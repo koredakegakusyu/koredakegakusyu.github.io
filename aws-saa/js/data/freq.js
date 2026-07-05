@@ -1,0 +1,55 @@
+/* =============================================================
+   コレダケAWS SAA — 科目の頻出度（SAA-C03の出題傾向をもとに）
+   3 = 頻出（必ず得点したい） / 2 = 標準 / 1 = 出題は少なめ
+   ============================================================= */
+window.FREQ = {
+  // 土台
+  "global-infra": 3,
+  "well-architected": 2,
+  "organizations": 2,
+  // 認証・IAM
+  "iam": 3,
+  "sts-federation": 2,
+  "cognito": 2,
+  // セキュリティ
+  "kms": 3,
+  "secrets": 2,
+  "edge-protection": 2,
+  "threat-detection": 2,
+  // コンピューティング
+  "ec2": 3,
+  "ec2-pricing": 3,
+  "elb-asg": 3,
+  "lambda": 3,
+  "containers": 2,
+  "beanstalk-batch": 1,
+  // ストレージ
+  "s3": 3,
+  "s3-classes": 3,
+  "block-file": 2,
+  "storage-gateway": 2,
+  // データベース
+  "rds": 3,
+  "dynamodb": 3,
+  "caching-db": 2,
+  "redshift-purpose": 2,
+  // ネットワーキング
+  "vpc": 3,
+  "vpc-connectivity": 3,
+  "route53": 2,
+  "cloudfront": 3,
+  // アプリ統合
+  "sqs-sns": 3,
+  "eventbridge": 2,
+  "kinesis-mq": 2,
+  // 分析
+  "athena-glue": 2,
+  "emr-os-qs": 1,
+  // 管理・監視
+  "observability": 2,
+  "ssm": 2,
+  "cost-mgmt": 2,
+  // 移行・DR
+  "migration": 2,
+  "dr": 3,
+};

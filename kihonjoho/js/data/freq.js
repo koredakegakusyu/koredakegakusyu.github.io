@@ -1,0 +1,41 @@
+/* =============================================================
+   コレダケ基本情報 — 科目の頻出度（FEの出題傾向をもとに）
+   3 = 頻出（必ず得点したい） / 2 = 標準 / 1 = 出題は少なめ
+   ============================================================= */
+window.FREQ = {
+  "fe-radix": 3,
+  "fe-logic": 3,
+  "fe-datastruct": 2,
+  "fe-algorithm": 3,
+  "fe-processor": 2,
+  "fe-memory": 2,
+  "fe-sysconf": 3,
+  "fe-os": 2,
+  "fe-db": 3,
+  "fe-transaction": 2,
+  "fe-network": 2,
+  "fe-ipaddr": 3,
+  "fe-sec-threat": 3,
+  "fe-sec-measure": 3,
+  "fe-dev": 2,
+  "fe-pm": 3,
+  "fe-strategy": 2,
+  "fe-syskikaku": 2,
+  // 追加分
+  "fe-math": 3,
+  "fe-info": 2,
+  "fe-instruction": 2,
+  "fe-storage": 2,
+  "fe-sysstruct": 3,
+  "fe-perf": 2,
+  "fe-sql": 3,
+  "fe-dbapp": 2,
+  "fe-protocol": 2,
+  "fe-transmission": 2,
+  "fe-secmgmt": 3,
+  "fe-secattack": 3,
+  "fe-devproc": 2,
+  "fe-estimate": 2,
+  "fe-accounting": 2,
+  "fe-bizlaw": 2,
+};
