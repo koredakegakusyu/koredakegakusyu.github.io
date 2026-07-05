@@ -16,17 +16,29 @@
     { name: "コレダケ応用情報", tag: "応用情報技術者", url: "", soon: true },
   ];
 
-  function hostOf(url) {
-    try { return new URL(url).hostname; } catch (e) { return ""; }
+  /* 同一ドメイン配下にサブフォルダで複数サイトを置く構成（例: GitHub Pagesの
+     koredakegakusyu.github.io/aws-saa/ 等）では、ホスト名だけでは全サイトが
+     一致してしまう。ホスト名に加え、パスの一致（ルート運用なら完全一致、
+     サブフォルダ運用なら前方一致）まで見て「このサイト」かどうかを判定する。 */
+  function isCurrentSite(url) {
+    try {
+      var u = new URL(url);
+      if (u.hostname !== location.hostname) return false;
+      var targetPath = u.pathname.replace(/\/?$/, "/");
+      var herePath = location.pathname.replace(/\/?$/, "/");
+      if (targetPath === "/") return herePath === "/";
+      return herePath.indexOf(targetPath) === 0;
+    } catch (e) {
+      return false;
+    }
   }
 
   function render() {
     var ul = document.getElementById("footer-sites");
     if (ul) {
-      var here = location.hostname;
       var html = "";
       SITES.forEach(function (s) {
-        var isCurrent = s.url && hostOf(s.url) === here && here !== "";
+        var isCurrent = !!s.url && isCurrentSite(s.url);
         if (isCurrent) {
           html +=
             '<li class="fnet-item is-current">' +
