@@ -11,6 +11,7 @@
      url が空 or soon:true は「準備中」表示。公開したら url を入れて soon を外す。 */
   var SITES = [
     { name: "コレダケAWS SAA", tag: "AWS認定SAA-C03", url: "https://koredakegakusyu.github.io/aws-saa/" },
+    { name: "コレダケAWS CCP", tag: "AWS認定CLF-C02", url: "https://koredakegakusyu.github.io/aws-ccp/" },
     { name: "コレダケITパスポート", tag: "国家試験・iパス", url: "https://koredakegakusyu.github.io/it-passport/" },
     { name: "コレダケ基本情報", tag: "基本情報技術者", url: "https://koredakegakusyu.github.io/kihonjoho/" },
     { name: "コレダケ応用情報", tag: "応用情報技術者", url: "", soon: true },
