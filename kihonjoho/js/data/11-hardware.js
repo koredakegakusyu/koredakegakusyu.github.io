@@ -144,8 +144,47 @@ window.CURRICULUM.push(
       {
         h: "半導体メモリ（RAMとROM）",
         body:
-          "<p>電源を切ると内容が<strong>消える（揮発性）</strong>のが<strong>RAM</strong>。RAMには2種類あります。安価・大容量で主記憶に使う<strong>DRAM</strong>（内容保持に定期的なリフレッシュが必要）と、高速でキャッシュに使う<strong>SRAM</strong>です。</p>" +
-          "<p>電源を切っても<strong>消えない（不揮発性）</strong>のが<strong>ROM</strong>。中でも書き換え可能な<strong>フラッシュメモリ</strong>は、SSDやUSBメモリ、SDカードに使われています。</p>",
+          "<p>半導体メモリは大きく<strong>RAM</strong>と<strong>ROM</strong>に分かれます。下の図の分類を、上から枝分かれでたどって押さえましょう。</p>" +
+          "<p><strong>RAM</strong>は電源を切ると内容が<strong>消える（揮発性）</strong>メモリ。2種類あり、安価・大容量で<strong>主記憶</strong>に使う<strong>DRAM</strong>（コンデンサに電荷を貯める方式のため放っておくと消える→定期的な<strong>リフレッシュ</strong>が必要）と、高速で<strong>キャッシュメモリ</strong>に使う<strong>SRAM</strong>（フリップフロップ回路で保持し、リフレッシュ不要）です。</p>" +
+          "<p><strong>ROM</strong>は電源を切っても<strong>消えない（不揮発性）</strong>メモリ。製造時に内容を焼き込む<strong>読み出し専用のマスクROM</strong>と、あとから<strong>書き込めるPROM</strong>があります。PROMには、<strong>紫外線</strong>を当てて消去する<strong>EPROM</strong>、<strong>電圧</strong>をかけて消去する<strong>EEPROM</strong>があり、EEPROMを高速・大容量にした<strong>フラッシュメモリ</strong>がSSD・USBメモリ・SDカードに使われています。</p>",
+        diagram:
+          '<svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="300" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">半導体メモリの分類</text>' +
+          (function () {
+            var N = {
+              root: { x: 12, y: 125, w: 92, h: 38, label: "半導体メモリ", fill: "#dce8f3", st: "#4a7fa8", fs: 11.5 },
+              ram: { x: 126, y: 62, w: 84, h: 38, label: "RAM", sub: "揮発性", fill: "#dcecdd", st: "#5c9160", fs: 13 },
+              rom: { x: 126, y: 189, w: 84, h: 38, label: "ROM", sub: "不揮発性", fill: "#f3ddcd", st: "#c1855c", fs: 13 },
+              dram: { x: 232, y: 36, w: 100, h: 38, label: "DRAM", fill: "#e7f0e8", st: "#5c9160", fs: 12.5, desc: "主記憶・コンデンサに電荷" },
+              sram: { x: 232, y: 88, w: 100, h: 38, label: "SRAM", fill: "#e7f0e8", st: "#5c9160", fs: 12.5, desc: "キャッシュ・フリップフロップ回路" },
+              mask: { x: 232, y: 150, w: 100, h: 38, label: "マスクROM", fill: "#f3ddcd", st: "#c1855c", fs: 11.5, desc: "読み出しのみ" },
+              prom: { x: 232, y: 228, w: 100, h: 38, label: "PROM", sub: "書き込み可能", fill: "#dce8f3", st: "#4a7fa8", fs: 12.5 },
+              eprom: { x: 380, y: 202, w: 100, h: 38, label: "EPROM", fill: "#dce8f3", st: "#4a7fa8", fs: 12.5, desc: "紫外線で消去可能" },
+              eeprom: { x: 380, y: 254, w: 100, h: 38, label: "EEPROM", fill: "#dce8f3", st: "#4a7fa8", fs: 12, desc: "電圧かけて消去可能" },
+              flash: { x: 410, y: 308, w: 150, h: 38, label: "フラッシュメモリ", fill: "#dce8f3", st: "#4a7fa8", fs: 12 },
+            };
+            function edge(p, c, midx) {
+              var px = p.x + p.w, py = p.y + p.h / 2, cx = c.x, cy = c.y + c.h / 2;
+              return '<path d="M' + px + "," + py + " H" + midx + " V" + cy + " H" + cx + '" fill="none" stroke="#6f9bd1" stroke-width="1.6"/>';
+            }
+            function node(n) {
+              var s = '<rect x="' + n.x + '" y="' + n.y + '" width="' + n.w + '" height="' + n.h + '" rx="7" fill="' + n.fill + '" stroke="' + n.st + '" stroke-width="1.5"/>';
+              s += '<text x="' + (n.x + n.w / 2) + '" y="' + (n.y + n.h / 2 + 5) + '" fill="#23252b" font-size="' + n.fs + '" font-weight="800" text-anchor="middle">' + n.label + "</text>";
+              if (n.sub) s += '<text x="' + (n.x + n.w / 2) + '" y="' + (n.y + n.h + 13) + '" fill="#6b6e76" font-size="10" text-anchor="middle">' + n.sub + "</text>";
+              if (n.desc) s += '<text x="' + (n.x + n.w + 8) + '" y="' + (n.y + n.h / 2 + 4) + '" fill="#5a5346" font-size="9.5" text-anchor="start">' + n.desc + "</text>";
+              return s;
+            }
+            var s = "";
+            s += edge(N.root, N.ram, 115) + edge(N.root, N.rom, 115);
+            s += edge(N.ram, N.dram, 221) + edge(N.ram, N.sram, 221);
+            s += edge(N.rom, N.mask, 221) + edge(N.rom, N.prom, 221);
+            s += edge(N.prom, N.eprom, 356) + edge(N.prom, N.eeprom, 356);
+            s += '<path d="M430,292 V308" fill="none" stroke="#6f9bd1" stroke-width="1.6"/>';
+            ["root", "ram", "rom", "dram", "sram", "mask", "prom", "eprom", "eeprom", "flash"].forEach(function (k) { s += node(N[k]); });
+            return s;
+          })() +
+          "</svg>",
+        cap: "半導体メモリ＝RAM(揮発性: DRAM/SRAM)＋ROM(不揮発性: マスクROM/PROM)。PROMはEPROM・EEPROMがあり、EEPROMの発展形がフラッシュメモリ。",
       },
       {
         h: "補助記憶と入出力方式（DMA）",
@@ -155,9 +194,11 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
-      { k: "DRAM / SRAM", v: "DRAM=主記憶・安価・要リフレッシュ。SRAM=高速・キャッシュ用。" },
+      { k: "DRAM / SRAM", v: "DRAM=主記憶・安価・要リフレッシュ(コンデンサ)。SRAM=高速・キャッシュ用(フリップフロップ)。" },
       { k: "RAM / ROM", v: "RAM=揮発性(消える)、ROM=不揮発性(消えない)。" },
-      { k: "フラッシュメモリ", v: "不揮発で書換え可。SSD・USBメモリに使う。" },
+      { k: "マスクROM / PROM", v: "マスクROM=製造時に焼込み読み出し専用。PROM=後から書き込める。" },
+      { k: "EPROM / EEPROM", v: "EPROM=紫外線で消去。EEPROM=電圧で消去。フラッシュメモリはEEPROMの発展形。" },
+      { k: "フラッシュメモリ", v: "不揮発で電気的に書換え可。SSD・USBメモリ・SDカードに使う。" },
       { k: "SSD vs HDD", v: "SSD=フラッシュ・高速・耐衝撃。HDD=円盤回転・安価大容量。" },
       { k: "DMA", v: "CPUを介さずメモリと装置が直接転送。CPU負担を軽減。" },
       { k: "インタフェース", v: "USB(汎用)、HDMI(映像音声)、Bluetooth(近距離無線)。" },
@@ -167,6 +208,7 @@ window.CURRICULUM.push(
       { q: "DMAとは何を高速化する仕組みか？", a: "CPUを介さずにメモリと入出力装置が直接データ転送を行い、CPUの負担を減らして入出力を高速化する。" },
       { q: "SSDがHDDより優れる点は？", a: "高速・耐衝撃・静音・低消費電力（機械的な回転部がない）。" },
       { q: "RAMとROMの揮発性の違いは？", a: "RAMは揮発性（電源で消える）、ROMは不揮発性（消えない）。" },
+      { q: "EPROMとEEPROMの消去方法の違いは？", a: "EPROMは紫外線を当てて消去、EEPROMは電圧をかけて電気的に消去する。フラッシュメモリはEEPROMの発展形。" },
     ],
     quiz: [
       {
@@ -186,6 +228,12 @@ window.CURRICULUM.push(
         choices: ["SSD", "磁気テープ", "光ディスク", "DRAM"],
         answer: 0,
         explain: "フラッシュメモリの補助記憶は<strong>SSD</strong>。",
+      },
+      {
+        q: "ROMのうち、電気的にデータを消去・再書込みできるものはどれか。",
+        choices: ["マスクROM", "EPROM", "EEPROM", "DRAM"],
+        answer: 2,
+        explain: "電圧をかけて電気的に消去・再書込みできるのは<strong>EEPROM</strong>。EPROMは紫外線で消去、マスクROMは読み出し専用。フラッシュメモリはEEPROMの発展形。",
       },
     ],
   }

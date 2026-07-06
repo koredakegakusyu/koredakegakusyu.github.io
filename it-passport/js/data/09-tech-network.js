@@ -80,7 +80,21 @@ window.CURRICULUM.push(
       },
       {
         h: "名前解決とアドレス配布——DNSとDHCP",
-        body: "<p>人は<code>www.example.com</code>のような<strong>ドメイン名</strong>を使うが、通信にはIPアドレスが必要。この<strong>ドメイン名⇔IPアドレスの変換（名前解決）</strong>を行うのが<strong>DNS</strong>。機器がネットに接続したとき<strong>IPアドレスなどを自動で割り当てる</strong>のが<strong>DHCP</strong>だ。この2つは役割が違うので必ず区別する。</p>",
+        body: "<p>人は<code>www.example.com</code>のような<strong>ドメイン名</strong>を使うが、通信にはIPアドレスが必要。この<strong>ドメイン名⇔IPアドレスの変換（名前解決）</strong>を行うのが<strong>DNS</strong>。下の図のように、PCはまずDNSに『この名前のIPは？』と尋ね、教わったIPアドレスへアクセスします。機器がネットに接続したとき<strong>IPアドレスなどを自動で割り当てる</strong>のが<strong>DHCP</strong>だ。この2つは役割が違うので必ず区別する。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">DNSによる名前解決（ドメイン名→IPアドレス）</text>' +
+          '<rect x="24" y="92" width="124" height="56" rx="8" fill="#dce8f3" stroke="#4a7fa8"/><text x="86" y="116" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">あなたのPC</text><text x="86" y="134" fill="#6b6e76" font-size="9" text-anchor="middle">www.example.com を開きたい</text>' +
+          '<rect x="228" y="24" width="134" height="50" rx="8" fill="#f2e7cd" stroke="#b28a2e"/><text x="295" y="45" fill="#23252b" font-size="12" font-weight="800" text-anchor="middle">DNSサーバ</text><text x="295" y="62" fill="#7a5e17" font-size="9" text-anchor="middle">名前とIPの対応表</text>' +
+          '<rect x="440" y="92" width="120" height="56" rx="8" fill="#dcecdd" stroke="#5c9160"/><text x="500" y="116" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">Webサーバ</text><text x="500" y="134" fill="#3f7a45" font-size="10" text-anchor="middle">203.0.113.5</text>' +
+          '<line x1="120" y1="96" x2="232" y2="62" stroke="#4a7fa8" stroke-width="2"/><polygon points="232,62 220,62 226,71" fill="#4a7fa8"/>' +
+          '<text x="132" y="74" fill="#34567a" font-size="9.5" font-weight="700">① IPアドレスは？</text>' +
+          '<line x1="238" y1="74" x2="128" y2="116" stroke="#5c9160" stroke-width="2" stroke-dasharray="5 3"/><polygon points="128,116 140,113 135,123" fill="#5c9160"/>' +
+          '<text x="132" y="104" fill="#3f7a45" font-size="9.5" font-weight="700">② 203.0.113.5 です</text>' +
+          '<line x1="148" y1="130" x2="438" y2="130" stroke="#a85733" stroke-width="2"/><polygon points="438,130 427,125 427,135" fill="#a85733"/>' +
+          '<text x="293" y="122" fill="#a85733" font-size="10" font-weight="700" text-anchor="middle">③ 教わったIPアドレスへアクセス</text>' +
+          "</svg>",
+        cap: "PCはドメイン名のIPをDNSに問い合わせ、返ってきたIPアドレスへアクセスする。DHCPはIP自体を自動配布する別の役割。",
       },
       {
         h: "アプリ層のプロトコルとポート番号",

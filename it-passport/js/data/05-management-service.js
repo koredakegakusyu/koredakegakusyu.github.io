@@ -88,7 +88,18 @@ window.CURRICULUM.push(
     understand: [
       {
         h: "ITサービスマネジメントとSLA",
-        body: "<p>作ったシステムを『安定して使い続けられる』ように運用する活動が<strong>ITサービスマネジメント</strong>。その良い進め方をまとめたベストプラクティス集が<strong>ITIL</strong>。提供者と利用者が<strong>サービスの品質水準を数値で合意した文書</strong>が<strong>SLA（サービスレベル合意書）</strong>（例：稼働率99.9%以上、障害復旧2時間以内）。SLAを継続的に管理・改善する活動が<strong>SLM（サービスレベル管理）</strong>だ。</p><p>利用者の問い合わせや障害の窓口を一本化するのが<strong>サービスデスク（ヘルプデスク）</strong>。運用では、まず<strong>インシデント管理</strong>で『とにかく早くサービスを復旧』させ、<strong>問題管理</strong>で『根本原因を突き止め再発を防ぐ』。この2つの役割の違いが問われる。</p>",
+        body: "<p>作ったシステムを『安定して使い続けられる』ように運用する活動が<strong>ITサービスマネジメント</strong>。その良い進め方をまとめたベストプラクティス集が<strong>ITIL</strong>。提供者と利用者が<strong>サービスの品質水準を数値で合意した文書</strong>が<strong>SLA（サービスレベル合意書）</strong>（例：稼働率99.9%以上、障害復旧2時間以内）。SLAを継続的に管理・改善する活動が<strong>SLM（サービスレベル管理）</strong>だ。</p><p>利用者の問い合わせや障害の窓口を一本化するのが<strong>サービスデスク（ヘルプデスク）</strong>。運用では、下の図のように、まず<strong>インシデント管理</strong>で『とにかく早くサービスを復旧』させ、<strong>問題管理</strong>で『根本原因を突き止め再発を防ぐ』。この2つの役割の違いが問われる。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 175" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">インシデント管理と問題管理の役割分担</text>' +
+          '<rect x="20" y="66" width="92" height="52" rx="8" fill="#f7dfd6" stroke="#c26b4a"/><text x="66" y="90" fill="#8a4626" font-size="12" font-weight="800" text-anchor="middle">⚡障害</text><text x="66" y="107" fill="#8a4626" font-size="10" text-anchor="middle">発生</text>' +
+          '<line x1="112" y1="92" x2="148" y2="92" stroke="#8a8f98" stroke-width="2"/><polygon points="148,92 138,87 138,97" fill="#8a8f98"/>' +
+          '<rect x="150" y="58" width="184" height="68" rx="8" fill="#dce8f3" stroke="#4a7fa8"/><text x="242" y="82" fill="#23252b" font-size="12.5" font-weight="800" text-anchor="middle">① インシデント管理</text><text x="242" y="102" fill="#34567a" font-size="10" text-anchor="middle">とにかく早く復旧</text><text x="242" y="117" fill="#6b6e76" font-size="9" text-anchor="middle">（応急処置・目的は早期復旧）</text>' +
+          '<line x1="334" y1="92" x2="370" y2="92" stroke="#8a8f98" stroke-width="2"/><polygon points="370,92 360,87 360,97" fill="#8a8f98"/>' +
+          '<rect x="372" y="58" width="192" height="68" rx="8" fill="#dcecdd" stroke="#5c9160"/><text x="468" y="82" fill="#23252b" font-size="12.5" font-weight="800" text-anchor="middle">② 問題管理</text><text x="468" y="102" fill="#3f7a45" font-size="10" text-anchor="middle">根本原因を究明し再発防止</text><text x="468" y="117" fill="#6b6e76" font-size="9" text-anchor="middle">（恒久対策・目的は二度と起こさない）</text>' +
+          '<text x="290" y="158" fill="#6b6e76" font-size="10.5" text-anchor="middle">まず復旧（インシデント管理）→ あとで原因究明と再発防止（問題管理）</text>' +
+          "</svg>",
+        cap: "インシデント管理は「まず早く復旧」、問題管理は「根本原因を突き止め再発を防ぐ」。目的が違う。",
       },
       {
         h: "ファシリティマネジメント（設備）",
@@ -141,7 +152,22 @@ window.CURRICULUM.push(
       },
       {
         h: "内部統制とITガバナンス",
-        body: "<p><strong>内部統制</strong>は、業務が適正に行われるよう組織自身が整える仕組み。不正やミスを防ぐ代表策が<strong>職務分掌</strong>（担当を分けて一人に権限を集中させない。例：発注する人と支払う人を分ける）。組織がITを適切に活用し、リスクを管理して価値を生み出すよう統制する枠組みが<strong>ITガバナンス</strong>だ。</p>",
+        body: "<p><strong>内部統制</strong>は、業務が適正に行われるよう組織自身が整える仕組み。不正やミスを防ぐ代表策が<strong>職務分掌</strong>（担当を分けて一人に権限を集中させない。例：発注する人と支払う人を分ける）。下の図のように、一人に権限が集中すると不正が起きやすく、担当を分ければ相互にけん制が働きます。組織がITを適切に活用し、リスクを管理して価値を生み出すよう統制する枠組みが<strong>ITガバナンス</strong>だ。</p>",
+        diagram:
+          '<svg viewBox="0 0 560 185" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="280" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">職務分掌（権限を分けて相互けん制）</text>' +
+          '<line x1="280" y1="34" x2="280" y2="170" stroke="#e2e4e8" stroke-width="1"/>' +
+          '<text x="140" y="50" fill="#b0532f" font-size="12" font-weight="800" text-anchor="middle">権限が集中 → 危険</text>' +
+          '<rect x="70" y="62" width="140" height="46" rx="8" fill="#f7dfd6" stroke="#c26b4a"/><text x="140" y="82" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">担当者A（1人）</text><text x="140" y="99" fill="#8a4626" font-size="9.5" text-anchor="middle">発注 も 支払承認 も</text>' +
+          '<text x="140" y="140" fill="#b0532f" font-size="10.5" font-weight="700" text-anchor="middle">一人で不正ができてしまう</text>' +
+          '<text x="420" y="50" fill="#3f7a45" font-size="12" font-weight="800" text-anchor="middle">担当を分ける → 安全</text>' +
+          '<rect x="318" y="62" width="110" height="46" rx="8" fill="#dce8f3" stroke="#4a7fa8"/><text x="373" y="82" fill="#23252b" font-size="11.5" font-weight="700" text-anchor="middle">発注担当</text><text x="373" y="99" fill="#34567a" font-size="9.5" text-anchor="middle">発注する</text>' +
+          '<rect x="440" y="62" width="110" height="46" rx="8" fill="#dcecdd" stroke="#5c9160"/><text x="495" y="82" fill="#23252b" font-size="11.5" font-weight="700" text-anchor="middle">承認担当</text><text x="495" y="99" fill="#3f7a45" font-size="9.5" text-anchor="middle">支払を承認</text>' +
+          '<line x1="428" y1="118" x2="440" y2="118" stroke="#8a8f98" stroke-width="1.5"/>' +
+          '<text x="434" y="132" fill="#6b6e76" font-size="9" text-anchor="middle">相互チェック</text>' +
+          '<text x="434" y="152" fill="#3f7a45" font-size="10.5" font-weight="700" text-anchor="middle">互いにけん制し不正を防ぐ</text>' +
+          "</svg>",
+        cap: "発注と承認を同じ人が担うと不正が起きやすい。担当を分けて相互けん制させるのが職務分掌。",
       },
     ],
     memorize: [

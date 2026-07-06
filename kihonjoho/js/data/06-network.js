@@ -117,32 +117,138 @@ window.CURRICULUM.push(
     intro: "IPv4/IPv6、サブネットマスク、ホスト数の計算。FEの計算頻出テーマ。",
     understand: [
       {
-        h: "IPアドレスとサブネットマスク",
+        h: "IPアドレスの正体——32ビットを8ビットずつ区切った数字",
         body:
-          "<p><strong>IPv4は32ビット</strong>で、<strong>ネットワーク部</strong>と<strong>ホスト部</strong>に分かれます。どこまでがネットワーク部かを示すのが<strong>サブネットマスク</strong>（例 255.255.255.0）。</p>" +
-          "<p><strong>/24</strong> のような表記（CIDR）は「上位24ビットがネットワーク部」の意味。残りの<strong>ホスト部ビット数</strong>から、そのネットワークに置ける機器数が決まります。</p>",
+          "<p>ネットワーク上の機器を識別する住所が<strong>IPアドレス</strong>です。<strong>IPv4は全部で32ビット</strong>——ただし2進数32桁は人間には読みにくいので、<strong>8ビット（＝0〜255）ずつ4つに区切り、10進数で「.（ドット）」でつないで</strong>表します。「192.168.1.10」のような表記がこれです。</p>" +
+          "<p>つまり4つの数字は、それぞれが8ビットの2進数を10進数に直したもの。下の図で対応を見ておくと、この後の計算がぐっと分かりやすくなります。</p>",
         diagram:
-          '<svg viewBox="0 0 580 160" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
-          '<text x="290" y="24" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">IPv4アドレス（/24 の例）</text>' +
-          '<rect x="40" y="44" width="360" height="40" rx="7" fill="#dce8f3" stroke="#4a7fa8"/><text x="220" y="69" fill="#34567a" font-size="13" font-weight="800" text-anchor="middle">ネットワーク部（24ビット）</text>' +
-          '<rect x="400" y="44" width="140" height="40" rx="7" fill="#f2e7cd" stroke="#b28a2e"/><text x="470" y="69" fill="#7a5e17" font-size="13" font-weight="800" text-anchor="middle">ホスト部（8）</text>' +
-          '<text x="220" y="104" fill="#6b6e76" font-size="11" text-anchor="middle">192.168.1 が共通</text>' +
-          '<text x="470" y="104" fill="#6b6e76" font-size="11" text-anchor="middle">1〜254 が機器</text>' +
-          '<rect x="120" y="120" width="340" height="30" rx="7" fill="#dcecdd" stroke="#5c9160"/><text x="290" y="140" fill="#366b3c" font-size="13" font-weight="800" text-anchor="middle">利用可能ホスト数 = 2⁸ − 2 = 254</text>' +
+          '<svg viewBox="0 0 580 150" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">IPアドレス ＝ 8ビット × 4 ＝ 32ビット</text>' +
+          (function () {
+            var oct = [{ d: "192", b: "11000000" }, { d: "168", b: "10101000" }, { d: "1", b: "00000001" }, { d: "10", b: "00001010" }];
+            var s = "", bw = 118, x0 = 26, gap = 18;
+            oct.forEach(function (o, i) {
+              var x = x0 + i * (bw + gap);
+              s += '<rect x="' + x + '" y="42" width="' + bw + '" height="34" rx="6" fill="#dce8f3" stroke="#4a7fa8"/>';
+              s += '<text x="' + (x + bw / 2) + '" y="65" fill="#23252b" font-size="17" font-weight="800" text-anchor="middle">' + o.d + "</text>";
+              s += '<text x="' + (x + bw / 2) + '" y="96" fill="#34567a" font-size="12" font-family="monospace" text-anchor="middle">' + o.b + "</text>";
+              s += '<text x="' + (x + bw / 2) + '" y="114" fill="#6b6e76" font-size="9" text-anchor="middle">8ビット</text>';
+              if (i < 3) s += '<text x="' + (x + bw + gap / 2) + '" y="66" fill="#6b6e76" font-size="18" font-weight="800" text-anchor="middle">.</text>';
+            });
+            return s;
+          })() +
+          '<text x="290" y="140" fill="#6b6e76" font-size="11" text-anchor="middle">各数字は0〜255（8ビット）。192を2進数にすると11000000。4つで合計32ビット。</text>' +
           "</svg>",
-        cap: "ホスト部がnビットなら、使える機器数は 2ⁿ−2（全0=ネットワーク、全1=ブロードキャストを除く）。",
+        cap: "IPv4は32ビット。8ビット(0〜255)ずつ4つに区切って10進数で表す。各数字は8桁の2進数に対応する。",
+      },
+      {
+        h: "ネットワーク部とホスト部——サブネットマスクが境界を決める",
+        body:
+          "<p>IPアドレスは、<strong>前半＝ネットワーク部</strong>（どのネットワークか）と<strong>後半＝ホスト部</strong>（その中のどの機器か）に分かれます。住所でいえば「〇〇マンション」までがネットワーク部、「△△号室」がホスト部のイメージです。同じネットワーク内の機器は<strong>ネットワーク部が全員共通</strong>で、ホスト部だけが1台ずつ違います。</p>" +
+          "<p>どこまでがネットワーク部かを示すのが<strong>サブネットマスク</strong>です。<strong>255の部分がネットワーク部、0の部分がホスト部</strong>を表します。<code>255.255.255.0</code>なら前3つ（24ビット）がネットワーク部、最後（8ビット）がホスト部。この「上位何ビットがネットワーク部か」を<code>/24</code>のように書くのが<strong>CIDR表記</strong>です。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 180" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">サブネットマスク /24（255.255.255.0）の意味</text>' +
+          (function () {
+            var bw = 96, x0 = 104, gap = 12, rh = 30;
+            function cell(x, y, val, net) {
+              var fill = net ? "#dce8f3" : "#f2e7cd", st = net ? "#4a7fa8" : "#b28a2e";
+              return '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + rh + '" rx="5" fill="' + fill + '" stroke="' + st + '"/><text x="' + (x + bw / 2) + '" y="' + (y + 20) + '" fill="#23252b" font-size="13" font-weight="700" text-anchor="middle">' + val + "</text>";
+            }
+            var ip = ["192", "168", "1", "10"], mask = ["255", "255", "255", "0"];
+            var s = "";
+            s += '<text x="92" y="68" fill="#6b6e76" font-size="11" font-weight="700" text-anchor="end">IPアドレス</text>';
+            ip.forEach(function (v, i) { s += cell(x0 + i * (bw + gap), 50, v, i < 3); });
+            s += '<text x="92" y="110" fill="#6b6e76" font-size="11" font-weight="700" text-anchor="end">マスク</text>';
+            mask.forEach(function (v, i) { s += cell(x0 + i * (bw + gap), 92, v, i < 3); });
+            return s;
+          })() +
+          '<text x="290" y="150" fill="#34567a" font-size="11" text-anchor="middle">青（255の3つ）＝ネットワーク部：同じネット内の全機器で共通</text>' +
+          '<text x="290" y="168" fill="#7a5e17" font-size="11" text-anchor="middle">橙（0の部分）＝ホスト部：機器ごとに 1〜254 を割り当てる</text>' +
+          "</svg>",
+        cap: "マスクの255＝ネットワーク部（ネット内で共通）、0＝ホスト部（機器ごとの番号）。255.255.255.0 は /24。",
+      },
+      {
+        h: "「255.255.255.192」のような中途半端なマスクは2進数で考える",
+        body:
+          "<p>試験で差がつくのが、<code>255.255.255.192</code>のように<strong>255でも0でもない数字</strong>が混じるマスクです。これは<strong>その数字を2進数に直し、先頭から「1」が続いている桁数を数える</strong>と解けます。1が続く部分がネットワーク部だからです。</p>" +
+          "<p><code>192</code>を2進数にすると<strong>11000000</strong>——先頭の「1」が2個。つまり最後の8ビットのうち<strong>上位2ビットがネットワーク部に食い込み</strong>、<strong>/24＋2＝/26</strong>になります。残る<strong>ホスト部は6ビット</strong>なので、置ける機器数は<strong>2⁶−2＝62台</strong>。下の早見表の「1の数」を覚えておくと即答できます。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 315" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">255.255.255.192 が /26 になる理由</text>' +
+          '<text x="290" y="44" fill="#23252b" font-size="11.5" text-anchor="middle">最後の「192」を2進数にすると…</text>' +
+          (function () {
+            var bits = [1, 1, 0, 0, 0, 0, 0, 0], cw = 44, x0 = 114, y = 52;
+            var s = "";
+            bits.forEach(function (b, i) {
+              var net = i < 2, fill = net ? "#dce8f3" : "#f2e7cd", st = net ? "#4a7fa8" : "#b28a2e";
+              var x = x0 + i * cw;
+              s += '<rect x="' + x + '" y="' + y + '" width="' + cw + '" height="34" fill="' + fill + '" stroke="' + st + '"/>';
+              s += '<text x="' + (x + cw / 2) + '" y="' + (y + 23) + '" fill="#23252b" font-size="16" font-weight="700" font-family="monospace" text-anchor="middle">' + b + "</text>";
+            });
+            s += '<text x="' + (x0 + cw) + '" y="' + (y + 52) + '" fill="#34567a" font-size="10" font-weight="700" text-anchor="middle">ネット 2ビット</text>';
+            s += '<text x="' + (x0 + 5 * cw) + '" y="' + (y + 52) + '" fill="#7a5e17" font-size="10" font-weight="700" text-anchor="middle">ホスト 6ビット</text>';
+            return s;
+          })() +
+          '<text x="290" y="130" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">→ 24＋2 ＝ /26 ・ ホスト部6ビット → 2⁶−2 ＝ 62台</text>' +
+          (function () {
+            var rows = [["128", "10000000", "1"], ["192", "11000000", "2"], ["224", "11100000", "3"], ["240", "11110000", "4"], ["248", "11111000", "5"], ["252", "11111100", "6"], ["254", "11111110", "7"], ["255", "11111111", "8"]];
+            var head = ["10進", "2進数", "1の数"], w = [70, 130, 60], x0 = 160, y0 = 152, rh = 17;
+            var xs = [x0]; for (var i = 0; i < w.length; i++) xs.push(xs[i] + w[i]);
+            var s = '<text x="290" y="' + (y0 - 6) + '" fill="#6b6e76" font-size="10.5" text-anchor="middle">早見表：マスクの数字と「1の数（＝足すネットワークビット）」</text>';
+            head.forEach(function (h, ci) {
+              s += '<rect x="' + xs[ci] + '" y="' + y0 + '" width="' + w[ci] + '" height="' + rh + '" fill="#eceff3" stroke="#c7ccd2"/><text x="' + (xs[ci] + w[ci] / 2) + '" y="' + (y0 + 12) + '" fill="#23252b" font-size="10" font-weight="700" text-anchor="middle">' + h + "</text>";
+            });
+            rows.forEach(function (row, ri) {
+              var y = y0 + (ri + 1) * rh, hi = row[0] === "192";
+              row.forEach(function (cell, ci) {
+                var fill = hi ? "#dce8f3" : "#ffffff";
+                s += '<rect x="' + xs[ci] + '" y="' + y + '" width="' + w[ci] + '" height="' + rh + '" fill="' + fill + '" stroke="#d8dbe0"/>';
+                s += '<text x="' + (xs[ci] + w[ci] / 2) + '" y="' + (y + 12) + '" fill="#23252b" font-size="' + (ci === 1 ? 10 : 10.5) + '" ' + (ci === 1 ? 'font-family="monospace" ' : "") + (hi ? 'font-weight="700" ' : "") + 'text-anchor="middle">' + cell + "</text>";
+              });
+            });
+            return s;
+          })() +
+          "</svg>",
+        cap: "マスクの数字を2進数にして「1の数」を数えるとネットワークのビット数が分かる。192=11000000→2→/26→ホスト6ビット→62台。",
+      },
+      {
+        h: "ネットワークアドレスとブロードキャスト——だから「−2」する",
+        body:
+          "<p>ホスト部のビットが n 個あるとき、値の組合せは2ⁿ通りありますが、<strong>そのうち2つは機器に使えません</strong>。</p>" +
+          "<ul>" +
+          "<li><strong>ホスト部が全部0</strong>のアドレス＝<strong>ネットワークアドレス</strong>（そのネットワーク自体を指す。個々の機器には付けない）。</li>" +
+          "<li><strong>ホスト部が全部1</strong>のアドレス＝<strong>ブロードキャストアドレス</strong>（同じネットワークの全機器へ一斉送信するための特別なアドレス）。</li>" +
+          "</ul>" +
+          "<p>この2つを除くので、<strong>使える機器数 ＝ 2ⁿ − 2</strong>。/24（ホスト8ビット）なら2⁸−2＝254台、/26（ホスト6ビット）なら2⁶−2＝62台、という計算になります。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 165" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">192.168.1.x（/24）に置けるアドレス</text>' +
+          '<rect x="30" y="50" width="150" height="50" rx="7" fill="#eceff3" stroke="#9aa0a8"/><text x="105" y="72" fill="#23252b" font-size="12" font-weight="800" text-anchor="middle">192.168.1.0</text><text x="105" y="90" fill="#6b6e76" font-size="10" text-anchor="middle">ネットワークアドレス</text>' +
+          '<rect x="196" y="50" width="188" height="50" rx="7" fill="#dcecdd" stroke="#5c9160"/><text x="290" y="72" fill="#23252b" font-size="12" font-weight="800" text-anchor="middle">.1 〜 .254</text><text x="290" y="90" fill="#3f7a45" font-size="10" text-anchor="middle">機器に使える（254台）</text>' +
+          '<rect x="400" y="50" width="150" height="50" rx="7" fill="#f7dfd6" stroke="#c26b4a"/><text x="475" y="72" fill="#23252b" font-size="12" font-weight="800" text-anchor="middle">192.168.1.255</text><text x="475" y="90" fill="#b0532f" font-size="10" text-anchor="middle">ブロードキャスト</text>' +
+          '<text x="105" y="118" fill="#6b6e76" font-size="9.5" text-anchor="middle">ホスト部 all 0</text>' +
+          '<text x="475" y="118" fill="#6b6e76" font-size="9.5" text-anchor="middle">ホスト部 all 1</text>' +
+          '<text x="290" y="150" fill="#6b6e76" font-size="11" text-anchor="middle">両端の2つは機器に使えない → 256 − 2 ＝ 254台</text>' +
+          "</svg>",
+        cap: "ホスト部all0=ネットワークアドレス、all1=ブロードキャスト。この2つは機器に使えないので 2ⁿ−2 台。",
       },
     ],
     memorize: [
-      { k: "IPv4 / IPv6", v: "IPv4=32ビット。IPv6=128ビット。" },
-      { k: "サブネットマスク", v: "ネットワーク部を示す。255.255.255.0 = /24。" },
+      { k: "IPv4 / IPv6", v: "IPv4=32ビット(8ビット×4)。IPv6=128ビット。" },
+      { k: "ネットワーク部/ホスト部", v: "前半=どのネットワークか(ネット内共通)、後半=その中のどの機器か。境界はマスクで決まる。" },
+      { k: "サブネットマスク", v: "255の部分=ネットワーク部、0の部分=ホスト部。255.255.255.0 = /24。" },
+      { k: "CIDR表記", v: "/24 = 上位24ビットがネットワーク部。255.255.255.0 と同じ意味。" },
+      { k: "マスク値→ビット", v: "2進数の1の数で判断。192=11000000→2→/26。224→/27、240→/28…。" },
       { k: "利用可能ホスト数", v: "<strong>2^(ホスト部ビット数) − 2</strong>（ネットワークとブロードキャストを除く）。" },
+      { k: "ネットワークアドレス", v: "ホスト部が全0。ネットワーク自体を指し、機器には使えない。" },
+      { k: "ブロードキャストアドレス", v: "ホスト部が全1。同一ネット全機器へ一斉送信。機器には使えない。" },
       { k: "プライベート/グローバル", v: "社内用/インターネット用。変換はNAT。" },
-      { k: "ブロードキャスト", v: "ホスト部が全1のアドレス。同一ネット全体へ送信。" },
     ],
     flashcards: [
       { q: "サブネットマスク /24 のホスト部は何ビットで、機器は何台置ける？", a: "ホスト部8ビット。2⁸−2＝254台。" },
-      { q: "利用可能ホスト数の求め方は？", a: "2^(ホスト部ビット数)−2（全0と全1を除く）。" },
+      { q: "255.255.255.192 は /いくつ？ ホストは何台？", a: "192=11000000で1が2個→24+2=/26。ホスト部6ビット→2⁶−2＝62台。" },
+      { q: "利用可能ホスト数が「2ⁿ−2」と−2する理由は？", a: "ホスト部が全0のネットワークアドレスと、全1のブロードキャストアドレスの2つは機器に使えないから。" },
       { q: "IPv4とIPv6のビット数は？", a: "IPv4は32ビット、IPv6は128ビット。" },
       { q: "255.255.255.0 はCIDR表記で何？", a: "/24（上位24ビットがネットワーク部）。" },
     ],
@@ -157,7 +263,19 @@ window.CURRICULUM.push(
         q: "サブネットマスクが 255.255.255.192 のとき、1つのサブネットに置けるホストの最大数はいくつか。",
         choices: ["30", "62", "126", "254"],
         answer: 1,
-        explain: "192は上位2ビットが1（/26）。ホスト部は6ビット→2⁶−2＝<strong>62</strong>。",
+        explain: "192を2進数にすると11000000で1が2個（/26）。ホスト部は6ビット→2⁶−2＝<strong>62</strong>。",
+      },
+      {
+        q: "サブネットマスクが 255.255.255.224 のとき、1つのサブネットに置けるホストの最大数はいくつか。",
+        choices: ["14", "30", "62", "126"],
+        answer: 1,
+        explain: "224を2進数にすると11100000で1が3個（/27）。ホスト部は5ビット→2⁵−2＝<strong>30</strong>。",
+      },
+      {
+        q: "IPアドレスにおいて、ホスト部のビットがすべて0であるアドレスは何を表すか。",
+        choices: ["ブロードキャストアドレス", "ネットワークアドレス", "デフォルトゲートウェイ", "ループバックアドレス"],
+        answer: 1,
+        explain: "ホスト部が全0はそのネットワーク自体を指す<strong>ネットワークアドレス</strong>。全1はブロードキャスト。どちらも機器には使えない。",
       },
       {
         q: "IPv6が導入された最大の理由はどれか。",

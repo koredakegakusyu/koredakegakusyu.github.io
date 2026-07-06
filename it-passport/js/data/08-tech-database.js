@@ -111,7 +111,25 @@ window.CURRICULUM.push(
       },
       {
         h: "排他制御とデッドロック",
-        body: "<p>複数の人が同時に同じデータを更新すると矛盾が起きる。これを防ぐのが<strong>排他制御（ロック）</strong>——誰かが更新中のデータに<strong>鍵をかけ</strong>、他の人を待たせる。ただし、AさんがXをロックしてYを待ち、BさんがYをロックしてXを待つと、互いに永遠に待ち合う<strong>デッドロック（膠着状態）</strong>が起きる。DBMSはこれを検出して一方を強制終了するなどで解消する。</p><p>障害でデータが壊れても復旧できるよう、DBMSは変更の記録（<strong>ログ／ジャーナル</strong>）を残す。完了済みの処理をログから再実行して復旧するのが<strong>ロールフォワード</strong>、未完了の処理を取り消すのが<strong>ロールバック</strong>だ。</p>",
+        body: "<p>複数の人が同時に同じデータを更新すると矛盾が起きる。これを防ぐのが<strong>排他制御（ロック）</strong>——誰かが更新中のデータに<strong>鍵をかけ</strong>、他の人を待たせる。ただし、AさんがXをロックしてYを待ち、BさんがYをロックしてXを待つと、下の図のように互いに永遠に待ち合う<strong>デッドロック（膠着状態）</strong>が起きる。DBMSはこれを検出して一方を強制終了するなどで解消する。</p><p>障害でデータが壊れても復旧できるよう、DBMSは変更の記録（<strong>ログ／ジャーナル</strong>）を残す。完了済みの処理をログから再実行して復旧するのが<strong>ロールフォワード</strong>、未完了の処理を取り消すのが<strong>ロールバック</strong>だ。</p>",
+        diagram:
+          '<svg viewBox="0 0 560 205" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="280" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">デッドロック（互いに待ち合う）</text>' +
+          '<rect x="28" y="82" width="120" height="44" rx="8" fill="#dce8f3" stroke="#4a7fa8"/><text x="88" y="109" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">トランザクションA</text>' +
+          '<rect x="412" y="82" width="120" height="44" rx="8" fill="#f3ddcd" stroke="#c1855c"/><text x="472" y="109" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">トランザクションB</text>' +
+          '<rect x="225" y="30" width="110" height="36" rx="6" fill="#eef4f9" stroke="#9db8cd"/><text x="280" y="53" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">データX</text>' +
+          '<rect x="225" y="138" width="110" height="36" rx="6" fill="#eef4f9" stroke="#9db8cd"/><text x="280" y="161" fill="#23252b" font-size="12" font-weight="700" text-anchor="middle">データY</text>' +
+          '<line x1="148" y1="92" x2="222" y2="56" stroke="#5c9160" stroke-width="2"/><polygon points="222,56 210,55 216,65" fill="#5c9160"/>' +
+          '<text x="150" y="72" fill="#3f7a45" font-size="9.5" font-weight="700">Xをロック中</text>' +
+          '<line x1="148" y1="116" x2="222" y2="150" stroke="#c26b4a" stroke-width="2" stroke-dasharray="5 3"/><polygon points="222,150 210,146 214,157" fill="#c26b4a"/>' +
+          '<text x="150" y="140" fill="#b0532f" font-size="9.5" font-weight="700">Yを待つ</text>' +
+          '<line x1="412" y1="116" x2="338" y2="150" stroke="#5c9160" stroke-width="2"/><polygon points="338,150 350,146 346,157" fill="#5c9160"/>' +
+          '<text x="410" y="140" fill="#3f7a45" font-size="9.5" font-weight="700" text-anchor="end">Yをロック中</text>' +
+          '<line x1="412" y1="92" x2="338" y2="56" stroke="#c26b4a" stroke-width="2" stroke-dasharray="5 3"/><polygon points="338,56 350,55 344,65" fill="#c26b4a"/>' +
+          '<text x="410" y="72" fill="#b0532f" font-size="9.5" font-weight="700" text-anchor="end">Xを待つ</text>' +
+          '<text x="280" y="196" fill="#6b6e76" font-size="10.5" text-anchor="middle">AはB保有のYを、BはA保有のXを待ち、互いに進めない＝デッドロック（緑=ロック中／赤=待ち）</text>' +
+          "</svg>",
+        cap: "AがX・BがYをロックし、互いに相手のロックを待ち合う循環が生じると処理が進まない＝デッドロック。",
       },
     ],
     memorize: [

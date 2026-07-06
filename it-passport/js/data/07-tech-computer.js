@@ -13,7 +13,30 @@ window.CURRICULUM.push(
       },
       {
         h: "記憶階層——速い順・高い順",
-        body: "<p>記憶装置は『速いが高価で少量』と『遅いが安価で大量』の階層になっている。速い順に<strong>レジスタ → キャッシュメモリ → 主記憶（メインメモリ）→ 補助記憶（SSD/HDD）</strong>。CPUと主記憶の速度差を埋めるのが<strong>キャッシュメモリ</strong>（よく使うデータを一時保持）だ。</p><p>メモリの種類も区別する。<strong>RAM</strong>は読み書きでき電源を切ると消える<strong>揮発性</strong>（主記憶に使う<strong>DRAM</strong>、高速な<strong>SRAM</strong>）。<strong>ROM</strong>は主に読み出し専用で電源を切っても<strong>消えない不揮発性</strong>。データを保存するSSD・USBメモリ（フラッシュメモリ）も不揮発性だ。</p>",
+        body: "<p>記憶装置は『速いが高価で少量』と『遅いが安価で大量』の階層になっている。速い順に<strong>レジスタ → キャッシュメモリ → 主記憶（メインメモリ）→ 補助記憶（SSD/HDD）</strong>。CPUと主記憶の速度差を埋めるのが<strong>キャッシュメモリ</strong>（よく使うデータを一時保持）だ。上に行くほど速く高価で少量、下に行くほど遅く安価で大容量になる。</p><p>メモリの種類も区別する。<strong>RAM</strong>は読み書きでき電源を切ると消える<strong>揮発性</strong>（主記憶に使う<strong>DRAM</strong>、高速な<strong>SRAM</strong>）。<strong>ROM</strong>は主に読み出し専用で電源を切っても<strong>消えない不揮発性</strong>。データを保存するSSD・USBメモリ（フラッシュメモリ）も不揮発性だ。</p>",
+        diagram:
+          '<svg viewBox="0 0 520 215" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="260" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">記憶階層（上ほど速い・下ほど大容量）</text>' +
+          (function () {
+            var L = [
+              { n: "レジスタ", d: "CPU内・最速", w: 130, c: "#f3ddcd", st: "#c1855c" },
+              { n: "キャッシュメモリ(SRAM)", d: "CPUと主記憶の橋渡し", w: 210, c: "#f2e7cd", st: "#b28a2e" },
+              { n: "主記憶（DRAM）", d: "プログラム実行の作業場", w: 300, c: "#dce8f3", st: "#4a7fa8" },
+              { n: "補助記憶（SSD / HDD）", d: "大容量・不揮発（電源を切っても残る）", w: 410, c: "#dcecdd", st: "#5c9160" },
+            ];
+            var s = "", y0 = 40, h = 36, gap = 6, cx = 260;
+            L.forEach(function (x, i) {
+              var y = y0 + i * (h + gap);
+              s += '<rect x="' + (cx - x.w / 2) + '" y="' + y + '" width="' + x.w + '" height="' + h + '" rx="6" fill="' + x.c + '" stroke="' + x.st + '"/>';
+              s += '<text x="' + cx + '" y="' + (y + 16) + '" fill="#23252b" font-size="11" font-weight="700" text-anchor="middle">' + x.n + "</text>";
+              s += '<text x="' + cx + '" y="' + (y + 30) + '" fill="#6b6e76" font-size="9" text-anchor="middle">' + x.d + "</text>";
+            });
+            s += '<text x="40" y="60" fill="#a85733" font-size="11" font-weight="700">速い↑</text>';
+            s += '<text x="40" y="200" fill="#4a7a4e" font-size="11" font-weight="700">大容量↓</text>';
+            return s;
+          })() +
+          "</svg>",
+        cap: "上ほど速い・高価・少量、下ほど遅い・安価・大容量。キャッシュがCPUと主記憶の速度差を埋める。",
       },
       {
         h: "入出力インタフェース",

@@ -108,8 +108,33 @@ window.CURRICULUM.push(
         h: "アイデアを試す——PoC と3つの壁",
         body:
           "<p>新しい技術は、いきなり本格開発せず、まず<strong>PoC（概念実証）</strong>で「本当に実現できるか」を小さく試します。</p>" +
-          "<p>技術が事業になるまでには壁があります。研究→開発の<strong>魔の川</strong>、開発→事業化の<strong>死の谷</strong>、事業化→産業化の<strong>ダーウィンの海</strong>です。</p>" +
+          "<p>技術が事業になるまでには、下の図のように<strong>3つの壁</strong>があります。研究→開発の<strong>魔の川</strong>、開発→事業化の<strong>死の谷</strong>、事業化→産業化の<strong>ダーウィンの海</strong>です。順番と名前の対応が問われます。</p>" +
           "<p>外部の技術も取り込む<strong>オープンイノベーション</strong>も現代のキーワードです。</p>",
+        diagram:
+          '<svg viewBox="0 0 620 165" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="310" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">技術が事業になるまでの3つの壁</text>' +
+          (function () {
+            var stages = ["研究", "開発", "事業化", "産業化"];
+            var walls = ["魔の川", "死の谷", "ダーウィンの海"];
+            var s = "", w = 104, h = 56, y = 50;
+            var xs = [18, 176, 334, 492];
+            for (var i = 0; i < 3; i++) {
+              s += '<line x1="' + (xs[i] + w) + '" y1="' + (y + h / 2) + '" x2="' + xs[i + 1] + '" y2="' + (y + h / 2) + '" stroke="#a85733" stroke-width="2"/>';
+              s += '<polygon points="' + xs[i + 1] + "," + (y + h / 2) + " " + (xs[i + 1] - 11) + "," + (y + h / 2 - 5) + " " + (xs[i + 1] - 11) + "," + (y + h / 2 + 5) + '" fill="#a85733"/>';
+            }
+            stages.forEach(function (t, i) {
+              s += '<rect x="' + xs[i] + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="9" fill="#dce8f3" stroke="#4a7fa8"/>';
+              s += '<text x="' + (xs[i] + w / 2) + '" y="' + (y + h / 2 + 5) + '" fill="#23252b" font-size="14" font-weight="800" text-anchor="middle">' + t + "</text>";
+            });
+            walls.forEach(function (t, i) {
+              var wx = (xs[i] + w + xs[i + 1]) / 2;
+              s += '<rect x="' + (wx - 5) + '" y="' + (y - 6) + '" width="10" height="' + (h + 12) + '" rx="2" fill="#f7dfd6" stroke="#c26b4a"/>';
+              s += '<text x="' + wx + '" y="' + (y + h + 24) + '" fill="#b0532f" font-size="10" font-weight="700" text-anchor="middle">' + t + "</text>";
+            });
+            return s;
+          })() +
+          "</svg>",
+        cap: "研究→開発→事業化→産業化と進む各段階の間に、魔の川・死の谷・ダーウィンの海という壁がある。",
       },
     ],
     memorize: [

@@ -9,7 +9,19 @@ window.CURRICULUM.push(
     understand: [
       {
         h: "AIと機械学習",
-        body: "<p><strong>AI（人工知能）</strong>のうち、大量のデータから規則性を自動で学ぶのが<strong>機械学習</strong>。学び方は3種類——正解付きデータで学ぶ<strong>教師あり学習</strong>（分類・予測）、正解なしでデータの構造を見つける<strong>教師なし学習</strong>（クラスタリング）、試行錯誤で報酬が最大になる行動を学ぶ<strong>強化学習</strong>。人間の神経回路を模したニューラルネットワークを多層にした<strong>ディープラーニング（深層学習）</strong>が精度を飛躍させた。文章・画像・音声などを新たに作り出す<strong>生成AI</strong>（大規模言語モデルなど）も頻出。AIには学習データの偏りによる差別など<strong>倫理・バイアスの問題</strong>があることも問われる。</p>",
+        body: "<p><strong>AI（人工知能）</strong>のうち、大量のデータから規則性を自動で学ぶのが<strong>機械学習</strong>。学び方は3種類——正解付きデータで学ぶ<strong>教師あり学習</strong>（分類・予測）、正解なしでデータの構造を見つける<strong>教師なし学習</strong>（クラスタリング）、試行錯誤で報酬が最大になる行動を学ぶ<strong>強化学習</strong>。人間の神経回路を模したニューラルネットワークを多層にした<strong>ディープラーニング（深層学習）</strong>が精度を飛躍させた。下の図のように、この3つは<strong>AI ⊃ 機械学習 ⊃ ディープラーニング</strong>という包含関係にあります。文章・画像・音声などを新たに作り出す<strong>生成AI</strong>（大規模言語モデルなど）も頻出。AIには学習データの偏りによる差別など<strong>倫理・バイアスの問題</strong>があることも問われる。</p>",
+        diagram:
+          '<svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="260" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">AI・機械学習・ディープラーニングの関係</text>' +
+          '<rect x="30" y="40" width="460" height="158" rx="12" fill="#eef4f9" stroke="#4a7fa8" stroke-width="1.5"/>' +
+          '<text x="260" y="60" fill="#34567a" font-size="13" font-weight="800" text-anchor="middle">AI（人工知能）</text>' +
+          '<rect x="86" y="70" width="348" height="112" rx="10" fill="#f7edd6" stroke="#b28a2e" stroke-width="1.5"/>' +
+          '<text x="260" y="90" fill="#7a5e17" font-size="13" font-weight="800" text-anchor="middle">機械学習（データから規則を学ぶ）</text>' +
+          '<rect x="150" y="104" width="220" height="66" rx="9" fill="#dcecdd" stroke="#5c9160" stroke-width="1.5"/>' +
+          '<text x="260" y="134" fill="#366b3c" font-size="12.5" font-weight="800" text-anchor="middle">ディープラーニング</text>' +
+          '<text x="260" y="152" fill="#3f7a45" font-size="9.5" text-anchor="middle">多層ニューラルネットワーク</text>' +
+          "</svg>",
+        cap: "AIの一部が機械学習、そのまた一部がディープラーニング。範囲の広い順にAI＞機械学習＞ディープラーニング。",
       },
       {
         h: "IoT・ビッグデータ・第4次産業革命",
@@ -72,7 +84,40 @@ window.CURRICULUM.push(
       },
       {
         h: "マルチメディアと符号化",
-        body: "<p>音・画像・動画などをデジタルで扱うのが<strong>マルチメディア</strong>。アナログの音や光を、標本化→量子化→符号化の流れでデジタルに変換する（<strong>A/D変換</strong>）。データは大きいので<strong>圧縮</strong>する——元に完全に戻せる<strong>可逆圧縮</strong>と、多少劣化するが小さくできる<strong>非可逆圧縮</strong>がある。代表的な形式は、写真向けの<strong>JPEG</strong>（非可逆）、透過や図に強い<strong>PNG</strong>、動画の<strong>MP4</strong>、音声の<strong>MP3</strong>、文書配布の<strong>PDF</strong>。用途に合った形式を選ぶ。</p>",
+        body: "<p>音・画像・動画などをデジタルで扱うのが<strong>マルチメディア</strong>。アナログの音や光を、標本化→量子化→符号化の流れでデジタルに変換する（<strong>A/D変換</strong>）。データは大きいので<strong>圧縮</strong>する——元に完全に戻せる<strong>可逆圧縮</strong>と、多少劣化するが小さくできる<strong>非可逆圧縮</strong>がある。代表的な形式は下の早見表のとおり。用途に合った形式を選ぶ。</p>",
+        diagram:
+          '<svg viewBox="0 0 560 215" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
+          '<text x="280" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">代表的なファイル形式の早見表</text>' +
+          (function () {
+            var head = ["形式", "種類", "圧縮", "特徴"];
+            var rows = [
+              ["JPEG", "画像(写真)", "非可逆", "写真向き・高圧縮"],
+              ["PNG", "画像", "可逆", "透過対応・図やイラスト"],
+              ["GIF", "画像", "可逆", "256色・簡単なアニメ"],
+              ["MP3", "音声", "非可逆", "音楽の圧縮に定番"],
+              ["MP4", "動画", "非可逆", "動画の標準形式"],
+              ["PDF", "文書", "—", "レイアウトを保って配布"],
+            ];
+            var w = [70, 96, 70, 210], x0 = 56, y0 = 34, rh = 26;
+            var xs = [x0]; for (var i = 0; i < w.length; i++) xs.push(xs[i] + w[i]);
+            var s = "";
+            head.forEach(function (h, ci) {
+              s += '<rect x="' + xs[ci] + '" y="' + y0 + '" width="' + w[ci] + '" height="' + rh + '" fill="#eceff3" stroke="#c7ccd2"/><text x="' + (xs[ci] + w[ci] / 2) + '" y="' + (y0 + 17) + '" fill="#23252b" font-size="11" font-weight="700" text-anchor="middle">' + h + "</text>";
+            });
+            rows.forEach(function (row, ri) {
+              var y = y0 + (ri + 1) * rh;
+              row.forEach(function (cell, ci) {
+                var isNonrev = ci === 2 && cell === "非可逆", isRev = ci === 2 && cell === "可逆";
+                var fill = isNonrev ? "#f7dfd6" : (isRev ? "#dcecdd" : "#ffffff");
+                var tc = isNonrev ? "#8a4626" : (isRev ? "#366b3c" : "#23252b");
+                s += '<rect x="' + xs[ci] + '" y="' + y + '" width="' + w[ci] + '" height="' + rh + '" fill="' + fill + '" stroke="#d8dbe0"/>';
+                s += '<text x="' + (ci === 3 ? xs[ci] + 10 : xs[ci] + w[ci] / 2) + '" y="' + (y + 17) + '" fill="' + tc + '" font-size="10.5" ' + (ci === 0 ? 'font-weight="700" ' : "") + 'text-anchor="' + (ci === 3 ? "start" : "middle") + '">' + cell + "</text>";
+              });
+            });
+            return s;
+          })() +
+          "</svg>",
+        cap: "写真は非可逆のJPEG、透過や図は可逆のPNG、動画はMP4、音声はMP3、文書配布はPDF、と用途で選ぶ。",
       },
     ],
     memorize: [
