@@ -21,20 +21,48 @@
     return '<span class="freq freq-' + n + '" title="頻出度：' + label + '" aria-label="頻出度' + n + '">' + stars + "</span>";
   }
 
+  /* ---------- 科目（A / B）の状態 ---------- */
+  var SUBJECT_KEY = "fe-subject";
+  var activeSubject = (function () {
+    try { return localStorage.getItem(SUBJECT_KEY) === "B" ? "B" : "A"; } catch (e) { return "A"; }
+  })();
+  function subjectOf(domain) { return /^【科目B】/.test(domain) ? "B" : "A"; }
+
   /* ---------- サイドバー生成 ---------- */
   function buildNav() {
     var nav = document.getElementById("nav");
     if (!nav) return;
     var order = [];
     var groups = {};
+    var countA = 0, countB = 0;
     DATA.forEach(function (m) {
       if (!groups[m.domain]) { groups[m.domain] = []; order.push(m.domain); }
       groups[m.domain].push(m);
+      if (subjectOf(m.domain) === "B") countB++; else countA++;
     });
+
+    // 早見表（科目に関わらず常時表示）
     var html = '<a class="nav-link nav-special" data-id="compare" href="#compare"><span class="nav-icon" aria-hidden="true">🗂</span><span>用語早見表</span></a>';
     html += '<a class="nav-link nav-special" data-id="formulas" href="#formulas"><span class="nav-icon" aria-hidden="true">🧮</span><span>公式早見表</span></a>';
+
+    // 科目タブ（A＝知識／B＝実践）
+    html += '<div class="subject-tabs" role="tablist" aria-label="科目の切り替え">';
+    html += '<button type="button" class="subject-tab' + (activeSubject === "A" ? " active" : "") + '" data-subject="A" role="tab" aria-selected="' + (activeSubject === "A" ? "true" : "false") + '">' +
+      '<span class="st-name">科目A</span><span class="st-desc">知識 ' + countA + "項目</span></button>";
+    html += '<button type="button" class="subject-tab' + (activeSubject === "B" ? " active" : "") + '" data-subject="B" role="tab" aria-selected="' + (activeSubject === "B" ? "true" : "false") + '">' +
+      '<span class="st-name">科目B</span><span class="st-desc">実践 ' + countB + "項目</span></button>";
+    html += "</div>";
+
+    // 選択中科目の一言ガイド
+    html += '<div class="subject-hint">' + (activeSubject === "A"
+      ? "知識を問う四択問題。全分野から幅広く出題。"
+      : "擬似言語のトレースが中心。アルゴリズム16問＋情報セキュリティ4問。") + "</div>";
+
+    // 選択中の科目に属するドメイングループだけ表示
     order.forEach(function (domain) {
-      html += '<div class="nav-domain">' + domain + "</div>";
+      if (subjectOf(domain) !== activeSubject) return;
+      var label = domain.replace(/^【科目B】/, ""); // タブで科目は分かるので接頭辞は省く
+      html += '<div class="nav-domain">' + label + "</div>";
       groups[domain].forEach(function (m) {
         html +=
           '<a class="nav-link" data-id="' + m.id + '" href="#' + m.id + '">' +
@@ -44,6 +72,18 @@
       });
     });
     nav.innerHTML = html;
+
+    // タブのクリックで科目を切り替え（サイドバーは閉じない）
+    nav.querySelectorAll(".subject-tab").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var s = btn.getAttribute("data-subject");
+        if (s === activeSubject) return;
+        activeSubject = s;
+        try { localStorage.setItem(SUBJECT_KEY, s); } catch (e) {}
+        buildNav();
+        setActiveNav(currentId); // 表示中の科目ハイライトを維持
+      });
+    });
   }
 
   /* ---------- カリキュラム一覧生成 ---------- */
@@ -210,7 +250,9 @@
   var viewHome = document.getElementById("view-home");
   var viewModule = document.getElementById("view-module");
 
+  var currentId = null;
   function setActiveNav(id) {
+    currentId = id;
     document.querySelectorAll(".nav-link").forEach(function (a) {
       a.classList.toggle("active", a.getAttribute("data-id") === id);
     });
@@ -232,6 +274,13 @@
     viewHome.hidden = true;
     viewModule.hidden = false;
     renderModule(m);
+    // 開いた科目に応じてサイドバーのタブを自動で合わせる
+    var s = subjectOf(m.domain);
+    if (s !== activeSubject) {
+      activeSubject = s;
+      try { localStorage.setItem(SUBJECT_KEY, s); } catch (e) {}
+      buildNav();
+    }
     setActiveNav(m.id);
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();

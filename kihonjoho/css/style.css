@@ -119,6 +119,33 @@ h1, h2, h3, h4 { line-height: 1.4; text-wrap: balance; font-weight: 700; letter-
 }
 .nav-icon { font-size: 1rem; width: 1.4rem; text-align: center; }
 
+/* 科目A / 科目B 切り替えタブ（セグメントコントロール） */
+.subject-tabs {
+  display: flex; gap: 0.3rem;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem;
+  margin: 0.95rem 0 0.25rem;
+}
+.subject-tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  padding: 0.5rem 0.3rem; border: none; border-radius: 6px;
+  background: transparent; color: var(--text-muted); cursor: pointer;
+  font-family: var(--font); line-height: 1.2; transition: var(--transition);
+}
+.subject-tab:hover { background: rgba(0, 0, 0, 0.035); color: var(--text); }
+.subject-tab.active {
+  background: var(--accent); color: #fff; box-shadow: var(--shadow-soft);
+}
+.subject-tab .st-name { font-size: 0.92rem; font-weight: 800; }
+.subject-tab .st-desc { font-size: 0.64rem; font-weight: 600; opacity: 0.82; }
+.subject-tab.active .st-desc { opacity: 0.95; }
+.subject-hint {
+  font-size: 0.72rem; color: var(--text-dim); line-height: 1.55;
+  padding: 0.2rem 0.7rem 0.15rem;
+}
+
 .sidebar-foot { font-size: 0.72rem; color: var(--text-dim); padding: 1rem 0.7rem 0; line-height: 1.6; }
 
 .sidebar-overlay {
