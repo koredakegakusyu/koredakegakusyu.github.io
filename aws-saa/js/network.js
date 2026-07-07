@@ -1,5 +1,5 @@
 /* =============================================================
-   コレダケ ネットワーク — 共通フッター部品（全サイト共通・同一ファイル）
+   コレダケ学習 ネットワーク — 共通フッター部品（全サイト共通・同一ファイル）
    新しい資格サイトを公開したら SITES に1行足すだけ。
    「このサイト」判定は URL のホスト名から自動で行うので、
    このファイルは全サイトへそのままコピーして使い回せる。
@@ -10,11 +10,11 @@
   /* ---- 姉妹サイト一覧（ここを編集して増やす。全サイト同一にする） ----
      url が空 or soon:true は「準備中」表示。公開したら url を入れて soon を外す。 */
   var SITES = [
-    { name: "コレダケAWS SAA", tag: "AWS認定SAA-C03", url: "https://koredakegakusyu.github.io/aws-saa/" },
-    { name: "コレダケAWS CCP", tag: "AWS認定CLF-C02", url: "https://koredakegakusyu.github.io/aws-ccp/" },
-    { name: "コレダケITパスポート", tag: "国家試験・iパス", url: "https://koredakegakusyu.github.io/it-passport/" },
-    { name: "コレダケ基本情報", tag: "基本情報技術者", url: "https://koredakegakusyu.github.io/kihonjoho/" },
-    { name: "コレダケ応用情報", tag: "応用情報技術者", url: "", soon: true },
+    { name: "コレダケ学習AWS SAA", tag: "AWS認定SAA-C03", url: "https://koredakegakusyu.github.io/aws-saa/" },
+    { name: "コレダケ学習AWS CCP", tag: "AWS認定CLF-C02", url: "https://koredakegakusyu.github.io/aws-ccp/" },
+    { name: "コレダケ学習ITパスポート", tag: "国家試験・iパス", url: "https://koredakegakusyu.github.io/it-passport/" },
+    { name: "コレダケ学習基本情報", tag: "基本情報技術者", url: "https://koredakegakusyu.github.io/kihonjoho/" },
+    { name: "コレダケ学習応用情報", tag: "応用情報技術者", url: "", soon: true },
   ];
 
   /* 同一ドメイン配下にサブフォルダで複数サイトを置く構成（例: GitHub Pagesの

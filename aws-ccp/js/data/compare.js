@@ -72,6 +72,31 @@ window.COMPARE = [
   { n: "AWS Budgets", cat: "請求・サポート", role: "予算アラート", sig: "使いすぎを通知", key: "予算超過で通知" },
   { n: "サポートプラン", cat: "請求・サポート", role: "4段階の支援", sig: "必要な支援レベル", key: "Basic/Developer/Business/Enterprise" },
   { n: "TAM", cat: "請求・サポート", role: "専任担当", sig: "Enterpriseで付く", key: "テクニカルアカウントマネージャー" },
+
+  /* 移行・転送 */
+  { n: "DataSync", cat: "移行・転送", role: "ネット経由の転送", sig: "回線で送れる大量データ", key: "オンプレ⇔AWSを高速・自動" },
+  { n: "Snowファミリー", cat: "移行・転送", role: "物理デバイスで郵送", sig: "回線で送りきれない大量データ", key: "Snowcone/Snowball/Snowmobile(数十PB)" },
+  { n: "DMS", cat: "移行・転送", role: "DB移行", sig: "データベースをAWSへ", key: "稼働したまま移行。異種はSCTで変換" },
+  { n: "Storage Gateway", cat: "移行・転送", role: "オンプレとS3を橋渡し", sig: "ハイブリッドなバックアップ", key: "既存システムからクラウドへ" },
+  { n: "リホスト(7つのR)", cat: "移行・転送", role: "そのまま移す", sig: "最速で移行の第一歩", key: "リフト&シフト。他にリプラットフォーム/リファクタ" },
+
+  /* AI・機械学習 */
+  { n: "SageMaker", cat: "AI・機械学習", role: "モデルを自作", sig: "MLを構築・学習・デプロイ", key: "作り込みたいとき" },
+  { n: "Rekognition", cat: "AI・機械学習", role: "画像・動画分析", sig: "顔認識・物体検出", key: "入力=画像/動画" },
+  { n: "Polly / Transcribe", cat: "AI・機械学習", role: "音声変換", sig: "読み上げ／文字起こし", key: "Polly=文字→音声、Transcribe=音声→文字" },
+  { n: "Translate", cat: "AI・機械学習", role: "翻訳", sig: "言語→別言語", key: "多言語対応" },
+  { n: "Comprehend", cat: "AI・機械学習", role: "自然言語処理", sig: "感情分析・キーワード抽出", key: "文章の解析" },
+  { n: "Lex", cat: "AI・機械学習", role: "チャットボット", sig: "会話・音声ボット", key: "Alexaと同技術" },
+  { n: "Textract", cat: "AI・機械学習", role: "書類から抽出", sig: "画像/書類の文字・表を抽出", key: "OCR＋" },
+  { n: "Q / Bedrock", cat: "AI・機械学習", role: "生成AI", sig: "対話AI・基盤モデル", key: "Q=アシスタント、Bedrock=構築" },
+
+  /* 開発者ツール */
+  { n: "CodeCommit/Build/Deploy", cat: "開発者ツール", role: "CI/CDの各段階", sig: "保管・ビルド・デプロイ", key: "CodeCommit=Git、Build=ビルド、Deploy=デプロイ" },
+  { n: "CodePipeline", cat: "開発者ツール", role: "CI/CDの司令塔", sig: "一連の流れを自動化", key: "Code系を1本につなぐ" },
+  { n: "X-Ray", cat: "開発者ツール", role: "処理の追跡", sig: "ボトルネック・障害分析", key: "アプリのデバッグ" },
+  { n: "Step Functions", cat: "開発者ツール", role: "ワークフロー", sig: "処理を順序立てて実行", key: "状態遷移で連携" },
+  { n: "EventBridge", cat: "開発者ツール", role: "イベント連携", sig: "イベント起点で別サービス起動", key: "イベントバス" },
+  { n: "Cloud9 / CloudShell", cat: "開発者ツール", role: "開発環境", sig: "ブラウザのIDE/CLI", key: "環境構築不要" },
 ];
 
 window.COMPARE_LINK = {
@@ -125,6 +150,25 @@ window.COMPARE_LINK = {
   "AWS Budgets": "ccp-billing",
   "サポートプラン": "ccp-support",
   "TAM": "ccp-support",
+  "DataSync": "ccp-migration",
+  "Snowファミリー": "ccp-migration",
+  "DMS": "ccp-migration",
+  "Storage Gateway": "ccp-migration",
+  "リホスト(7つのR)": "ccp-migration",
+  "SageMaker": "ccp-ai-ml",
+  "Rekognition": "ccp-ai-ml",
+  "Polly / Transcribe": "ccp-ai-ml",
+  "Translate": "ccp-ai-ml",
+  "Comprehend": "ccp-ai-ml",
+  "Lex": "ccp-ai-ml",
+  "Textract": "ccp-ai-ml",
+  "Q / Bedrock": "ccp-ai-ml",
+  "CodeCommit/Build/Deploy": "ccp-devtools",
+  "CodePipeline": "ccp-devtools",
+  "X-Ray": "ccp-devtools",
+  "Step Functions": "ccp-devtools",
+  "EventBridge": "ccp-devtools",
+  "Cloud9 / CloudShell": "ccp-devtools",
 };
 
 window.VERSUS = [

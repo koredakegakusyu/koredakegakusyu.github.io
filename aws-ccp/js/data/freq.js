@@ -19,6 +19,9 @@ window.FREQ = {
   "ccp-network": 3,
   "ccp-management": 3,
   "ccp-integration": 2,
+  "ccp-migration": 2,
+  "ccp-ai-ml": 2,
+  "ccp-devtools": 1,
   // 請求とサポート
   "ccp-billing": 3,
   "ccp-support": 2,

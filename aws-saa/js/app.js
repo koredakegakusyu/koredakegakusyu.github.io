@@ -234,7 +234,7 @@
     setActiveNav(m.id);
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = m.title + " | コレダケAWS SAA";
+    document.title = m.title + " | コレダケ学習AWS SAA";
   }
 
   /* ---------- サービス早見表 ---------- */
@@ -250,7 +250,7 @@
     setActiveNav("compare");
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = "サービス早見表 | コレダケAWS SAA";
+    document.title = "サービス早見表 | コレダケ学習AWS SAA";
   }
 
   function renderCompare() {
@@ -309,14 +309,14 @@
     setActiveNav(null);
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = "お問い合わせ | コレダケAWS SAA";
+    document.title = "お問い合わせ | コレダケ学習AWS SAA";
   }
 
   function renderContact() {
     var mail = "koredakegakusyu@gmail.com";
     var html = '<div class="cmp-head"><div class="crumb"><a href="#home" data-nav>ホーム</a> ／ お問い合わせ</div>';
     html += "<h1>✉️ お問い合わせ</h1>";
-    html += "<p>内容の誤り・ご要望・ご感想など、お気軽にご連絡ください。コレダケシリーズ共通の窓口です。</p></div>";
+    html += "<p>内容の誤り・ご要望・ご感想など、お気軽にご連絡ください。コレダケ学習シリーズ共通の窓口です。</p></div>";
     html += '<div class="feature-grid"><div class="feature-card"><h3>メールでのお問い合わせ</h3>' +
       '<p><a href="mailto:' + mail + '">' + mail + "</a></p>" +
       "<p>上記アドレス宛にメールをお送りください。内容確認のうえ対応いたします（返信をお約束するものではありません）。</p></div></div>";
@@ -373,7 +373,7 @@
     } else if (moduleById[hash]) {
       showModule(moduleById[hash]);
     } else {
-      document.title = "コレダケAWS SAA｜完全無料でSAA-C03に合格する図解学習サイト";
+      document.title = "コレダケ学習AWS SAA｜完全無料でSAA-C03に合格する図解学習サイト";
       showHome(hash === "how" || hash === "curriculum" ? hash : null);
     }
   }

@@ -28,7 +28,7 @@
   --test: #4a7a4e;            /* テスト=セージ */
   --test-bg: rgba(74, 122, 78, 0.1);
   --danger: #a8412f;
-  --diagram-bg: #1f232d;      /* 図解は引き締めのインクパネル */
+  --diagram-bg: #ffffff;      /* 図解は明るいテキストブック風パネル */
 
   /* タイポ */
   --font: "Noto Sans JP", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -287,11 +287,11 @@ h1, h2, h3, h4 { line-height: 1.4; text-wrap: balance; font-weight: 700; letter-
 .concept code { background: var(--bg-elev-2); padding: 0.05em 0.35em; border-radius: 4px; font-size: 0.9em; }
 
 .diagram {
-  background: var(--diagram-bg); border-radius: var(--radius-sm);
+  background: var(--diagram-bg); border: 1px solid var(--border-soft); border-radius: var(--radius-sm);
   padding: 1.2rem; overflow-x: auto; margin: 1.1rem 0 0.3rem;
 }
 .diagram svg { margin-inline: auto; width: 100%; height: auto; max-width: 640px; }
-.diagram-cap { text-align: center; font-size: 0.8rem; color: #b8bcc6; margin-top: 0.6rem; }
+.diagram-cap { text-align: center; font-size: 0.8rem; color: #6b6e76; margin-top: 0.6rem; }
 
 /* 暗記パート */
 .memo-grid { display: grid; gap: 0.7rem; }

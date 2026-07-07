@@ -1,5 +1,5 @@
 /* =============================================================
-   コレダケITパスポート — アプリ本体
+   コレダケ学習ITパスポート — アプリ本体
    ナビ生成 / ハッシュルーティング / フラッシュカード / クイズ採点
    （進捗ゲーミフィケーションは持たない。落ち着いた学習ツールに徹する）
    ============================================================= */
@@ -235,7 +235,7 @@
     setActiveNav(m.id);
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = m.title + " | コレダケITパスポート";
+    document.title = m.title + " | コレダケ学習ITパスポート";
   }
 
   /* ---------- 用語早見表 ---------- */
@@ -251,7 +251,7 @@
     setActiveNav("compare");
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = "用語早見表 | コレダケITパスポート";
+    document.title = "用語早見表 | コレダケ学習ITパスポート";
   }
 
   function renderCompare() {
@@ -351,7 +351,7 @@
     setActiveNav("formulas");
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = "公式早見表 | コレダケITパスポート";
+    document.title = "公式早見表 | コレダケ学習ITパスポート";
   }
 
   function renderFormulas() {
@@ -380,14 +380,14 @@
     setActiveNav(null);
     window.scrollTo({ top: 0, behavior: "auto" });
     closeSidebar();
-    document.title = "お問い合わせ | コレダケITパスポート";
+    document.title = "お問い合わせ | コレダケ学習ITパスポート";
   }
 
   function renderContact() {
     var mail = "koredakegakusyu@gmail.com";
     var html = '<div class="cmp-head"><div class="crumb"><a href="#home" data-nav>ホーム</a> ／ お問い合わせ</div>';
     html += "<h1>✉️ お問い合わせ</h1>";
-    html += "<p>内容の誤り・ご要望・ご感想など、お気軽にご連絡ください。コレダケシリーズ共通の窓口です。</p></div>";
+    html += "<p>内容の誤り・ご要望・ご感想など、お気軽にご連絡ください。コレダケ学習シリーズ共通の窓口です。</p></div>";
     html += '<div class="formula-group"><div class="formula-list">';
     html += '<div class="formula-card"><div class="formula-name">メールでのお問い合わせ</div>' +
       '<div class="formula-eq"><a href="mailto:' + mail + '">' + mail + "</a></div>" +
@@ -407,7 +407,7 @@
     } else if (moduleById[hash]) {
       showModule(moduleById[hash]);
     } else {
-      document.title = "コレダケITパスポート｜完全無料で合格する図解学習サイト";
+      document.title = "コレダケ学習ITパスポート｜完全無料で合格する図解学習サイト";
       showHome(hash === "how" || hash === "curriculum" ? hash : null);
     }
   }
