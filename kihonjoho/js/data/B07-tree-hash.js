@@ -102,6 +102,37 @@ window.CURRICULUM.push(
         answer: 0,
         explain: "異なるキーが同じ位置になるのは<strong>衝突（シノニム）</strong>。別の空き位置へずらすなどで対応する。",
       },
+      {
+        q:
+          "2分木の各節点はクラス Node（メンバ：value、left、right。子が無ければ未定義）で表す。次の再帰関数 countNodes は、根 t 以下の節点数を数える。空欄 <b>a</b> に入れる正しい記述はどれか。" +
+          PCODE(
+            "整数型: countNodes(Node: t)\n" +
+            "  if (t が 未定義)\n" +
+            "    return 0\n" +
+            "  endif\n" +
+            "  return " + BLANK("a") + "\n"
+          ),
+        choices: [
+          "1 + countNodes(t.left) + countNodes(t.right)",
+          "countNodes(t.left) + countNodes(t.right)",
+          "1 + countNodes(t.left)",
+          "t.value + countNodes(t.left) + countNodes(t.right)",
+        ],
+        answer: 0,
+        explain: "自分自身の<strong>1</strong>と、左部分木の節点数、右部分木の節点数を合計する。空(未定義)なら0で底を打つ。これが木の再帰の基本形。",
+      },
+      {
+        q:
+          "ハッシュ法で、キー x の格納位置を『x mod 7』（7で割った余り、位置は0〜6）で決める。空の表に 10, 17, 4 の順で格納する。17 を入れようとするとどうなるか。",
+        choices: [
+          "位置3に入る（衝突は起きない）",
+          "10と同じ位置3で衝突（シノニム）が起きる",
+          "位置4に入り、後の4と衝突する",
+          "位置0に入る",
+        ],
+        answer: 1,
+        explain: "10 mod 7＝3、17 mod 7＝3 で<strong>同じ位置3</strong>。異なるキーが同じ位置＝<strong>衝突（シノニム）</strong>。4 mod 7＝4なので4は別位置。衝突時は空き位置へずらす等で対応する。",
+      },
     ],
   }
 );

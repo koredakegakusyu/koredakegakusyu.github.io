@@ -135,6 +135,40 @@ window.CURRICULUM.push(
         answer: 0,
         explain: "push後は[1,2,3,4]。popを2回すると4と3が出て、残りは下から<strong>1, 2</strong>。",
       },
+      {
+        q:
+          "スタック stk とキュー que がどちらも空の状態から次を実行した。最後に出力される値はどれか。（push/pop=スタック、enq/deq=キュー）" +
+          PCODE(
+            "push(stk, 1)\n" +
+            "push(stk, 2)\n" +
+            "enq(que, pop(stk))   // popした値をキューに入れる\n" +
+            "push(stk, 3)\n" +
+            "enq(que, pop(stk))\n" +
+            "enq(que, pop(stk))\n" +
+            "deq(que) を出力       // 最初に入れた値が出る"
+          ),
+        choices: ["1", "2", "3", "空でエラー"],
+        answer: 1,
+        explain: "stk:[1,2]→pop=2をenq→que:[2]。push3→stk:[1,3]→pop=3をenq→que:[2,3]。pop=1をenq→que:[2,3,1]。deqは先頭<strong>2</strong>。スタックとキューの向きの違いが鍵。",
+      },
+      {
+        q:
+          "次の手続は、文字列中の括弧の対応が正しいか調べるためにスタックを使う。空欄 <b>a</b> に入れる操作はどれか。『(』が来たらスタックに積み、『)』が来たら1つ取り出して対応させる。" +
+          PCODE(
+            "// s の各文字 c を先頭から順に見る\n" +
+            "if (c が '(' と等しい)\n" +
+            "  " + BLANK("a") + "\n" +
+            "elseif (c が ')' と等しい)\n" +
+            "  if (スタックが空)\n" +
+            "    return 対応していない\n" +
+            "  endif\n" +
+            "  pop()   // 対応する '(' を取り出す\n" +
+            "endif"
+          ),
+        choices: ["push('(')", "pop()", "dequeue()", "return 対応している"],
+        answer: 0,
+        explain: "開き括弧『(』が来たら後で対応させるため<strong>push('(')</strong>で積む。閉じ括弧でpopして対応を取る。開いた分だけ積み、閉じるたびに取り出すのが括弧チェックの定石。",
+      },
     ],
   }
 );

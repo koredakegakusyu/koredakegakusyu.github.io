@@ -160,6 +160,30 @@ window.CURRICULUM.push(
         answer: 1,
         explain: "do-whileは後判定なので<strong>先に1回実行</strong>。その後 k=6 で条件 k&lt;3 は偽になり終了。よって<strong>1回</strong>。",
       },
+      {
+        q:
+          "ある施設の入場料は、0〜3歳は100円、4〜9歳は300円、10歳以上は500円である。関数 fee は年齢 age（0以上の整数）を受け取り入場料を返す。空欄 <b>a</b> に入れる正しい条件式はどれか。（IPA科目Bサンプル問1）" +
+          PCODE(
+            "整数型: fee(整数型: age)\n" +
+            "  整数型: ret\n" +
+            "  if (age が 3 以下)\n" +
+            "    ret ← 100\n" +
+            "  elseif (" + BLANK("a") + ")\n" +
+            "    ret ← 300\n" +
+            "  else\n" +
+            "    ret ← 500\n" +
+            "  endif\n" +
+            "  return ret"
+          ),
+        choices: [
+          "age が 9 以下",
+          "(age が 4 以上) and (age が 9 以下)",
+          "age が 4 以上",
+          "(age が 4 と等しい) or (age が 9 と等しい)",
+        ],
+        answer: 0,
+        explain: "elseif に来る時点で『age が 3 以下』は<strong>すでに偽</strong>＝age は4以上が確定。だから残す条件は上限の<strong>『age が 9 以下』だけ</strong>で足りる。正解はカ相当。and で4以上を重ねるのは冗長（間違いではないが最小の条件を選ぶ）。ここが引っかけ。",
+      },
     ],
   }
 );

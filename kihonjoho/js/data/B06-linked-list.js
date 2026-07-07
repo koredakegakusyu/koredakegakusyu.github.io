@@ -125,6 +125,30 @@ window.CURRICULUM.push(
         answer: 1,
         explain: "前後両方向にたどれるのは<strong>双方向リスト</strong>（各ノードがnextとprevを持つ）。",
       },
+      {
+        q:
+          "大域変数 listHead を先頭とする単方向リスト（各要素はクラス Node、メンバ val・next）から、先頭でない要素 target を削除する。target の1つ前の要素 prev は分かっているものとする。空欄 <b>a</b> に入れる正しい記述はどれか。" +
+          PCODE(
+            "// prev.next が target を指している状態\n" +
+            "prev.next ← " + BLANK("a") + "   // targetを飛ばしてつなぎ替える"
+          ),
+        choices: ["target.next", "target.val", "prev.next", "未定義"],
+        answer: 0,
+        explain: "削除は『前の要素の next を、削除要素の次へ付け替える』。prev.next に <strong>target.next</strong> を入れると target が链から外れる（飛ばされる）。これが連結リスト削除の定石。",
+      },
+      {
+        q:
+          "単方向リストが 先頭→A→B→C→D とつながっている。次の操作を順に行った後、先頭からたどった並びはどれか。（各要素はクラス Node、prevBはBを指す変数）" +
+          PCODE(
+            "Node: X ← Node('X')\n" +
+            "X.next ← prevB.next   // prevB.next は B\n" +
+            "prevB.next ← X        // AとBの間にX挿入\n" +
+            "B.next ← D            // Cを飛ばす（Cを削除）"
+          ),
+        choices: ["A → X → B → D", "A → X → B → C → D", "A → B → X → C → D", "A → X → B → C"],
+        answer: 0,
+        explain: "AとBの間にXを挿入（A→X→B）。さらにB.nextをDにしてCを削除（B→D）。結果は<strong>A→X→B→D</strong>。挿入と削除のポインタ操作を続けて追う本番型。",
+      },
     ],
   }
 );

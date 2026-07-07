@@ -41,6 +41,7 @@ window.FREQ = {
   // 科目B（アルゴリズム＆プログラミング16問＋情報セキュリティ4問）
   "feb-pseudo-basics": 3,
   "feb-functions": 3,
+  "feb-class": 3,
   "feb-array": 3,
   "feb-sort-search": 3,
   "feb-stack-queue": 2,

@@ -107,6 +107,40 @@ window.CURRICULUM.push(
         answer: 1,
         explain: "1回だけの探索なら、整列の手間が不要な<strong>線形探索</strong>が適切。整列してから2分探索するのは、何度も探索する場合に有利。",
       },
+      {
+        q:
+          "次の関数は、昇順に整列済みの配列 A から目的の値 target を2分探索する。空欄 <b>a</b>・<b>b</b> に入れる正しい組合せはどれか。要素番号は1から始まる。" +
+          PCODE(
+            "整数型: bsearch(整数型の配列: A, 整数型: target)\n" +
+            "  整数型: lo ← 1, hi ← Aの要素数, mid\n" +
+            "  while (lo ≦ hi)\n" +
+            "    mid ← (lo + hi) ÷ 2 の商\n" +
+            "    if (A[mid] = target)\n" +
+            "      return mid\n" +
+            "    elseif (A[mid] &lt; target)\n" +
+            "      " + BLANK("a") + "\n" +
+            "    else\n" +
+            "      " + BLANK("b") + "\n" +
+            "    endif\n" +
+            "  endwhile\n" +
+            "  return −1"
+          ),
+        choices: [
+          "a：lo ← mid + 1 ／ b：hi ← mid − 1",
+          "a：hi ← mid − 1 ／ b：lo ← mid + 1",
+          "a：lo ← mid ／ b：hi ← mid",
+          "a：hi ← mid + 1 ／ b：lo ← mid − 1",
+        ],
+        answer: 0,
+        explain: "真ん中A[mid]が目的より<strong>小さい</strong>→目的は右半分にある→<strong>lo←mid+1</strong>。大きい→左半分→<strong>hi←mid−1</strong>。mid自身は一致判定済みなので±1する。",
+      },
+      {
+        q:
+          "配列 {3, 1, 4, 2} をバブルソートで昇順に並べ替える（隣を比較し逆なら交換）。外側ループが<strong>2周</strong>終わった直後の配列はどれか。1周ごとに未確定範囲の最大が右へ確定する。",
+        choices: ["{1, 3, 2, 4}", "{1, 2, 3, 4}", "{3, 1, 2, 4}", "{1, 3, 4, 2}"],
+        answer: 1,
+        explain: "1周目:{3,1,4,2}→3,1交換{1,3,4,2}→3,4はそのまま→4,2交換{1,3,2,4}（4が確定）。2周目:{1,3,2,4}→1,3そのまま→3,2交換{1,2,3,4}（3が確定）。2周後は<strong>{1,2,3,4}</strong>。",
+      },
     ],
   }
 );

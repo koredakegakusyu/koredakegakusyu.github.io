@@ -76,6 +76,23 @@ window.CURRICULUM.push(
             "左端iと右端jを交換し、iを右へ・jを左へ。i<jの間くり返すと全体が逆順になる。"
           ),
       },
+      {
+        h: "二次元配列——『行と列』で表を扱う（本番頻出）",
+        body:
+          "<p>本番では<strong>二次元配列</strong>（表・行列）もよく出ます。<code>matrix[i, j]</code> は<strong>i行j列</strong>の要素を表し、<strong>行数・列数</strong>で大きさが分かります。二重ループ（外側で行 i、内側で列 j）で全要素を走査するのが定番パターンです。</p>" +
+          "<p>下は表の全要素の合計を求める例（要素番号は1から）。IPA公式のサンプル問4（疎行列）もこの二重ループが土台です。<strong>『行数×列数の分だけ内側が回る』</strong>感覚をトレースで身につけます。</p>" +
+          PCODE(
+            "整数型の二次元配列: M ← {{1, 2, 3}, {4, 5, 6}}  // 2行3列\n" +
+            "整数型: i, j, 合計 ← 0\n" +
+            "for (i を 1 から Mの行数 まで 1 ずつ増やす)      // i=1,2\n" +
+            "  for (j を 1 から Mの列数 まで 1 ずつ増やす)    // j=1,2,3\n" +
+            "    合計 ← 合計 + M[i, j]\n" +
+            "  endfor\n" +
+            "endfor\n" +
+            "// M[1,1..3]=1,2,3 と M[2,1..3]=4,5,6 を全部足す → 合計=21",
+            "外側=行、内側=列の二重ループ。M[i,j]でi行j列。合計は1+2+3+4+5+6=21。"
+          ),
+      },
     ],
     memorize: [
       { k: "合計のパターン", v: "合計←0 にして、要素を順に 合計←合計+A[i] で足す。" },
@@ -83,6 +100,7 @@ window.CURRICULUM.push(
       { k: "線形探索", v: "先頭から順に比較。見つかれば位置、無ければ−1等。最悪n回。" },
       { k: "スワップ（交換）", v: "一時変数tmpを使う。tmp←a；a←b；b←tmp の3手順。" },
       { k: "逆順", v: "左端と右端を交換し内側へ。i<jの間くり返す。" },
+      { k: "二次元配列", v: "matrix[i,j]でi行j列。二重ループ(外=行,内=列)で全要素を走査。" },
       { k: "要素番号の開始", v: "0からか1からかで境界が変わる。問題文で必ず確認。" },
     ],
     flashcards: [
@@ -152,6 +170,46 @@ window.CURRICULUM.push(
         ],
         answer: 1,
         explain: "<strong>線形探索は未整列でも使え、先頭から順に比較</strong>する（最悪n回）。整列が前提で半分に絞るのは2分探索。",
+      },
+      {
+        q:
+          "次のプログラムは、整数型の配列 array の要素の並びを逆順にする。空欄 <b>a</b>・<b>b</b> に入れる正しい組合せはどれか。ここで、配列の要素番号は1から始まる。（IPA科目Bサンプル問2の類題）" +
+          PCODE(
+            "整数型の配列: array ← {1, 2, 3, 4, 5}\n" +
+            "整数型: right, left, tmp\n" +
+            "for (left を 1 から (arrayの要素数 ÷ 2 の商) まで 1 ずつ増やす)\n" +
+            "  right ← " + BLANK("a") + "\n" +
+            "  tmp ← array[right]\n" +
+            "  array[right] ← array[left]\n" +
+            "  " + BLANK("b") + " ← tmp\n" +
+            "endfor"
+          ),
+        choices: [
+          "a：arrayの要素数 − left ／ b：array[left]",
+          "a：arrayの要素数 − left ＋ 1 ／ b：array[left]",
+          "a：arrayの要素数 − left ＋ 1 ／ b：array[right]",
+          "a：arrayの要素数 − left ／ b：array[right]",
+        ],
+        answer: 1,
+        explain: "left=1 のとき対になる右端は要素数5番目。<strong>right＝要素数−left＋1</strong>（5−1+1=5）。交換の3手順目は<strong>array[left]←tmp</strong>。left=1↔right=5, left=2↔right=4 と入れ替わる。",
+      },
+      {
+        q:
+          "2行3列の二次元配列 M ← {{2, 0, 5}, {0, 4, 0}} に対し次を実行した。出力される cnt はどれか。要素番号は1から始まる。" +
+          PCODE(
+            "整数型: i, j, cnt ← 0\n" +
+            "for (i を 1 から Mの行数 まで 1 ずつ増やす)\n" +
+            "  for (j を 1 から Mの列数 まで 1 ずつ増やす)\n" +
+            "    if (M[i, j] が 0 でない)\n" +
+            "      cnt ← cnt + 1\n" +
+            "    endif\n" +
+            "  endfor\n" +
+            "endfor\n" +
+            "cnt を出力"
+          ),
+        choices: ["2", "3", "4", "6"],
+        answer: 1,
+        explain: "0でない要素の個数を数える。1行目に 2,5 の2個、2行目に 4 の1個で合計<strong>3</strong>個。（疎行列で非ゼロ要素を数える処理の基本）",
       },
     ],
   }

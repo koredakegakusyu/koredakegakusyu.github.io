@@ -115,6 +115,34 @@ window.CURRICULUM.push(
         answer: 1,
         explain: "基底条件が無いと<strong>無限に自分を呼び出し続けて終わらない</strong>（スタックあふれになる）。",
       },
+      {
+        q:
+          "関数 sum は、1 から n までの整数の和を再帰で求める。空欄 <b>a</b> に入れる正しい記述はどれか。例：sum(3)＝3+2+1＝6。" +
+          PCODE(
+            "整数型: sum(整数型: n)\n" +
+            "  if (n = 0)\n" +
+            "    return 0\n" +
+            "  endif\n" +
+            "  return " + BLANK("a") + "\n"
+          ),
+        choices: ["n + sum(n − 1)", "n × sum(n − 1)", "sum(n − 1)", "n + sum(n)"],
+        answer: 0,
+        explain: "『n と、n未満の和』を足すので <strong>n + sum(n − 1)</strong>。× は階乗、sum(n)のままだと基底に届かず無限再帰。",
+      },
+      {
+        q:
+          "次の再帰関数 fib（フィボナッチ数）を fib(5) で呼び出したときの戻り値はどれか。fib(1)=1, fib(2)=1, 以降は前2つの和。" +
+          PCODE(
+            "整数型: fib(整数型: n)\n" +
+            "  if (n ≦ 2)\n" +
+            "    return 1\n" +
+            "  endif\n" +
+            "  return fib(n − 1) + fib(n − 2)"
+          ),
+        choices: ["3", "5", "8", "13"],
+        answer: 1,
+        explain: "1,1,2,3,<strong>5</strong>,… fib(3)=2, fib(4)=3, fib(5)=fib(4)+fib(3)=3+2＝<strong>5</strong>。前2項を足していく。",
+      },
     ],
   }
 );
