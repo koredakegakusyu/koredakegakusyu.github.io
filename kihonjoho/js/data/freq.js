@@ -38,4 +38,13 @@ window.FREQ = {
   "fe-estimate": 2,
   "fe-accounting": 2,
   "fe-bizlaw": 2,
+  // 科目B（アルゴリズム＆プログラミング16問＋情報セキュリティ4問）
+  "feb-pseudo-basics": 3,
+  "feb-functions": 3,
+  "feb-array": 3,
+  "feb-sort-search": 3,
+  "feb-stack-queue": 2,
+  "feb-linked-list": 2,
+  "feb-tree-hash": 2,
+  "feb-security-b": 3,
 };
