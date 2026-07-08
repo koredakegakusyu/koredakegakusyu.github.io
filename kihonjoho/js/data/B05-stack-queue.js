@@ -76,6 +76,28 @@ window.CURRICULUM.push(
             "先に入れた1、2の順にdequeueで出てくる（FIFO）。残るのは最後に入れた3。"
           ),
       },
+      {
+        h: "深掘り：中身は配列＋『位置を指す変数』でできている",
+        body:
+          "<p>スタックやキューは魔法ではなく、<strong>ふつうの配列と『今どこか』を指す整数変数</strong>で作れます。仕組みを知ると、本番でクラス実装が出ても中身を追えます。</p>" +
+          "<p><strong>スタック</strong>は、配列 data と『一番上の位置』を指す <code>top</code> を持ちます。push は top を1増やしてそこへ入れ、pop はそこを取り出して top を1減らすだけです。</p>" +
+          PCODE(
+            "整数型の配列: data   // 中身の入れ物\n" +
+            "整数型: top ← 0      // 0 は「空」を表す\n" +
+            "\n" +
+            "○push(整数型: x)\n" +
+            "  top ← top + 1\n" +
+            "  data[top] ← x      // 上に積む\n" +
+            "\n" +
+            "○整数型: pop()\n" +
+            "  整数型: r ← data[top]\n" +
+            "  top ← top − 1      // 上を1つ下げる\n" +
+            "  return r",
+            "top が『上の位置』。push で+1して入れ、pop で取り出して−1。top=0 は空。"
+          ) +
+          "<p><strong>キュー</strong>は、取り出す側の <code>front</code>（先頭）と入れる側の <code>rear</code>（末尾）の2つの位置を持ちます。enqueue は rear 側に足し、dequeue は front 側から取る——入口と出口が別なので、<strong>先入れ先出し（FIFO）</strong>になります。配列の端まで来たら先頭に戻って使い回す<strong>リングバッファ</strong>という工夫もあります。</p>" +
+          "<p>ここで大事なのは、<strong>スタックは位置が1つ（top）、キューは2つ（front と rear）</strong>という違い。『出る順番が逆になる理由』が、この構造から腑に落ちます。</p>",
+      },
     ],
     memorize: [
       { k: "スタック(LIFO)", v: "後入れ先出し。push=積む、pop=一番上を取り出す。" },

@@ -70,6 +70,48 @@ window.CURRICULUM.push(
           "<p><strong>配列</strong>は要素番号を <code>[ ]</code> で指定します（例 <code>A[3]</code>）。中身のまとまりは <code>{ }</code> で表します（例 <code>A ← {10, 20, 30}</code>）。二次元配列は <code>M[行, 列]</code> のように「，」で区切ります。<strong>要素番号が1から始まるか0から始まるかは問題文で必ず確認</strong>します（どちらもあり得ます）。</p>" +
           "<p>変数に値がまだ入っていない状態を<strong>未定義</strong>といいます。未定義の変数を計算に使うと正しく動きません。</p>",
       },
+      {
+        h: "深掘り①：式は『優先順位の高い所から』評価する",
+        body:
+          "<p>条件式や計算式は、<strong>優先順位の高い演算子から順に、1つずつ値を確定</strong>させて読みます。頭の中でまとめて処理せず、下のように<strong>かっこを補いながら1手ずつ</strong>潰すのが確実です。</p>" +
+          "<p>例：<code>x ← 2 ＋ 3 × 4 &gt; 10 and 5 mod 2 ＝ 1</code> を評価してみます（x は論理型）。</p>" +
+          PCODE(
+            "元の式 : 2 ＋ 3 × 4 > 10 and 5 mod 2 ＝ 1\n" +
+            "① ×÷mod: 3×4=12,  5 mod 2=1\n" +
+            "   → 2 ＋ 12 > 10 and 1 ＝ 1\n" +
+            "② ＋－  : 2＋12=14\n" +
+            "   → 14 > 10 and 1 ＝ 1\n" +
+            "③ 関係  : 14>10=true,  1＝1=true\n" +
+            "   → true and true\n" +
+            "④ and   : true\n" +
+            "// x ← true",
+            "×÷mod → ＋－ → 関係(> ＝) → and の順。上から機械的に潰せば迷わない。"
+          ) +
+          "<p><strong>よくある誤り</strong>は、関係演算（&gt; や ＝）より <code>and / or</code> を先に読んでしまうこと。論理積・論理和は<strong>いちばん最後</strong>です。逆に、迷ったら問題文の式に<strong>自分でかっこを書き足して</strong>から解くと安全です（本番でも問題用紙に書き込めます）。</p>",
+      },
+      {
+        h: "深掘り②：ループは『トレース表』で一手ずつ確定する",
+        body:
+          "<p>繰返しは目で追うと必ずどこかで間違えます。<strong>変数を横に並べた表を作り、1回まわるごとに1行書き足す</strong>——これがトレースの王道です。下の for を、実際に表で追ってみます。</p>" +
+          PCODE(
+            "整数型: i, s ← 0\n" +
+            "for (i を 1 から 5 まで 1 ずつ増やす)\n" +
+            "  if ((i mod 2) ＝ 1)   // i が奇数のとき\n" +
+            "    s ← s ＋ i\n" +
+            "  endif\n" +
+            "endfor\n" +
+            "// s は？"
+          ) +
+          "<div class='pcode'><table>" +
+          "<tr><td class='pc-n'>i</td><td class='pc-c'>i mod 2 ＝ 1 ?</td><td class='pc-c'>s（実行後）</td></tr>" +
+          "<tr><td class='pc-n'>1</td><td class='pc-c'>真（奇数）</td><td class='pc-c'>0＋1 = 1</td></tr>" +
+          "<tr><td class='pc-n'>2</td><td class='pc-c'>偽</td><td class='pc-c'>1（変化なし）</td></tr>" +
+          "<tr><td class='pc-n'>3</td><td class='pc-c'>真</td><td class='pc-c'>1＋3 = 4</td></tr>" +
+          "<tr><td class='pc-n'>4</td><td class='pc-c'>偽</td><td class='pc-c'>4</td></tr>" +
+          "<tr><td class='pc-n'>5</td><td class='pc-c'>真</td><td class='pc-c'>4＋5 = 9</td></tr>" +
+          "</table><div class='pc-cap'>奇数(1,3,5)のときだけ s に足す。最終的に s ＝ 9。</div></div>" +
+          "<p>ポイントは<strong>『各行で、その周の実行後の値だけを書く』</strong>こと。これを紙に書く習慣がつくと、二重ループや再帰でも迷わなくなります。本番の演習問題はこの表さえ書ければ確実に解けます。</p>",
+      },
     ],
     memorize: [
       { k: "← （代入）", v: "右の値を左の変数へ入れる。数学の『＝』ではない。" },

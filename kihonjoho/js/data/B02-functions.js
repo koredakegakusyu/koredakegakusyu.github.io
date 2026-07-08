@@ -45,6 +45,20 @@ window.CURRICULUM.push(
             "n=0 で1を返して底を打ち、そこから 1→1→2→6 と掛け算が確定する。階乗(3)=6。"
           ),
       },
+      {
+        h: "深掘り：再帰は『行って（下り）→戻る（上り）』の2段階",
+        body:
+          "<p>再帰でつまずく最大の原因は、<strong>『呼び出しが積み上がる下り』と『戻り値が確定していく上り』を混ぜて考えてしまう</strong>ことです。この2つは向きが逆なので、分けて追います。</p>" +
+          "<p><strong>下り</strong>：<code>階乗(3)</code> は答えを出すのに <code>階乗(2)</code> が必要、それには <code>階乗(1)</code>、さらに <code>階乗(0)</code> が必要——と、<strong>基底条件に届くまで呼び出しが積み重なります</strong>（この待ち行列がコールスタック）。<br><strong>上り</strong>：<code>階乗(0)＝1</code> が確定すると、待っていた計算が<strong>下から順に確定</strong>していきます。</p>" +
+          "<div class='pcode'><table>" +
+          "<tr><td class='pc-c' style='font-weight:700'>下り（呼び出しが積む）</td><td class='pc-c' style='font-weight:700'>上り（戻り値が確定）</td></tr>" +
+          "<tr><td class='pc-c'>階乗(3)＝3×階乗(2) ←待つ</td><td class='pc-c'>＝3×2 ＝ <b>6</b></td></tr>" +
+          "<tr><td class='pc-c'>&nbsp;階乗(2)＝2×階乗(1) ←待つ</td><td class='pc-c'>＝2×1 ＝ 2</td></tr>" +
+          "<tr><td class='pc-c'>&nbsp;&nbsp;階乗(1)＝1×階乗(0) ←待つ</td><td class='pc-c'>＝1×1 ＝ 1</td></tr>" +
+          "<tr><td class='pc-c'>&nbsp;&nbsp;&nbsp;階乗(0)＝1（基底条件）</td><td class='pc-c'>＝ 1 ←ここから折り返す</td></tr>" +
+          "</table><div class='pc-cap'>左へ深く潜って基底条件に当たり、右へ折り返して掛け算が確定する。</div></div>" +
+          "<p>本番のトレースでは、この<strong>インデントを付けた呼び出しの図</strong>を紙に書くと、どこまで潜ってどこから戻るかが一目で分かります。『基底条件でいくつを返すか』と『戻り値をどう使うか（＋なのか×なのか）』の2点だけ押さえれば、再帰は必ず解けます。</p>",
+      },
     ],
     memorize: [
       { k: "手続 / 関数", v: "処理をまとめて名前で呼ぶ。関数は戻り値あり、手続は戻り値なし。" },

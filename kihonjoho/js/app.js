@@ -118,44 +118,54 @@
     html += '<p class="module-intro">' + m.intro + "</p>";
     html += "</div>";
 
-    // 理解
-    html += '<section class="sec sec-understand">';
-    html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◐</span><div><h2>理解する</h2><div class="sec-tag">仕組みと選定理由を図解で（青）</div></div></div>';
-    m.understand.forEach(function (u) {
-      html += '<div class="concept"><h3>' + u.h + "</h3>" + u.body;
-      if (u.diagram) {
-        html += '<div class="diagram">' + u.diagram +
-          (u.cap ? '<div class="diagram-cap">' + u.cap + "</div>" : "") + "</div>";
-      }
-      html += "</div>";
-    });
-    html += "</section>";
+    // 理解（内容がある場合のみ）
+    if (m.understand && m.understand.length) {
+      html += '<section class="sec sec-understand">';
+      html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◐</span><div><h2>理解する</h2><div class="sec-tag">仕組みと選定理由を図解で（青）</div></div></div>';
+      m.understand.forEach(function (u) {
+        html += '<div class="concept"><h3>' + u.h + "</h3>" + u.body;
+        if (u.diagram) {
+          html += '<div class="diagram">' + u.diagram +
+            (u.cap ? '<div class="diagram-cap">' + u.cap + "</div>" : "") + "</div>";
+        }
+        html += "</div>";
+      });
+      html += "</section>";
+    }
 
-    // 暗記
-    html += '<section class="sec sec-memorize">';
-    html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◆</span><div><h2>要点を暗記する</h2><div class="sec-tag">覚えるしかない要点だけ（橙）</div></div></div>';
-    html += '<div class="memo-grid">';
-    m.memorize.forEach(function (mm) {
-      html += '<div class="memo"><div class="memo-key">' + mm.k + '</div><div class="memo-val">' + mm.v + "</div></div>";
-    });
-    html += "</div></section>";
+    // 暗記（内容がある場合のみ）
+    if (m.memorize && m.memorize.length) {
+      html += '<section class="sec sec-memorize">';
+      html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◆</span><div><h2>要点を暗記する</h2><div class="sec-tag">覚えるしかない要点だけ（橙）</div></div></div>';
+      html += '<div class="memo-grid">';
+      m.memorize.forEach(function (mm) {
+        html += '<div class="memo"><div class="memo-key">' + mm.k + '</div><div class="memo-val">' + mm.v + "</div></div>";
+      });
+      html += "</div></section>";
+    }
 
-    // フラッシュカード
-    html += '<section class="sec sec-cards">';
-    html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">▤</span><div><h2>フラッシュカード</h2><div class="sec-tag">クリックで答え。左右で移動</div></div></div>';
-    html += '<div class="flash-wrap" data-flash="' + m.id + '">';
-    html += '<div class="flash-toolbar"><span class="flash-counter"><span class="fc-cur">1</span> / ' + m.flashcards.length + "</span></div>";
-    html += '<div class="flashcard" tabindex="0" role="button" aria-label="クリックで答えを表示">';
-    html += '<div class="flashcard-inner">';
-    html += '<div class="flash-face flash-front"><span class="flash-side">Q</span><div class="flash-q"></div><span class="flash-hint">クリックで答えを見る</span></div>';
-    html += '<div class="flash-face flash-back"><span class="flash-side">A</span><div class="flash-a"></div><span class="flash-hint">クリックで問題に戻る</span></div>';
-    html += "</div></div>";
-    html += '<div class="flash-nav"><button class="flash-btn fb-prev" type="button" aria-label="前のカード">‹</button><button class="flash-btn fb-next" type="button" aria-label="次のカード">›</button></div>';
-    html += "</div></section>";
+    // フラッシュカード（内容がある場合のみ）
+    if (m.flashcards && m.flashcards.length) {
+      html += '<section class="sec sec-cards">';
+      html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">▤</span><div><h2>フラッシュカード</h2><div class="sec-tag">クリックで答え。左右で移動</div></div></div>';
+      html += '<div class="flash-wrap" data-flash="' + m.id + '">';
+      html += '<div class="flash-toolbar"><span class="flash-counter"><span class="fc-cur">1</span> / ' + m.flashcards.length + "</span></div>";
+      html += '<div class="flashcard" tabindex="0" role="button" aria-label="クリックで答えを表示">';
+      html += '<div class="flashcard-inner">';
+      html += '<div class="flash-face flash-front"><span class="flash-side">Q</span><div class="flash-q"></div><span class="flash-hint">クリックで答えを見る</span></div>';
+      html += '<div class="flash-face flash-back"><span class="flash-side">A</span><div class="flash-a"></div><span class="flash-hint">クリックで問題に戻る</span></div>';
+      html += "</div></div>";
+      html += '<div class="flash-nav"><button class="flash-btn fb-prev" type="button" aria-label="前のカード">‹</button><button class="flash-btn fb-next" type="button" aria-label="次のカード">›</button></div>';
+      html += "</div></section>";
+    }
 
-    // 確認テスト（本番想定）
+    // 確認テスト / 演習問題
+    if (m.quiz && m.quiz.length) {
+    var quizOnly = !(m.understand && m.understand.length);
+    var testTitle = quizOnly ? "演習問題" : "確認テスト（本番型）";
+    var testTag = quizOnly ? "本番と同じ形式・難度。選ぶと即採点＋解説" : "選ぶと即採点＋解説";
     html += '<section class="sec sec-test">';
-    html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◇</span><div><h2>確認テスト（本番型）</h2><div class="sec-tag">選ぶと即採点＋解説</div></div></div>';
+    html += '<div class="sec-head"><span class="sec-badge" aria-hidden="true">◇</span><div><h2>' + testTitle + '</h2><div class="sec-tag">' + testTag + '</div></div></div>';
     html += '<div class="quiz" data-quiz="' + m.id + '">';
     m.quiz.forEach(function (q, qi) {
       html += '<div class="q-card" data-qi="' + qi + '">';
@@ -171,6 +181,7 @@
       html += "</div>";
     });
     html += "</div></section>";
+    }
 
     // フッター（前後の科目へ）
     html += '<div class="module-foot">';

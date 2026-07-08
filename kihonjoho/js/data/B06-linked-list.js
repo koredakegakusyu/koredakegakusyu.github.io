@@ -67,6 +67,19 @@ window.CURRICULUM.push(
             "①でXに続きをつないでから、②でPをXにつなぐ。順番を守るのが鉄則。"
           ),
       },
+      {
+        h: "深掘り：配列とどう使い分ける？（速さの比較）",
+        body:
+          "<p>配列と連結リストは<strong>得意・不得意が正反対</strong>です。本番でも『どちらが適切か』が問われるので、理由ごと押さえます。かかる手間を、要素数 n に対する<strong>おおまかな回数</strong>で比べます。</p>" +
+          "<div class='pcode'><table style='width:100%'>" +
+          "<tr><td class='pc-c' style='font-weight:700;border-bottom:1px solid var(--border)'>操作</td><td class='pc-c' style='font-weight:700;border-bottom:1px solid var(--border)'>配列</td><td class='pc-c' style='font-weight:700;border-bottom:1px solid var(--border)'>連結リスト</td></tr>" +
+          "<tr><td class='pc-c'>n番目に直接アクセス</td><td class='pc-c'><b>速い</b>（一発・約1回）</td><td class='pc-c'>遅い（先頭からn回たどる）</td></tr>" +
+          "<tr><td class='pc-c'>途中に挿入・削除</td><td class='pc-c'>遅い（後ろを全部ずらす）</td><td class='pc-c'><b>速い</b>（矢印のつなぎ替えだけ）</td></tr>" +
+          "<tr><td class='pc-c'>メモリの並び</td><td class='pc-c'>連続</td><td class='pc-c'>バラバラでよい（参照でつなぐ）</td></tr>" +
+          "<tr><td class='pc-c'>要素数の増減</td><td class='pc-c'>苦手（サイズ固定が基本）</td><td class='pc-c'>得意（ノードを足す/外す）</td></tr>" +
+          "</table><div class='pc-cap'>『添字で一発アクセスなら配列、途中の出し入れが多いならリスト』が判断の軸。</div></div>" +
+          "<p>理由はこれまでの図の通り。配列は<strong>番地が連続</strong>しているので『先頭＋番号』で一発で場所が出ますが、途中に入れると後ろを全部ずらす必要があります。連結リストは<strong>矢印でたどる</strong>ので途中の出し入れは速い代わりに、n番目へは先頭から順に行くしかありません。<strong>『何を速くしたいか』で選ぶ</strong>——これが使い分けの本質です。</p>",
+      },
     ],
     memorize: [
       { k: "連結リスト", v: "ノード（値＋next）を矢印でつないだ構造。先頭からnextでたどる。" },
