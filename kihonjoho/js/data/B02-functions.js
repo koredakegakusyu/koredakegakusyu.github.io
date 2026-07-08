@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-functions", domain: "【科目B】擬似言語", icon: "🧩", title: "手続・関数と再帰",
+    id: "feb-functions", domain: "【科目B】第1章 擬似言語の記述", icon: "🧩", title: "手続・関数と再帰",
     intro: "処理をまとめる手続・関数、値の受け渡し（引数・戻り値）、そして自分を呼ぶ再帰。トレースで確実に。",
     understand: [
       {

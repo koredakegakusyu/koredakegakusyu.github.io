@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-security-b", domain: "【科目B】情報セキュリティ", icon: "🔐", title: "情報セキュリティ（科目B型）",
+    id: "feb-security-b", domain: "【科目B】第4章 情報セキュリティ", icon: "🔐", title: "情報セキュリティ（科目B型）",
     intro: "科目Bのセキュリティは4問（2割）。用語暗記ではなく『この状況ならどう守るか』を判断する現場型。考え方を固める。",
     understand: [
       {

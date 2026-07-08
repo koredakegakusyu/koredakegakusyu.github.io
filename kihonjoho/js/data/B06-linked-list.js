@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-linked-list", domain: "【科目B】アルゴリズム", icon: "🔗", title: "連結リスト",
+    id: "feb-linked-list", domain: "【科目B】第2章 データ構造とアルゴリズム", icon: "🔗", title: "連結リスト",
     intro: "『値＋次への矢印』でつなぐ連結リスト。挿入・削除が得意な理由と、ポインタのつなぎ替えを図で理解する。",
     understand: [
       {

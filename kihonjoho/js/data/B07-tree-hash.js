@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-tree-hash", domain: "【科目B】アルゴリズム", icon: "🌳", title: "木構造・グラフ・ハッシュ・文字列",
+    id: "feb-tree-hash", domain: "【科目B】第2章 データ構造とアルゴリズム", icon: "🌳", title: "木構造・グラフ・ハッシュ・文字列",
     intro: "枝分かれの木、2分探索木、走査の順序、グラフ、ハッシュ法、文字列処理。用語と『たどる順番』を押さえる。",
     understand: [
       {

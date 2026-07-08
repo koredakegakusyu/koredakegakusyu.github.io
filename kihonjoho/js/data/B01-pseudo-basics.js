@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-pseudo-basics", domain: "【科目B】擬似言語", icon: "📜", title: "擬似言語の読み方（記述形式）",
+    id: "feb-pseudo-basics", domain: "【科目B】第1章 擬似言語の記述", icon: "📜", title: "擬似言語の読み方（記述形式）",
     intro: "科目Bで使う『擬似言語』の書き方を、記号の意味から丁寧に。ここが読めないと問題が解けない最重要の土台。",
     understand: [
       {

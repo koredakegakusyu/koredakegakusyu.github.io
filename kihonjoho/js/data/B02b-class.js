@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-class", domain: "【科目B】擬似言語", icon: "🏛️", title: "クラス・メソッド・大域変数",
+    id: "feb-class", domain: "【科目B】第1章 擬似言語の記述", icon: "🏛️", title: "クラス・メソッド・大域変数",
     intro: "本番の連結リスト・キュー問題はほぼこの形式。クラス／インスタンス／メンバ参照『.』／大域変数／未定義を、実際のサンプル問題と同じ書き方で読めるようにする。",
     understand: [
       {

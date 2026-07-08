@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-sort-search", domain: "【科目B】アルゴリズム", icon: "🔀", title: "整列（バブルソート）と2分探索",
+    id: "feb-sort-search", domain: "【科目B】第2章 データ構造とアルゴリズム", icon: "🔀", title: "整列（バブルソート）と2分探索",
     intro: "並べ替えの基本バブルソートと、整列済みだから速い2分探索。動きを1ステップずつ追えるようにする。",
     understand: [
       {

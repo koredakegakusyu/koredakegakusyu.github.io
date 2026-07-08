@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-stack-queue", domain: "【科目B】アルゴリズム", icon: "🥞", title: "スタックとキュー",
+    id: "feb-stack-queue", domain: "【科目B】第2章 データ構造とアルゴリズム", icon: "🥞", title: "スタックとキュー",
     intro: "『最後に入れたものが先に出る』スタックと『先に入れたものが先に出る』キュー。出る順番を正確に追う。",
     understand: [
       {

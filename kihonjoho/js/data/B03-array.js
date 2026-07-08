@@ -4,7 +4,7 @@
 window.CURRICULUM = window.CURRICULUM || [];
 window.CURRICULUM.push(
   {
-    id: "feb-array", domain: "【科目B】アルゴリズム", icon: "🔢", title: "配列の操作（探索・集計・最大・逆順）",
+    id: "feb-array", domain: "【科目B】第2章 データ構造とアルゴリズム", icon: "🔢", title: "配列の操作（探索・集計・最大・逆順）",
     intro: "配列を1つずつ見ていく基本パターン。合計・最大値・線形探索・逆順は、そのまま出る超定番。トレースで固める。",
     understand: [
       {

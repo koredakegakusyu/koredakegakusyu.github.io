@@ -47,5 +47,6 @@ window.FREQ = {
   "feb-stack-queue": 2,
   "feb-linked-list": 2,
   "feb-tree-hash": 2,
+  "feb-jissen": 3,
   "feb-security-b": 3,
 };
