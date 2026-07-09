@@ -555,6 +555,51 @@ a.c-name:hover { color: var(--accent); text-decoration: underline; }
 }
 
 /* =============================================================
+   おすすめ教材（アフィリエイト枠・全ページ下部・全4サイト共通デザイン）
+   ============================================================= */
+.affiliate-section {
+  max-width: 920px; margin: 2rem auto 0; padding: 0 1.5rem;
+}
+.affiliate-head {
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem;
+}
+.affiliate-title { font-size: 1rem; font-weight: 800; color: var(--text); }
+.affiliate-pr {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--text-dim); border: 1px solid var(--border); border-radius: 4px;
+  padding: 0.1rem 0.45rem; text-transform: uppercase;
+}
+.affiliate-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
+}
+.affiliate-card {
+  display: flex; gap: 0.9rem; background: var(--bg-elev);
+  border: 1px solid var(--border-soft); border-radius: var(--radius-sm);
+  padding: 0.9rem; text-decoration: none; color: inherit;
+  transition: var(--transition);
+}
+.affiliate-card:hover {
+  border-color: var(--accent); box-shadow: var(--shadow-soft); transform: translateY(-2px);
+}
+.affiliate-thumb {
+  width: 56px; height: 76px; border-radius: 6px; flex-shrink: 0;
+  background: var(--understand-bg); color: var(--understand);
+  display: grid; place-items: center; font-size: 1.5rem;
+}
+.affiliate-body { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.affiliate-name {
+  font-size: 0.85rem; font-weight: 700; line-height: 1.4; color: var(--text);
+}
+.affiliate-desc { font-size: 0.74rem; color: var(--text-muted); line-height: 1.5; }
+.affiliate-cta {
+  margin-top: auto; font-size: 0.72rem; font-weight: 700; color: var(--accent);
+  display: flex; align-items: center; gap: 0.2rem;
+}
+@media (max-width: 640px) {
+  .affiliate-grid { grid-template-columns: 1fr; }
+}
+
+/* =============================================================
    ネットワークフッター（コレダケ シリーズ）
    ============================================================= */
 .site-footer {
