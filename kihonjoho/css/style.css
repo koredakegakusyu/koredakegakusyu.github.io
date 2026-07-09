@@ -571,6 +571,8 @@ a.c-name:hover { color: var(--accent); text-decoration: underline; }
 }
 .affiliate-lead { font-size: 0.8rem; color: var(--text-muted); margin: -0.4rem 0 0.9rem; line-height: 1.6; }
 .affiliate-note { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.8rem; }
+.affiliate-pr-mini { font-size: 0.68rem; color: var(--text-dim); }
+.affiliate-note-link { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
 .affiliate-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
 }
