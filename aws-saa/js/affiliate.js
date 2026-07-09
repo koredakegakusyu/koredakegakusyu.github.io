@@ -1,8 +1,8 @@
 /* =============================================================
    コレダケ学習 — おすすめ教材（アフィリエイト枠）
-   商品・画像・リンクは自由に差し替え可。
-   URL中の tag=YOUR_ASSOCIATE_ID-22 は、ご自身の
-   Amazonアソシエイト トラッキングIDに置き換えてください。
+   各商品に Amazon / 楽天 のリンクを用意できる（片方だけでも可）。
+   下の amazon / rakuten を、ご自身のアフィリエイトリンクに置き換える。
+   img に書影URL（楽天のpicttext画像URL等）を入れると表紙が表示される。
    ============================================================= */
 (function () {
   "use strict";
@@ -10,31 +10,53 @@
   var PRODUCTS = [
     {
       icon: "📘",
+      tag: "テキスト",
       name: "AWS認定資格試験テキスト ソリューションアーキテクト-アソシエイト",
-      desc: "SAA-C03対応の定番テキスト。サービスの使い所を体系的に学べる。",
-      url: "https://www.amazon.co.jp/s?k=AWS認定+ソリューションアーキテクトアソシエイト+テキスト&tag=YOUR_ASSOCIATE_ID-22",
+      author: "",
+      desc: "SAA-C03対応。サービスの使い所を体系的に学べる定番テキスト。",
+      amazon: "https://www.amazon.co.jp/s?k=AWS認定+ソリューションアーキテクトアソシエイト+テキスト&tag=YOUR_ASSOCIATE_ID-22",
+      rakuten: "",
     },
     {
       icon: "📗",
+      tag: "問題集",
       name: "AWS認定ソリューションアーキテクト-アソシエイト問題集",
-      desc: "本番形式の演習問題で仕上げたい人向けの問題集。",
-      url: "https://www.amazon.co.jp/s?k=AWS認定+ソリューションアーキテクトアソシエイト+問題集&tag=YOUR_ASSOCIATE_ID-22",
+      author: "",
+      desc: "本番形式の演習問題で仕上げたい人向け。",
+      amazon: "https://www.amazon.co.jp/s?k=AWS認定+ソリューションアーキテクトアソシエイト+問題集&tag=YOUR_ASSOCIATE_ID-22",
+      rakuten: "",
     },
   ];
+
+  function esc(u) { return String(u).replace(/&/g, "&amp;"); }
 
   function render() {
     var wrap = document.getElementById("affiliate-products");
     if (!wrap) return;
     var html = "";
     PRODUCTS.forEach(function (p) {
+      var thumb =
+        '<span class="affiliate-emoji" aria-hidden="true">' + (p.icon || "📘") + "</span>" +
+        (p.img ? '<img src="' + esc(p.img) + '" alt="" loading="lazy" onerror="this.remove()" />' : "");
+      var btns = "";
+      if (p.amazon) {
+        btns += '<a class="affiliate-btn amazon" href="' + esc(p.amazon) +
+          '" target="_blank" rel="sponsored nofollow noopener">Amazon</a>';
+      }
+      if (p.rakuten) {
+        btns += '<a class="affiliate-btn rakuten" href="' + esc(p.rakuten) +
+          '" target="_blank" rel="sponsored nofollow noopener">楽天</a>';
+      }
       html +=
-        '<a class="affiliate-card" href="' + p.url + '" target="_blank" rel="sponsored noopener">' +
-        '<span class="affiliate-thumb" aria-hidden="true">' + p.icon + "</span>" +
-        '<span class="affiliate-body">' +
+        '<div class="affiliate-card">' +
+        '<div class="affiliate-thumb">' + thumb + "</div>" +
+        '<div class="affiliate-body">' +
+        (p.tag ? '<span class="affiliate-cat">' + p.tag + "</span>" : "") +
         '<span class="affiliate-name">' + p.name + "</span>" +
-        '<span class="affiliate-desc">' + p.desc + "</span>" +
-        '<span class="affiliate-cta">Amazonで見る ›</span>' +
-        "</span></a>";
+        (p.author ? '<span class="affiliate-author">' + p.author + "</span>" : "") +
+        (p.desc ? '<span class="affiliate-desc">' + p.desc + "</span>" : "") +
+        '<div class="affiliate-btns">' + btns + "</div>" +
+        "</div></div>";
     });
     wrap.innerHTML = html;
   }
