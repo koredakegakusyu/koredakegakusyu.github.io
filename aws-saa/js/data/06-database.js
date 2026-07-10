@@ -109,6 +109,7 @@ window.CURRICULUM.push(
       { k: "プロビジョンド容量", v: "安定負荷で指定(Auto Scaling併用)。コスト最適。" },
       { k: "GSI", v: "別パーティションキーで検索を追加。LSIは同一パーティション内の別ソートキー。" },
       { k: "DAX", v: "DynamoDB専用キャッシュ→<strong>マイクロ秒</strong>読み取り。" },
+      { k: "DAXの保管時暗号化", v: "<strong>クラスター作成時にしか有効化できない</strong>。後から有効化は不可→暗号化有効で作り直す。" },
       { k: "Streams", v: "変更データを<strong>Lambdaへ</strong>(イベント駆動・レプリケーション元)。" },
       { k: "グローバルテーブル", v: "<strong>マルチリージョン双方向複製</strong>(世界規模低遅延＆DR)。" },
       { k: "TTL", v: "項目の<strong>自動期限切れ削除</strong>(セッション/一時データ)。" },

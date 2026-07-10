@@ -28,7 +28,7 @@ window.CURRICULUM.push(
       },
       {
         h: "起動の自動化(AMI・ユーザーデータ)と配置・ネットワーク",
-        body: "<p>EC2を再現性よく立ち上げる仕組みも頻出だ。<strong>AMI(Amazonマシンイメージ)</strong>は、OSや導入済みソフト・設定を丸ごと固めた<strong>テンプレート</strong>。同じAMIから何台でも同一構成のサーバーを起動でき、Auto Scalingの起動元にもなる。<strong>ユーザーデータ</strong>は起動時に一度だけ実行される初期化スクリプト(ソフト導入・設定の自動化)。</p><p>複数台の<strong>物理的な配置</strong>を制御するのが配置グループだ。<strong>クラスタ配置</strong>＝同一AZに密集させ<strong>超低遅延・高帯域</strong>(HPC向き、ただしAZ障害に弱い)。<strong>スプレッド配置</strong>＝別々のハードに分散し<strong>相関障害を回避</strong>(少数の重要サーバー)。<strong>パーティション配置</strong>＝区画に分けた大規模分散システム(Hadoop/Kafka)。ネットワーク面では、仮想NICの<strong>ENI</strong>、固定パブリックIPの<strong>Elastic IP</strong>を押さえる。</p>",
+        body: "<p>EC2を再現性よく立ち上げる仕組みも頻出だ。<strong>AMI(Amazonマシンイメージ)</strong>は、OSや導入済みソフト・設定を丸ごと固めた<strong>テンプレート</strong>。同じAMIから何台でも同一構成のサーバーを起動でき、Auto Scalingの起動元にもなる。<strong>ユーザーデータ</strong>は起動時に一度だけ実行される初期化スクリプト(ソフト導入・設定の自動化)。</p><p>複数台の<strong>物理的な配置</strong>を制御するのが配置グループだ。<strong>クラスタ配置</strong>＝同一AZに密集させ<strong>超低遅延・高帯域</strong>(HPC向き、ただしAZ障害に弱い)。<strong>スプレッド配置</strong>＝別々のハードに分散し<strong>相関障害を回避</strong>(少数の重要サーバー)。<strong>パーティション配置</strong>＝区画に分けた大規模分散システム(Hadoop/Kafka)。ネットワーク面では、仮想NICの<strong>ENI</strong>、固定パブリックIPの<strong>Elastic IP</strong>を押さえる。</p><p>科学計算のような<strong>HPC(ハイパフォーマンスコンピューティング)</strong>で、ノード同士が密に通信する<strong>MPI</strong>ワークロードでは、クラスタ配置グループに加えて<strong>EFA(Elastic Fabric Adapter)</strong>という専用ネットワークインターフェイスを使う。EFAはOSを介さずに通信する仕組みで、ノード間のレイテンシを大きく下げられる。こうしたHPCクラスタ(スケジューラ込み)を丸ごと自動構築・管理してくれるのが<strong>AWS ParallelCluster</strong>で、運用の手間を最小化できる。『密結合HPC＝クラスタ配置＋EFA＋ParallelCluster』とセットで覚えよう。</p>",
       },
     ],
     memorize: [
