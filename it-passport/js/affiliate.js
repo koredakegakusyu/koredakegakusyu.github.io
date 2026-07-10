@@ -1,7 +1,6 @@
 /* =============================================================
    コレダケ学習 — おすすめ教材（アフィリエイト枠）
    各商品に Amazon / 楽天 のリンクを用意できる（片方だけでも可）。
-   下の amazon / rakuten を、ご自身のアフィリエイトリンクに置き換える。
    img に書影URL（楽天のpicttext画像URL等）を入れると表紙が表示される。
    ============================================================= */
 (function () {
@@ -9,22 +8,13 @@
 
   var PRODUCTS = [
     {
-      icon: "📘",
-      tag: "テキスト",
-      name: "キタミ式イラストIT塾 ITパスポート",
-      author: "",
-      desc: "本サイトと相性よし。図解で掴んだ知識を、紙のテキストでやさしく固め直したい人に。",
-      amazon: "https://www.amazon.co.jp/s?k=キタミ式イラストIT塾+ITパスポート&tag=YOUR_ASSOCIATE_ID-22",
-      rakuten: "",
-    },
-    {
-      icon: "📗",
-      tag: "問題集",
-      name: "ITパスポート試験 対策テキスト＆問題集",
-      author: "",
-      desc: "当サイトの本番型問題と併用して、演習量を増やして直前の総仕上げに。",
-      amazon: "https://www.amazon.co.jp/s?k=ITパスポート試験+対策テキスト+問題集&tag=YOUR_ASSOCIATE_ID-22",
-      rakuten: "",
+      img: "https://hbb.afl.rakuten.co.jp/hgb/559afb6f.ebd0b732.559afb70.f3d91611/?me_id=1213310&item_id=21788381&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbook%2Fcabinet%2F8207%2F9784815638207_1_2.jpg%3F_ex%3D128x128&s=128x128&t=picttext",
+      name: "【令和8年度】いちばんやさしい ITパスポート 絶対合格の教科書＋出る順問題集",
+      author: "高橋 京介",
+      tag: "教科書＋問題集",
+      desc: "コレダケ学習（無料）で図解理解 → この1冊の「出る順」問題集で反復すれば、初学者でも最短で合格圏へ。1冊で教科書と問題集がそろう鉄板書。",
+      amazon: "https://amzn.to/4piQyIu",
+      rakuten: "https://hb.afl.rakuten.co.jp/ichiba/559afb6f.ebd0b732.559afb70.f3d91611/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbook%2F18432510%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIxMjh4MTI4IiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     },
   ];
 
@@ -33,6 +23,8 @@
   function render() {
     var wrap = document.getElementById("affiliate-products");
     if (!wrap) return;
+    // 商品が1つのときは横長1カラムで大きく見せる
+    wrap.className = "affiliate-grid" + (PRODUCTS.length === 1 ? " affiliate-grid-single" : "");
     var html = "";
     PRODUCTS.forEach(function (p) {
       var thumb =
@@ -41,11 +33,11 @@
       var btns = "";
       if (p.amazon) {
         btns += '<a class="affiliate-btn amazon" href="' + esc(p.amazon) +
-          '" target="_blank" rel="sponsored nofollow noopener">Amazon</a>';
+          '" target="_blank" rel="sponsored nofollow noopener">Amazonで見る</a>';
       }
       if (p.rakuten) {
         btns += '<a class="affiliate-btn rakuten" href="' + esc(p.rakuten) +
-          '" target="_blank" rel="sponsored nofollow noopener">楽天</a>';
+          '" target="_blank" rel="sponsored nofollow noopener">楽天で見る</a>';
       }
       html +=
         '<div class="affiliate-card">' +

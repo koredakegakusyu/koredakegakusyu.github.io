@@ -523,21 +523,27 @@ a.c-name:hover { color: var(--accent); text-decoration: underline; }
    おすすめ教材（アフィリエイト枠・全ページ下部・全4サイト共通デザイン）
    ============================================================= */
 .affiliate-section {
-  max-width: 920px; margin: 2rem auto 0; padding: 0 1.5rem;
+  max-width: 920px; margin: 2.5rem auto 0; padding: 0 1.5rem;
+}
+.affiliate-box {
+  background: var(--understand-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem 1.25rem;
+  box-shadow: var(--shadow-soft);
 }
 .affiliate-head {
-  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem;
+  display: flex; align-items: flex-start; gap: 0.7rem; margin-bottom: 1rem;
 }
-.affiliate-title { font-size: 1rem; font-weight: 800; color: var(--text); }
-.affiliate-pr {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.04em;
-  color: var(--text-dim); border: 1px solid var(--border); border-radius: 4px;
-  padding: 0.1rem 0.45rem; text-transform: uppercase;
-}
-.affiliate-lead { font-size: 0.8rem; color: var(--text-muted); margin: -0.4rem 0 0.9rem; line-height: 1.6; }
-.affiliate-note { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.8rem; }
+.affiliate-icon { font-size: 1.6rem; line-height: 1.15; flex-shrink: 0; }
+.affiliate-headtext { min-width: 0; }
+.affiliate-title { display: block; font-size: 1.12rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; }
+.affiliate-lead { font-size: 0.85rem; color: var(--text-muted); margin: 0.35rem 0 0; line-height: 1.7; }
+.affiliate-lead strong { color: var(--accent); font-weight: 800; }
+.affiliate-note { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.9rem; }
 .affiliate-pr-mini { font-size: 0.68rem; color: var(--text-dim); }
 .affiliate-note-link { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+.affiliate-grid-single { grid-template-columns: 1fr; }
 .affiliate-grid {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
 }
