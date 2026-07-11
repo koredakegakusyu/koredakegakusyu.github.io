@@ -25,6 +25,7 @@
       author: "滝澤 ななみ（TAC出版）",
       tag: "過去問題集",
       desc: "本サイトの論点整理と相性抜群。本物の過去問を分野別に繰り返し解いて、得点力を仕上げたい人に。",
+      amazon: "https://www.amazon.co.jp/dp/4300119287?tag=koredakegakus-22",
       rakuten: "https://hb.afl.rakuten.co.jp/ichiba/55af49bd.5678c813.55af49be.ef7a7d81/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbookfan%2Fbk-4300119287%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIxMjh4MTI4IiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjAsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D",
     },
   ];
