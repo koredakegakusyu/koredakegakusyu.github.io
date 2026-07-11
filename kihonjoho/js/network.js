@@ -14,6 +14,7 @@
     { name: "コレダケ学習AWS CCP", tag: "AWS認定CLF-C02", url: "https://koredakegakusyu.github.io/aws-ccp/" },
     { name: "コレダケ学習ITパスポート", tag: "国家試験・iパス", url: "https://koredakegakusyu.github.io/it-passport/" },
     { name: "コレダケ学習基本情報", tag: "基本情報技術者", url: "https://koredakegakusyu.github.io/kihonjoho/" },
+    { name: "コレダケ学習宅建士", tag: "宅地建物取引士", url: "https://koredakegakusyu.github.io/takken/" },
   ];
 
   /* 同一ドメイン配下にサブフォルダで複数サイトを置く構成（例: GitHub Pagesの

@@ -1,0 +1,50 @@
+/* =============================================================
+   コレダケ学習 宅建士 — 科目の頻出度（本試験の出題傾向をもとに）
+   3 = 頻出（必ず得点したい） / 2 = 標準 / 1 = 出題は少なめ
+   ============================================================= */
+window.FREQ = {
+  // 権利関係（民法・借地借家・区分所有・登記）
+  "seigen-koi": 2,
+  "ishi-hyoji": 3,
+  "dairi": 3,
+  "jikou": 2,
+  "bukken-hendo": 3,
+  "teitouken": 2,
+  "saimu-furiko": 2,
+  "keiyaku-futekigo": 3,
+  "hosho-rentai": 2,
+  "chintaishaku": 2,
+  "shakuchi": 3,
+  "shakuya": 3,
+  "sozoku": 3,
+  "fuhoukoui": 2,
+  "kyouyu": 2,
+  "kubun-shoyu": 3,
+  "fudosan-toki": 3,
+  // 宅建業法（配点最大＝ほぼ全分野が頻出）
+  "menkyo": 3,
+  "torihikishi": 3,
+  "hoshokin": 2,
+  "baikai": 3,
+  "koukoku-gyomu": 2,
+  "juyo-jiko": 3,
+  "sanjunana": 3,
+  "hasshu": 3,
+  "hoshu": 3,
+  "kantoku": 2,
+  // 法令上の制限
+  "toshikeikaku": 3,
+  "kaihatsu": 3,
+  "kenchiku1": 2,
+  "kenchiku2": 3,
+  "nochiho": 3,
+  "kokudo": 3,
+  "morido": 2,
+  // 税・その他
+  "chihouzei": 3,
+  "kokuzei": 2,
+  "chikakouji": 3,
+  "kikou": 2,
+  "keihyo": 2,
+  "tochitatemono": 2,
+};

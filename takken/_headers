@@ -1,0 +1,34 @@
+# Netlify セキュリティヘッダー（全パスに適用）
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=(), accelerometer=(), gyroscope=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+# 静的アセットは長期キャッシュ（パフォーマンス）
+/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 404はキャッシュしない
+/404
+  Cache-Control: no-store
+
+# ─────────────────────────────────────────────────────────────
+# 広告（Google AdSense等）を有効化するときの手順メモ
+#   1) 上の Content-Security-Policy の各ディレクティブに配信元を追記:
+#        script-src  に  https://pagead2.googlesyndication.com https://*.googlesyndication.com
+#        img-src     に  https://*.googlesyndication.com https://*.g.doubleclick.net
+#        frame-src   https://googleads.g.doubleclick.net https://*.safeframe.googlesyndication.com
+#        connect-src に  https://*.googlesyndication.com
+#      さらに X-Frame-Options/frame-ancestors は広告表示に影響するので必要に応じ調整。
+#   2) index.html の広告スロット（#ad-bottom / #ad-rail）内へ AdSense の広告ユニットを貼る。
+#   3) 空の間はCSSで自動的に非表示（.ad:empty）なので、貼るまでは何も表示されない。
+# ─────────────────────────────────────────────────────────────
