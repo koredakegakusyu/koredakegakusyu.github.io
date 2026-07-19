@@ -10,12 +10,12 @@ window.CURRICULUM.push(
       {
         h: "自分で作るなら SageMaker、すぐ使うなら用途特化AI",
         body:
-          "<p>AWSのAI/MLサービスは、大きく2階層で考えます。</p>" +
+          "<p>AWS の AI/ML サービスは、大きく<strong>2 階層</strong>で考えると整理できます。</p>" +
           "<ul>" +
-          "<li><strong>Amazon SageMaker</strong>：機械学習モデルを<strong>自分で構築・学習・デプロイ</strong>するための総合サービス。データ準備からモデル運用まで一通りできる（作り込みたい人向け）。</li>" +
-          "<li><strong>用途特化のAIサービス</strong>：機械学習の知識がなくても、<strong>APIを呼ぶだけで完成したAI機能を使える</strong>。画像・音声・言語など目的別に用意されている。</li>" +
+          "<li><strong>Amazon SageMaker</strong>：機械学習モデルを<strong>自分で構築・学習・デプロイ</strong>するための総合サービス。データ準備からモデルの学習・運用まで一通りできます。『オリジナルの予測モデルを作り込みたい人向け』の土台です。</li>" +
+          "<li><strong>用途特化の AI サービス</strong>：機械学習の知識がなくても、<strong>API を呼ぶだけで“完成した AI 機能”をすぐ使える</strong>タイプ。目的別に用意されています——<strong>Rekognition</strong>（画像・動画の認識）、<strong>Transcribe</strong>（音声→文字起こし）、<strong>Polly</strong>（文字→音声読み上げ）、<strong>Translate</strong>（翻訳）、<strong>Comprehend</strong>（文章の感情・キーワード分析）、<strong>Textract</strong>（書類から文字抽出）、<strong>Lex</strong>（チャットボット）、<strong>Amazon Bedrock</strong>（生成 AI を API で利用）など。</li>" +
           "</ul>" +
-          "<p>試験では<strong>『モデルを自作＝SageMaker』『すぐ使える機能＝用途特化AI』</strong>の区別と、各サービスの用途（入力→出力）が問われます。</p>",
+          "<p>試験では<strong>『モデルを自作＝SageMaker』『すぐ使える完成機能＝用途特化 AI』</strong>の区別と、各サービスの用途（入力→出力：例『音声を文字に＝Transcribe』『画像から物体を検出＝Rekognition』）が問われます。</p>",
       },
       {
         h: "用途特化AIサービス——入力と出力で覚える",

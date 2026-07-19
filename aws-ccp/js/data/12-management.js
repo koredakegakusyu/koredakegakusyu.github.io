@@ -16,13 +16,13 @@ window.CURRICULUM.push(
       {
         h: "監視の3兄弟——CloudWatch・CloudTrail・Config",
         body:
-          "<p>名前が似ていて混同しやすい3つを、はっきり区別します。ここはCCPの頻出ポイントです。</p>" +
+          "<p>名前が似ていて混同しやすい 3 つを、はっきり区別します。ここは CCP の<strong>頻出ポイント</strong>で、シナリオ問題で『どれを使うか』が問われます。</p>" +
           "<ul>" +
-          "<li><strong>CloudWatch</strong>：CPU使用率やアクセス数などの<strong>数値（メトリクス）を監視</strong>し、しきい値を超えたら<strong>アラームで通知</strong>する。ログの収集もできる（＝<strong>健康状態の監視</strong>）。</li>" +
-          "<li><strong>CloudTrail</strong>：<strong>『誰が何の操作をしたか』の履歴</strong>を記録（＝<strong>操作の監査</strong>）。</li>" +
-          "<li><strong>Config</strong>：<strong>設定（構成）が正しい状態かを監視</strong>し変更履歴を記録（＝<strong>設定の監視</strong>）。</li>" +
+          "<li><strong>CloudWatch</strong>：CPU 使用率・メモリ・アクセス数などの<strong>数値（メトリクス）を継続的に監視</strong>し、しきい値を超えたら<strong>アラームで通知</strong>したり Auto Scaling を起動したりします。ログの収集・可視化（ダッシュボード）もできます。ひとことで言えば<strong>システムの“健康状態”の監視</strong>です。</li>" +
+          "<li><strong>CloudTrail</strong>：<strong>『いつ・誰が・何の操作（API 呼び出し）をしたか』の履歴を記録</strong>します。『誰が EC2 を削除したのか』『不審なログインはないか』を後から追跡でき、<strong>操作の監査</strong>に使います。</li>" +
+          "<li><strong>Config</strong>：リソースの<strong>設定（構成）が“あるべき状態”になっているかを監視</strong>し、変更の履歴を記録します。『S3 が暗号化されているか』といったルール準拠のチェックに使う、<strong>設定の監視</strong>です。</li>" +
           "</ul>" +
-          "<p>合言葉は<strong>『数値＝CloudWatch、操作＝CloudTrail、設定＝Config』</strong>です。</p>",
+          "<p>合言葉は<strong>『数値＝CloudWatch、操作＝CloudTrail、設定＝Config』</strong>。『誰が消したか調べたい→CloudTrail』『CPU が高い時に通知→CloudWatch』『設定違反を検知→Config』と即答できるようにします。</p>",
         diagram:
           '<svg viewBox="0 0 580 165" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">監視の3兄弟の使い分け</text>' +
@@ -49,12 +49,13 @@ window.CURRICULUM.push(
       {
         h: "自動化と運用支援——CloudFormation・Systems Manager・Trusted Advisor",
         body:
-          "<p>手作業のミスを減らし、運用を楽にするサービスです。</p>" +
+          "<p>手作業を減らしてミスを防ぎ、運用を楽にするサービス群です。『同じ環境構築の繰り返し』や『たくさんのサーバーの一括管理』を自動化します。</p>" +
           "<ul>" +
-          "<li><strong>CloudFormation</strong>：<strong>インフラ構成をコード（テンプレート）で定義し、自動で構築・複製</strong>する（Infrastructure as Code）。同じ環境を何度でもボタン一つで作れる。</li>" +
-          "<li><strong>Systems Manager</strong>：多数のEC2の<strong>パッチ適用や設定を一括管理</strong>する運用ツール。パラメータストアで設定値も管理。</li>" +
-          "<li><strong>Trusted Advisor</strong>：アカウントを自動点検し、<strong>コスト削減・セキュリティ・パフォーマンス・耐障害性・サービス上限の5観点で改善を助言</strong>してくれる。</li>" +
-          "</ul>",
+          "<li><strong>CloudFormation</strong>：<strong>インフラ構成をコード（テンプレート）で定義し、自動で構築・複製・削除</strong>できます（Infrastructure as Code）。同じ環境（VPC＋EC2＋RDS 一式など）を<strong>何度でも同じ品質で</strong>ボタン一つで作れるため、手作業の設定ミスがなくなります。</li>" +
+          "<li><strong>Systems Manager</strong>：多数の EC2 に対する<strong>パッチ適用・コマンド実行・設定の一括管理</strong>を行う運用ツール。パラメータストアで設定値やパスワードのような情報も安全に管理できます。</li>" +
+          "<li><strong>Trusted Advisor</strong>：アカウントを自動で点検し、<strong>①コスト最適化 ②セキュリティ ③パフォーマンス ④耐障害性 ⑤サービス上限</strong>の 5 観点で<strong>改善点を助言</strong>してくれる“健康診断”サービス。使っていない高額リソースや、危険な公開設定などを教えてくれます。</li>" +
+          "</ul>" +
+          "<p>覚え方：『<strong>環境をコードで自動構築＝CloudFormation</strong>』『<strong>多数のサーバーを一括運用＝Systems Manager</strong>』『<strong>5観点で改善提案＝Trusted Advisor</strong>』。</p>",
       },
     ],
     memorize: [

@@ -10,12 +10,12 @@ window.CURRICULUM.push(
       {
         h: "『誰が何をしたか』と『設定が正しいか』——CloudTrailとConfig",
         body:
-          "<p>クラウドを安全に運用するには、記録と監視が欠かせません。名前が似た2つを区別します。</p>" +
+          "<p>クラウドを安全に、かつ<strong>規制やルールを守って（コンプライアンス）</strong>運用するには、『証拠が残ること（記録）』と『あるべき状態からズレていないか（監視）』が欠かせません。監査対応やインシデント（事故）調査では『いつ・誰が・何をしたか』を示せることが求められます。名前が似た 2 つを区別します。</p>" +
           "<ul>" +
-          "<li><strong>CloudTrail</strong>：<strong>『誰が・いつ・何の操作をしたか』というAPI操作の履歴</strong>を記録する。監査や不正調査に使う（＝<strong>操作ログ</strong>）。</li>" +
-          "<li><strong>Config</strong>：<strong>リソースの設定（構成）が、決めたルールに従っているかを継続的に監視・記録</strong>する。設定変更の履歴も追える（＝<strong>構成の監視</strong>）。</li>" +
+          "<li><strong>CloudTrail</strong>：<strong>『誰が・いつ・何の操作（API 呼び出し）をしたか』という操作の履歴（証跡）</strong>を記録します。『退職者のアカウントで操作されていないか』『いつ設定が変えられたか』を後から追え、<strong>監査・不正調査</strong>の根拠になります（＝操作ログ）。</li>" +
+          "<li><strong>Config</strong>：<strong>リソースの設定（構成）が、決めたルールに従っているかを継続的に監視・記録</strong>します。『すべての S3 が暗号化されているか』『開けてはいけないポートが開いていないか』などを自動でチェックし、設定変更の履歴も追えます（＝構成の監視）。</li>" +
           "</ul>" +
-          "<p>混同注意：<strong>『操作の履歴』＝CloudTrail</strong>、<strong>『設定の状態と変化』＝Config</strong>。あわせて、リソースの状態を数値で監視するのが後の章で学ぶ<strong>CloudWatch</strong>です。</p>",
+          "<p>混同注意：<strong>『操作の履歴』＝CloudTrail</strong>、<strong>『設定の状態と変化』＝Config</strong>。あわせて、リソースの状態を数値で監視するのが <strong>CloudWatch</strong>（数値＝CloudWatch／操作＝CloudTrail／設定＝Config）。監査資料として AWS の第三者認証レポートを入手できる <strong>AWS Artifact</strong> も、コンプライアンス対応の定番です。</p>",
         diagram:
           '<svg viewBox="0 0 580 165" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">CloudTrail と Config の違い</text>' +

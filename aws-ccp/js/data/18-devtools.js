@@ -16,7 +16,8 @@ window.CURRICULUM.push(
           "<li><strong>CodeBuild</strong>：コードを<strong>ビルド・テスト</strong>する。</li>" +
           "<li><strong>CodeDeploy</strong>：ビルド成果物を<strong>本番環境へ自動デプロイ</strong>する。</li>" +
           "<li><strong>CodePipeline</strong>：上記の一連の流れを<strong>1本のパイプラインにつないで自動化</strong>する（司令塔）。</li>" +
-          "</ul>",
+          "</ul>" +
+          "<p>流れは『<strong>CodeCommit（保管）→ CodeBuild（ビルド・テスト）→ CodeDeploy（デプロイ）</strong>』を <strong>CodePipeline</strong> が一本につないで自動化、というイメージです。CI/CD にすると、コードを変更するたびに<strong>手作業なしで自動的にテスト・リリース</strong>できるため、リリースが速くなり人為ミスも減ります。『毎回、手作業で本番へアップロードする』ような選択肢は CI/CD の考え方に反する、と判断できるようにします。</p>",
         diagram:
           '<svg viewBox="0 0 580 160" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">CI/CDパイプライン（CodePipelineがつなぐ）</text>' +

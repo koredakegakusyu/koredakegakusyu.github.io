@@ -9,7 +9,7 @@ window.CURRICULUM.push(
     understand: [
       {
         h: "コスト管理の補強——Cost Anomaly Detection と コスト配分タグ",
-        body: "<ul><li><strong>AWS Cost Anomaly Detection</strong>：機械学習で<strong>普段と違う異常なコスト増加を自動検知</strong>して通知。使い過ぎや設定ミスの早期発見。Budgets（事前設定した予算のしきい値超過を通知）や Cost Explorer（費用の可視化・分析）との違いを押さえる。</li><li><strong>コスト配分タグ</strong>：リソースにタグを付け、<strong>プロジェクト・部門・環境ごとに費用を仕分け</strong>して把握できる。誰が/どの案件でいくら使ったかの内訳が分かる。</li></ul>",
+        body: "<p>請求ツールの基本（Cost Explorer・Budgets 等）に加えて、CCP で問われる補強機能です。似た3つの役割を区別します。</p><ul><li><strong>AWS Cost Anomaly Detection</strong>：機械学習で<strong>普段と違う異常なコスト増加を自動検知</strong>して通知します。使い過ぎや設定ミス・不正利用の早期発見に役立ちます。『<strong>予算のしきい値超過を通知＝Budgets</strong>』『<strong>費用の可視化・分析＝Cost Explorer</strong>』『<strong>異常な増加を自動検知＝Cost Anomaly Detection</strong>』の違いを押さえます。</li><li><strong>コスト配分タグ</strong>：リソースに『プロジェクト名』『部門』『環境（本番/検証）』などの<strong>タグ</strong>を付けておくと、<strong>費用をその単位で仕分けして把握</strong>できます。『どの案件・どの部門がいくら使ったか』の内訳が分かり、社内でのコスト管理の基本になります。</li></ul>",
         cap: "異常なコスト増を自動検知＝Cost Anomaly Detection、費用を案件別に仕分け＝コスト配分タグ。",
       },
 
@@ -22,7 +22,8 @@ window.CURRICULUM.push(
           "<li><strong>ストレージ（保存量）</strong>：S3などに保存したデータ量。</li>" +
           "<li><strong>データ転送（外向き）</strong>：AWSから<strong>インターネットへ出ていく通信</strong>には料金がかかる。逆に<strong>AWSへ入ってくる通信（インバウンド）は基本無料</strong>。</li>" +
           "</ul>" +
-          "<p>基本は<strong>従量課金（使った分だけ）</strong>で、使わなければ課金されません。さらに、新規利用者向けに一定枠まで無料で試せる<strong>無料利用枠（Free Tier）</strong>があります。多く使うほど単価が下がる<strong>ボリュームディスカウント</strong>もポイントです。</p>",
+          "<p>基本は<strong>従量課金（使った分だけ）</strong>で、使わなければ課金されません。さらに、新規利用者向けに一定枠まで無料で試せる<strong>無料利用枠（Free Tier）</strong>があります。多く使うほど単価が下がる<strong>ボリュームディスカウント</strong>もポイントです。</p>" +
+          "<p>料金の感覚をつかむ例：EC2 は<strong>起動している間だけ計算料金が課金</strong>され、止めれば計算料金は止まります（ただし付随する EBS ディスクの保存料などは、止めても残る点に注意）。試験で狙われる 3 点は『<strong>使わなければ課金されない</strong>』『<strong>AWSへ入る通信（インバウンド）は基本無料</strong>』『<strong>AWSから出る通信（アウトバウンド）は有料</strong>』です。</p>",
         diagram:
           '<svg viewBox="0 0 580 160" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">AWS 料金の3本柱</text>' +

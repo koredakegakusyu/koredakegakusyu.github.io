@@ -45,7 +45,8 @@ window.CURRICULUM.push(
           "<li><strong>Glue</strong>：データの抽出・変換（ETL）を行うマネージドサービス。</li>" +
           "<li><strong>QuickSight</strong>：データを<strong>グラフやダッシュボードで可視化</strong>するBIツール。</li>" +
           "<li><strong>Redshift</strong>：大量データを集計・分析するデータウェアハウス（再掲）。</li>" +
-          "</ul>",
+          "</ul>" +
+          "<p>用途で結びつけて覚えます：『<strong>S3 のファイルにそのまま SQL＝Athena</strong>』『<strong>リアルタイムに流れ込むデータ＝Kinesis</strong>』『<strong>データの変換・整形(ETL)＝Glue</strong>』『<strong>グラフで見える化(BI)＝QuickSight</strong>』『<strong>大量データをまとめて集計・分析(DWH)＝Redshift</strong>』。CCP では作り込みの詳細より『どのサービスが何をするか』の対応が問われます。</p>",
       },
     ],
     memorize: [

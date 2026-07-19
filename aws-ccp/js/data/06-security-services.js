@@ -9,15 +9,15 @@ window.CURRICULUM.push(
     understand: [
       {
         h: "セキュリティサービスの補強——Detective・Firewall Manager・Network Firewall",
-        body: "<ul><li><strong>Amazon Detective</strong>：GuardDutyなどが検知したセキュリティ事象について、<strong>原因や影響範囲を深掘りして調査・分析</strong>する。『検知＝GuardDuty、調査＝Detective』。</li><li><strong>AWS Firewall Manager</strong>：<strong>複数アカウント・複数リソースのWAFやセキュリティ設定を一元管理</strong>し、ルールを組織全体へ一括適用する。</li><li><strong>AWS Network Firewall</strong>：<strong>VPCの境界に置く高度なファイアウォール/IPS</strong>。通信を検査し、不正な通信を防ぐ（セキュリティグループ/ネットワークACLより高機能）。</li></ul>",
+        body: "<p>基本のセキュリティサービスに加えて、CCP で名前が出る補強サービスです。役割で覚えます。</p><ul><li><strong>Amazon Detective</strong>：GuardDuty などが検知したセキュリティ事象について、<strong>原因や影響範囲を深掘りして調査・分析</strong>します。合言葉は『<strong>検知＝GuardDuty、調査＝Detective</strong>』。</li><li><strong>AWS Firewall Manager</strong>：<strong>複数アカウント・複数リソースの WAF やセキュリティ設定を一元管理</strong>し、ルールを組織全体へ一括適用します。会社全体で防御ルールを統一したいときに使います。</li><li><strong>AWS Network Firewall</strong>：<strong>VPC の境界に置く高度なファイアウォール／IPS</strong>。通信を細かく検査して不正な通信を防ぎます（サーバー単位のセキュリティグループやサブネット単位のネットワークACL より高機能な、VPC 全体の“関所”）。</li></ul>",
         cap: "事象の原因調査＝Detective、複数アカウントのWAF等を一元管理＝Firewall Manager、VPC境界の高度な防御＝Network Firewall。",
       },
 
       {
         h: "暗号化と秘密情報の管理——KMS・Secrets Manager",
         body:
-          "<p>データを守る基本が<strong>暗号化</strong>。その<strong>鍵を安全に作成・管理</strong>するのが<strong>KMS（Key Management Service）</strong>です。S3・EBS・RDSなど多くのサービスと連携し、保存データ（保管時）や通信（転送時）を暗号化します。専用のハードウェアで鍵を管理する<strong>CloudHSM</strong>もあります。</p>" +
-          "<p>データベースのパスワードやAPIキーなどの<strong>秘密情報</strong>を安全に保管し、自動でローテーション（定期更新）できるのが<strong>Secrets Manager</strong>。設定値やパラメータの保管には<strong>Systems Manager パラメータストア</strong>も使えます。</p>",
+          "<p>データを守る基本が<strong>暗号化</strong>——中身を鍵がないと読めない状態にすることです。守る対象は 2 種類あり、<strong>保存されているデータ（保管時／at rest）</strong>と<strong>通信中のデータ（転送時／in transit）</strong>の両方を暗号化するのが定石です。この暗号化に使う<strong>鍵を安全に作成・保管・管理</strong>するのが <strong>KMS（Key Management Service）</strong>です。KMS は S3・EBS・RDS など多くのサービスとボタン一つで連携でき、『チェックを入れるだけで暗号化』が実現します。より厳格に、専用の物理ハードウェアで鍵を管理したい場合は <strong>CloudHSM</strong> を使います。</p>" +
+          "<p>一方、データベースのパスワードや API キーといった<strong>秘密情報（シークレット）</strong>を安全に保管し、<strong>定期的に自動で更新（ローテーション）</strong>できるのが <strong>Secrets Manager</strong> です。コードに直接パスワードを書かず、Secrets Manager から取り出して使うことで漏えいを防ぎます。単純な設定値や環境変数の保管であれば、無料で使える <strong>Systems Manager パラメータストア</strong>も選べます（自動ローテーションが要るなら Secrets Manager、と使い分けます）。</p>",
       },
       {
         h: "攻撃から守る——Shield・WAF・GuardDuty・Inspector・Macie",

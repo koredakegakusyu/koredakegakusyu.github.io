@@ -16,8 +16,8 @@ window.CURRICULUM.push(
       {
         h: "EC2——AWS上の仮想サーバー",
         body:
-          "<p><strong>Amazon EC2（Elastic Compute Cloud）</strong>は、AWS上に<strong>仮想サーバーを立てて使う</strong>基本サービスです（IaaS）。数分で起動でき、CPU・メモリの大きさ（インスタンスタイプ）を用途に合わせて選べます。OS以上は利用者が管理します。</p>" +
-          "<p>アクセスの急増に自動で対応する仕組みが2つ。台数を自動で増減する<strong>Auto Scaling</strong>と、アクセスを複数サーバーに振り分ける<strong>ロードバランサー（ELB）</strong>。この2つを組み合わせると『混んだら自動で増え、空いたら減る』構成になり、可用性とコスト効率が両立します。</p>",
+          "<p><strong>Amazon EC2（Elastic Compute Cloud）</strong>は、AWS 上に<strong>仮想サーバーを立てて使う</strong>最も基本的なサービスです（IaaS）。物理サーバーを買う代わりに、必要なスペックのサーバーを<strong>数分で起動</strong>でき、不要になれば止めて課金を止められます。用途に応じて <strong>CPU・メモリの大きさ（インスタンスタイプ）</strong>を選び、汎用・計算重視・メモリ重視といった“ファミリー”から最適なものを選べます。OS とその上のアプリは利用者が管理します（責任共有モデルの IaaS）。起動時の OS・ソフト構成は <strong>AMI（マシンイメージ＝テンプレート）</strong>から選んで揃えます。</p>" +
+          "<p>アクセスの増減に自動で対応する仕組みが 2 つあります。台数を自動で増減する <strong>Auto Scaling</strong> と、アクセスを複数のサーバーへ振り分ける <strong>ロードバランサー（ELB）</strong>です。この 2 つを組み合わせると『混んだら自動で増え、空いたら自動で減る』構成になり、<strong>可用性（止まりにくさ）とコスト効率</strong>が両立します。さらに、使い方に合わせて料金プラン（オンデマンド／リザーブド／スポット等・次項）を選べば、同じ性能でもコストを大きく下げられます。</p>",
       },
       {
         h: "EC2の購入オプション——安くする4つの選択肢",
@@ -64,12 +64,12 @@ window.CURRICULUM.push(
       {
         h: "サーバー管理から解放される——LambdaとFargate",
         body:
-          "<p>EC2はOSの管理が必要ですが、<strong>サーバーの管理そのものをAWSに任せる</strong>のが<strong>サーバーレス</strong>という考え方です。</p>" +
+          "<p>EC2 は便利ですが、OS の更新やサーバー台数の調整など<strong>“サーバーのお守り”は利用者の仕事</strong>です。この管理そのものを AWS に任せ、<strong>アプリのコードだけに集中する</strong>考え方が <strong>サーバーレス</strong>です（サーバーが無いのではなく、『サーバーの存在を意識しなくてよい』という意味）。</p>" +
           "<ul>" +
-          "<li><strong>AWS Lambda</strong>：<strong>コードを書いて置くだけで、実行された分だけ課金</strong>される。サーバーの起動・管理・スケールは一切不要。イベント（ファイル到着・APIリクエスト等）に反応して動く。</li>" +
-          "<li><strong>コンテナ（ECS / EKS）</strong>：アプリを箱（コンテナ）にまとめて動かす。そのコンテナを<strong>サーバー管理なしで動かす</strong>のが<strong>Fargate</strong>。</li>" +
+          "<li><strong>AWS Lambda</strong>：<strong>コードを書いて置くだけ</strong>で動くサービス。サーバーの起動・管理・台数調整（スケール）は<strong>一切不要</strong>で、<strong>実行された回数と時間の分だけ課金</strong>されます（使わなければ料金ゼロ）。ファイルのアップロードや API リクエストなどの<strong>イベントに反応して短時間だけ動く</strong>処理が得意です。</li>" +
+          "<li><strong>コンテナ（ECS／EKS）</strong>：アプリを必要なものごと“箱（コンテナ）”に詰めて、どこでも同じように動かす技術です。AWS 独自の管理サービスが <strong>ECS</strong>、Kubernetes（業界標準）で動かすのが <strong>EKS</strong>。そして、その<strong>コンテナをサーバー管理なしで動かす</strong>実行基盤が <strong>Fargate</strong> です。</li>" +
           "</ul>" +
-          "<p>『サーバーの管理をしたくない』『使った分だけ払いたい』ならLambdaやFargate、と判断します。</p>",
+          "<p>判断の目安：『<strong>サーバーの管理をしたくない・使った分だけ払いたい</strong>』なら Lambda や Fargate。『OS レベルまで自分で細かく制御したい・既存のソフトをそのまま動かしたい』なら EC2、と選び分けます。</p>",
       },
     ],
     memorize: [

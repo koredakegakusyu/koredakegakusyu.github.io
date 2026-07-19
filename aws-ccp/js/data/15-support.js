@@ -50,7 +50,8 @@ window.CURRICULUM.push(
           "<li><strong>AWS Trusted Advisor</strong>：アカウントの改善点を助言（前章）。上位プランで全項目。</li>" +
           "<li><strong>AWS Marketplace</strong>：サードパーティ製のソフトを購入・デプロイできるストア。</li>" +
           "<li><strong>AWS Professional Services / パートナーネットワーク（APN）</strong>：導入・移行を支援する専門家やパートナー企業。</li>" +
-          "</ul>",
+          "</ul>" +
+          "<p>使い分けの目安：技術情報を自分で調べるなら<strong>ドキュメント／ホワイトペーパー</strong>（無料）、アカウントの改善点を知るなら <strong>Trusted Advisor</strong>、外部ソフトを導入するなら <strong>AWS Marketplace</strong>、専門家の支援が必要なら <strong>Professional Services／APN パートナー</strong>。『まず公式の無料リソースで調べ、足りなければパートナーに頼る』という流れで押さえます。</p>",
       },
     ],
     memorize: [
