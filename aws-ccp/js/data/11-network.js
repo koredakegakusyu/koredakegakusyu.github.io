@@ -45,8 +45,9 @@ window.CURRICULUM.push(
       {
         h: "VPC——AWSの中の『自分専用のネットワーク』",
         body:
-          "<p><strong>Amazon VPC（Virtual Private Cloud）</strong>は、AWSクラウドの中に作る<strong>自分専用の仮想ネットワーク</strong>です。この中にEC2やRDSを置きます。VPCの中を<strong>サブネット</strong>に分け、インターネットからアクセスさせる<strong>パブリックサブネット</strong>（Webサーバー等）と、外から直接アクセスさせない<strong>プライベートサブネット</strong>（DB等）に分けるのが基本です。</p>" +
-          "<p>通信を制御する仕組みが2つ。サーバー単位の<strong>セキュリティグループ</strong>（許可ルールのみ）と、サブネット単位の<strong>ネットワークACL</strong>。これらで『どの通信を通すか』を決めます。</p>",
+          "<p><strong>Amazon VPC（Virtual Private Cloud）</strong>は、AWSクラウドの中に作る<strong>自分専用の仮想ネットワーク</strong>です。他の利用者から論理的に隔離された“自分だけの区画”で、この中に EC2 や RDS などを配置します。オンプレミスのネットワークを AWS 上に再現するイメージで、使う IP アドレスの範囲（CIDR）を決めて構築します。</p>" +
+          "<p>VPC の中は<strong>サブネット</strong>に分けます。インターネットからアクセスさせる<strong>パブリックサブネット</strong>（Web サーバー等）と、外から直接アクセスさせない<strong>プライベートサブネット</strong>（DB 等）に分けるのが基本です。サブネットは<strong>アベイラビリティゾーン（AZ）ごと</strong>に作れるため、複数の AZ にまたがって配置すれば<strong>可用性（耐障害性）</strong>が高まります。外部との出入口には<strong>インターネットゲートウェイ（IGW）</strong>を付け、<strong>ルートテーブル</strong>で「どの通信をどこへ送るか」を決めます。</p>" +
+          "<p>通信を制御する“ファイアウォール”は 2 段階あります。<strong>セキュリティグループ</strong>は<strong>サーバー（インスタンス）単位</strong>で、<strong>許可ルールだけ</strong>を書きます（戻りの通信は自動で通す）。<strong>ネットワークACL</strong>は<strong>サブネット単位</strong>で、<strong>許可と拒否の両方</strong>を書けます。『インスタンスを守る細かい設定＝セキュリティグループ』『サブネット全体のおおまかな関所＝ネットワークACL』と役割で分けて覚えると混同しません。</p>",
         diagram:
           '<svg viewBox="0 0 580 190" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">VPC＝自分専用ネットワーク（公開/非公開に分ける）</text>' +
