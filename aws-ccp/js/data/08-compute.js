@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "仮想サーバーEC2とその購入オプション、サーバーレスのLambda、コンテナ、オートスケーリング。",
     understand: [
       {
+        h: "コンピュートの補強——Lightsail・AWS Batch・プレイスメントグループ・エッジ/ハイブリッド",
+        body: "<ul><li><strong>Amazon Lightsail</strong>：<strong>簡単・定額・低価格</strong>で小規模サーバやWebサイトを手軽に立てられる入門向け。個人ブログや小さなアプリに最適。</li><li><strong>AWS Batch</strong>：<strong>大量のバッチ処理（一括処理）ジョブ</strong>を、必要な計算資源を自動確保して並列実行するマネージドサービス。夜間の大量計算等。</li><li><strong>プレイスメントグループ</strong>：EC2の<strong>物理配置を制御</strong>。クラスター＝近くに固めて低遅延（HPC向け）、スプレッド＝別ハードに分散して同時障害を回避。</li><li><strong>エッジ/ハイブリッド</strong>：<strong>Outposts</strong>＝AWS機器を自社データセンターに設置、<strong>Local Zones</strong>＝大都市近くで低遅延、<strong>Wavelength</strong>＝<strong>5G</strong>網内に置きモバイルへ超低遅延。</li></ul>",
+        cap: "手軽な定額＝Lightsail、大量一括処理＝Batch、配置制御＝プレイスメントグループ、5G超低遅延＝Wavelength。",
+      },
+
+      {
         h: "EC2——AWS上の仮想サーバー",
         body:
           "<p><strong>Amazon EC2（Elastic Compute Cloud）</strong>は、AWS上に<strong>仮想サーバーを立てて使う</strong>基本サービスです（IaaS）。数分で起動でき、CPU・メモリの大きさ（インスタンスタイプ）を用途に合わせて選べます。OS以上は利用者が管理します。</p>" +
@@ -67,6 +73,11 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Amazon Lightsail", v: "<strong>簡単・定額・低価格</strong>で小規模サーバ/Webサイト。個人・入門向け。" },
+      { k: "AWS Batch", v: "<strong>大量のバッチ処理ジョブ</strong>を資源自動確保で並列実行。" },
+      { k: "プレイスメントグループ", v: "EC2の物理配置制御。<strong>クラスター＝低遅延</strong>、スプレッド＝分散で同時障害回避。" },
+      { k: "Outposts / Local Zones / Wavelength", v: "Outposts＝自社DCにAWS、Local Zones＝大都市で低遅延、Wavelength＝<strong>5G</strong>で超低遅延。" },
+
       { k: "EC2", v: "AWS上の仮想サーバー(IaaS)。インスタンスタイプでCPU/メモリを選ぶ。OS以上は利用者管理。" },
       { k: "Auto Scaling", v: "負荷に応じてEC2の台数を自動で増減。可用性とコスト効率を両立。" },
       { k: "ELB(ロードバランサー)", v: "アクセスを複数サーバーへ自動で振り分ける。" },
@@ -84,6 +95,19 @@ window.CURRICULUM.push(
       { q: "アクセス急増に自動で対応する2つの仕組みは？", a: "Auto Scaling（台数の自動増減）とELB（ロードバランサーによる振り分け）。" },
     ],
     quiz: [
+      {
+        q: "個人が、簡単な操作で低価格・定額料金の小規模Webサイトやサーバーを短時間で立ち上げたい。最も適したサービスはどれか。",
+        choices: ["Amazon EC2", "AWS Batch", "Amazon Lightsail", "Amazon EMR"],
+        answer: 2,
+        explain: "簡単・定額・低価格で小規模サーバを手軽に立てるのは<strong>Amazon Lightsail</strong>。EC2は柔軟だが設定項目が多い。",
+      },
+      {
+        q: "夜間に発生する大量のデータ処理ジョブを、必要な計算リソースを自動確保して並列に実行したい。適したサービスはどれか。",
+        choices: ["AWS Lambda", "AWS Batch", "Amazon Lightsail", "AWS Step Functions"],
+        answer: 1,
+        explain: "大量の<strong>バッチ処理ジョブ</strong>を資源を自動確保して並列実行するのは<strong>AWS Batch</strong>。Lambdaは短時間イベント処理、Step Functionsは処理の流れの制御。",
+      },
+
       {
         q: "アクセスの少ない夜間に自動的にサーバー台数を減らし、混雑する日中に自動的に増やしたい。用いるべきAWSの仕組みはどれか。",
         choices: ["Auto Scaling", "リザーブドインスタンス", "AWS Artifact", "CloudTrail"],

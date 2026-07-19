@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "オンプレからクラウドへ移す手段（Snowファミリー・DMS・DataSync）と、移行戦略（7つのR）、CAF。",
     understand: [
       {
+        h: "移行の可視化・計画の補強——Migration Hub・Application Discovery Service",
+        body: "<ul><li><strong>AWS Application Discovery Service</strong>：移行の<strong>計画段階</strong>で、オンプレのサーバー構成や依存関係・性能などの<strong>情報を自動収集</strong>する。何をどう移すか決める材料になる。</li><li><strong>AWS Migration Hub</strong>：複数の移行ツールを使った<strong>移行の進捗状況を1か所でまとめて可視化・追跡</strong>する。どのアプリがどこまで移行できたかを一元管理。</li></ul><p>『まず調べる＝Application Discovery Service』『進捗を束ねて見る＝Migration Hub』。既習のDMS（DB移行）・Snow family（大容量物理搬送）と合わせて押さえる。</p>",
+        cap: "移行前の情報収集＝Application Discovery Service、移行の進捗を一元可視化＝Migration Hub。",
+      },
+
+      {
         h: "大量データをどう運ぶ？——ネット転送 と 物理デバイス",
         body:
           "<p>オンプレミスの大量データをAWSへ移す方法は、データ量と回線速度で選びます。</p>" +
@@ -56,6 +62,9 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Application Discovery Service", v: "移行<strong>計画のためオンプレ構成・依存関係を自動収集</strong>。" },
+      { k: "AWS Migration Hub", v: "複数ツールの<strong>移行進捗を1か所で可視化・追跡</strong>。" },
+
       { k: "DataSync", v: "オンプレ⇔AWS間のネットワーク経由の大量データ転送を高速・自動化。" },
       { k: "Storage Gateway", v: "オンプレの既存システムからクラウドストレージを継続利用する橋渡し。" },
       { k: "Snowファミリー", v: "物理デバイスで大量データを郵送。Snowcone(小)/Snowball/Snowmobile(数十PB)。" },
@@ -73,6 +82,13 @@ window.CURRICULUM.push(
       { q: "クラウド移行のコストをオンプレと比較検討するために使うツールは？", a: "AWS Pricing Calculator（料金計算ツール）でTCOを試算する。" },
     ],
     quiz: [
+      {
+        q: "複数の移行ツールを併用しながら進めているクラウド移行について、各アプリケーションの移行の進捗状況を1か所でまとめて把握したい。適したサービスはどれか。",
+        choices: ["AWS Migration Hub", "AWS Application Discovery Service", "AWS Database Migration Service", "AWS Snowball"],
+        answer: 0,
+        explain: "移行の<strong>進捗を1か所で可視化・追跡</strong>するのは<strong>AWS Migration Hub</strong>。Application Discovery Serviceは移行前の情報収集、DMSはDB移行、Snowは物理搬送。",
+      },
+
       {
         q: "オンプレミスにある数十テラバイトのデータを、回線が細くネット転送では非現実的なためAWSへ移したい。最も適した方法はどれか。",
         choices: ["AWS DataSync", "AWS Snowball", "Amazon CloudFront", "AWS DMS"],

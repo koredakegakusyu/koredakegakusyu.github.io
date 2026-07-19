@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "AWSの料金の考え方（3本柱）と、コストを見える化・管理するツール（Cost Explorer・Budgets等）。",
     understand: [
       {
+        h: "コスト管理の補強——Cost Anomaly Detection と コスト配分タグ",
+        body: "<ul><li><strong>AWS Cost Anomaly Detection</strong>：機械学習で<strong>普段と違う異常なコスト増加を自動検知</strong>して通知。使い過ぎや設定ミスの早期発見。Budgets（事前設定した予算のしきい値超過を通知）や Cost Explorer（費用の可視化・分析）との違いを押さえる。</li><li><strong>コスト配分タグ</strong>：リソースにタグを付け、<strong>プロジェクト・部門・環境ごとに費用を仕分け</strong>して把握できる。誰が/どの案件でいくら使ったかの内訳が分かる。</li></ul>",
+        cap: "異常なコスト増を自動検知＝Cost Anomaly Detection、費用を案件別に仕分け＝コスト配分タグ。",
+      },
+
+      {
         h: "AWS料金の3本柱と『使わなければ無料』の考え方",
         body:
           "<p>AWSの料金は、ざっくり<strong>3つの要素</strong>で決まります。</p>" +
@@ -54,6 +60,9 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Cost Anomaly Detection", v: "MLで<strong>異常なコスト増加を自動検知・通知</strong>。" },
+      { k: "コスト配分タグ", v: "タグで<strong>プロジェクト/部門別に費用を仕分け</strong>。" },
+
       { k: "料金の3本柱", v: "コンピューティング(時間)・ストレージ(保存量)・データ転送(外向き)。" },
       { k: "データ転送料金", v: "AWSから外へ出る通信は課金。AWSへ入る(インバウンド)は基本無料。" },
       { k: "従量課金 / 無料利用枠", v: "使った分だけ。Free Tierで一定枠まで無料で試せる。" },
@@ -70,6 +79,19 @@ window.CURRICULUM.push(
       { q: "複数アカウントの請求をまとめて割引を受けられる仕組みは？", a: "AWS Organizationsの一括請求（Consolidated Billing）。" },
     ],
     quiz: [
+      {
+        q: "機械学習を用いて、普段の利用傾向と異なる想定外のコスト増加を自動的に検知し通知を受け取りたい。適したサービスはどれか。",
+        choices: ["AWS Cost Explorer", "AWS Cost Anomaly Detection", "AWS Budgets", "AWS Trusted Advisor"],
+        answer: 1,
+        explain: "MLで<strong>異常なコスト増加を自動検知・通知</strong>するのは<strong>Cost Anomaly Detection</strong>。Cost Explorerは費用の可視化、Budgetsは予算しきい値の通知。",
+      },
+      {
+        q: "特定のプロジェクトや部門ごとに、AWSの利用費用の内訳を把握したい。最も適した方法はどれか。",
+        choices: ["コスト配分タグを付けて費用を仕分ける", "全リソースを1つのアカウントに集約する", "リージョンを1つに統一する", "リザーブドインスタンスを購入する"],
+        answer: 0,
+        explain: "リソースに<strong>コスト配分タグ</strong>を付けると、プロジェクト/部門別に費用を仕分けて把握できる。",
+      },
+
       {
         q: "AWSの料金に関する記述として適切なものはどれか。",
         choices: [

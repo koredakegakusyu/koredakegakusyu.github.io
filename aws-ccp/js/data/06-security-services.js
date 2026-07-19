@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "暗号化のKMS、DDoS対策のShield、Web防御のWAF、脅威検知のGuardDutyなど。名前と用途をセットで。",
     understand: [
       {
+        h: "セキュリティサービスの補強——Detective・Firewall Manager・Network Firewall",
+        body: "<ul><li><strong>Amazon Detective</strong>：GuardDutyなどが検知したセキュリティ事象について、<strong>原因や影響範囲を深掘りして調査・分析</strong>する。『検知＝GuardDuty、調査＝Detective』。</li><li><strong>AWS Firewall Manager</strong>：<strong>複数アカウント・複数リソースのWAFやセキュリティ設定を一元管理</strong>し、ルールを組織全体へ一括適用する。</li><li><strong>AWS Network Firewall</strong>：<strong>VPCの境界に置く高度なファイアウォール/IPS</strong>。通信を検査し、不正な通信を防ぐ（セキュリティグループ/ネットワークACLより高機能）。</li></ul>",
+        cap: "事象の原因調査＝Detective、複数アカウントのWAF等を一元管理＝Firewall Manager、VPC境界の高度な防御＝Network Firewall。",
+      },
+
+      {
         h: "暗号化と秘密情報の管理——KMS・Secrets Manager",
         body:
           "<p>データを守る基本が<strong>暗号化</strong>。その<strong>鍵を安全に作成・管理</strong>するのが<strong>KMS（Key Management Service）</strong>です。S3・EBS・RDSなど多くのサービスと連携し、保存データ（保管時）や通信（転送時）を暗号化します。専用のハードウェアで鍵を管理する<strong>CloudHSM</strong>もあります。</p>" +
@@ -53,6 +59,10 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Amazon Detective", v: "検知後の<strong>原因・影響範囲の深掘り調査</strong>（検知はGuardDuty）。" },
+      { k: "AWS Firewall Manager", v: "<strong>複数アカウントのWAF/セキュリティ設定を一元管理</strong>し一括適用。" },
+      { k: "AWS Network Firewall", v: "<strong>VPC境界の高度なファイアウォール/IPS</strong>。" },
+
       { k: "KMS", v: "暗号鍵の作成・管理。多くのサービスと連携し保存/転送データを暗号化。" },
       { k: "CloudHSM", v: "専用ハードウェアで暗号鍵を厳格に管理する。" },
       { k: "Secrets Manager", v: "DBパスワードやAPIキー等の秘密情報を安全に保管し自動ローテーション。" },
@@ -70,6 +80,19 @@ window.CURRICULUM.push(
       { q: "データベースのパスワードなどの秘密情報を安全に保管し自動更新できるサービスは？", a: "Secrets Manager。" },
     ],
     quiz: [
+      {
+        q: "GuardDutyが検知したセキュリティ上の疑わしい事象について、その原因や影響範囲を深く掘り下げて調査・分析したい。適したサービスはどれか。",
+        choices: ["Amazon Detective", "AWS WAF", "AWS Shield", "Amazon Inspector"],
+        answer: 0,
+        explain: "検知後の<strong>原因・影響の深掘り調査</strong>は<strong>Amazon Detective</strong>。WAF/Shieldは防御、Inspectorは脆弱性診断。『検知＝GuardDuty、調査＝Detective』。",
+      },
+      {
+        q: "多数のAWSアカウントにまたがって、WAFのルールなどのセキュリティ設定を一元的に管理し、組織全体へ一括適用したい。適したサービスはどれか。",
+        choices: ["AWS Config", "AWS Firewall Manager", "Amazon Macie", "AWS CloudTrail"],
+        answer: 1,
+        explain: "複数アカウントの<strong>WAF等を一元管理・一括適用</strong>するのは<strong>AWS Firewall Manager</strong>。Configは構成評価、Macieは機密データ検出、CloudTrailはAPI証跡。",
+      },
+
       {
         q: "Webアプリケーションに対するSQLインジェクションやクロスサイトスクリプティングなどの攻撃を、ルールに基づいて防御するAWSサービスはどれか。",
         choices: ["AWS Shield", "AWS WAF", "Amazon GuardDuty", "AWS KMS"],

@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "リレーショナルのRDS/Aurora、NoSQLのDynamoDB、キャッシュのElastiCache、分析のRedshift。",
     understand: [
       {
+        h: "用途特化データベースの補強——Timestream・Neptune・DocumentDB・Keyspaces",
+        body: "<p>CCPでは『どんなデータにどのDBか』が問われます。用途特化型を押さえます。</p><ul><li><strong>Amazon Timestream</strong>：<strong>時系列データ</strong>（IoTセンサーの計測値など、時刻付きで次々増えるデータ）に特化。</li><li><strong>Amazon Neptune</strong>：<strong>グラフDB</strong>。要素どうしの『つながり（関係性）』——SNSの友人関係・レコメンド・不正検知に向く。</li><li><strong>Amazon DocumentDB</strong>：<strong>MongoDB互換</strong>のドキュメント（JSON形式）データベース。</li><li><strong>Amazon Keyspaces</strong>：<strong>Apache Cassandra互換</strong>のワイドカラム型データベース。</li></ul><p>対比：RDS/Aurora＝リレーショナル、DynamoDB＝キーバリュー、ElastiCache＝インメモリキャッシュ、Redshift＝分析用DWH。</p>",
+        cap: "時系列＝Timestream、つながり＝Neptune、MongoDB互換＝DocumentDB、Cassandra互換＝Keyspaces。",
+      },
+
+      {
         h: "マネージドなリレーショナルDB——RDSとAurora",
         body:
           "<p>従来のDB運用は、サーバー構築・バックアップ・パッチ適用・障害復旧まで手間がかかりました。<strong>Amazon RDS</strong>は、これらの<strong>面倒な管理をAWSが代行してくれるマネージドなリレーショナルデータベース</strong>です。MySQL・PostgreSQL・Oracle・SQL Serverなどが選べ、利用者はデータとアプリに集中できます。</p>" +
@@ -48,6 +54,11 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Amazon Timestream", v: "<strong>時系列データ</strong>（IoT計測値等）特化DB。" },
+      { k: "Amazon Neptune", v: "<strong>グラフDB</strong>。つながり（関係性）——SNS/レコメンド/不正検知。" },
+      { k: "Amazon DocumentDB", v: "<strong>MongoDB互換</strong>のドキュメントDB。" },
+      { k: "Amazon Keyspaces", v: "<strong>Cassandra互換</strong>のワイドカラム型DB。" },
+
       { k: "Amazon RDS", v: "マネージドなリレーショナルDB。構築・バックアップ・パッチ・復旧をAWSが代行。" },
       { k: "RDSマルチAZ", v: "別AZにスタンバイを自動複製し障害時に自動切替。可用性向上（性能目的ではない）。" },
       { k: "リードレプリカ", v: "読み取り専用の複製で読み取り性能を分散。" },
@@ -64,6 +75,19 @@ window.CURRICULUM.push(
       { q: "大量データの集計・分析（データウェアハウス）に使うAWSサービスは？", a: "Amazon Redshift。" },
     ],
     quiz: [
+      {
+        q: "IoTセンサーから、時刻とともに絶えず増え続ける計測値（時系列データ）を効率的に格納・分析したい。最も適したデータベースはどれか。",
+        choices: ["Amazon Timestream", "Amazon Neptune", "Amazon RDS", "Amazon DynamoDB"],
+        answer: 0,
+        explain: "<strong>時系列データ</strong>特化DBは<strong>Amazon Timestream</strong>。Neptuneはグラフ、RDSはリレーショナル、DynamoDBはキーバリュー。",
+      },
+      {
+        q: "SNSの友人関係のように、要素どうしの『つながり（関係性）』をたどる分析（レコメンドや不正検知など）に最も適したデータベースはどれか。",
+        choices: ["Amazon Redshift", "Amazon Neptune", "Amazon Timestream", "Amazon ElastiCache"],
+        answer: 1,
+        explain: "つながり（関係性）を扱う<strong>グラフDB</strong>は<strong>Amazon Neptune</strong>。Redshiftは分析用DWH、ElastiCacheはキャッシュ。",
+      },
+
       {
         q: "リレーショナルデータベースを利用したいが、バックアップやOSのパッチ適用などの運用管理はできるだけAWSに任せたい。最も適したサービスはどれか。",
         choices: ["Amazon EC2に自分でDBを構築", "Amazon RDS", "Amazon S3", "Amazon DynamoDB"],

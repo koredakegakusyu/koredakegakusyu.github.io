@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "システムを疎結合にするSQS/SNS、代表的な分析サービス（Athena/Kinesis/QuickSight等）。",
     understand: [
       {
+        h: "分析・データ統合の補強——Kinesis Data Firehose・EMR・Glue・Data Exchange",
+        body: "<ul><li><strong>Kinesis Data Firehose</strong>：リアルタイムに流れ込むストリーミングデータを、<strong>S3やRedshift等へそのまま配送（ロード）</strong>。『ストリーミングの転送・ロード』はFirehose。収集はKinesis Data Streams。</li><li><strong>Amazon EMR</strong>：<strong>Hadoop / Apache Spark</strong> などのビッグデータ処理基盤をマネージドで提供。大規模データの分散処理・分析。</li><li><strong>AWS Glue</strong>：サーバーレスの<strong>ETL（抽出・変換・ロード）</strong>。バラバラな形式のデータを整え統合・変換する。</li><li><strong>AWS Data Exchange</strong>：<strong>サードパーティ（第三者）が提供するデータセット</strong>を見つけて購読・利用できるマーケット。</li></ul>",
+        cap: "ストリーミング配送＝Firehose、Spark等のビッグデータ基盤＝EMR、ETL＝Glue、外部データ購入＝Data Exchange。",
+      },
+
+      {
         h: "システムを『疎結合』にする——SQSとSNS",
         body:
           "<p>アプリ同士を直接つなぐと、片方が忙しかったり落ちたりすると、もう片方も巻き込まれて止まります。間に<strong>クッション</strong>を挟んで<strong>互いの依存を弱める（疎結合にする）</strong>のが、次の2つです。</p>" +
@@ -43,6 +49,11 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "Kinesis Data Firehose", v: "ストリーミングを<strong>S3/Redshift等へそのまま配送</strong>。収集はData Streams。" },
+      { k: "Amazon EMR", v: "<strong>Hadoop/Apache Spark</strong> のビッグデータ処理基盤（マネージド）。" },
+      { k: "AWS Glue", v: "サーバーレスの<strong>ETL（抽出・変換・ロード）</strong>。" },
+      { k: "AWS Data Exchange", v: "<strong>第三者のデータセット</strong>を購読・利用するマーケット。" },
+
       { k: "SQS", v: "メッセージをためる待ち行列(キュー)。送受信を疎結合にし障害の波及を防ぐ。1対1。" },
       { k: "SNS", v: "1つのメッセージを複数の宛先へ一斉通知(発行/購読)。1対多。メール通知等。" },
       { k: "疎結合", v: "システム間の依存を弱める設計。片方が落ちても全体が止まりにくい。" },
@@ -57,6 +68,19 @@ window.CURRICULUM.push(
       { q: "リアルタイムに流れ込むストリーミングデータを収集・処理するサービスは？", a: "Amazon Kinesis。" },
     ],
     quiz: [
+      {
+        q: "リアルタイムに流れ込むストリーミングデータを、変換せずそのままAmazon S3へ継続的にロード（配送）したい。最も適したサービスはどれか。",
+        choices: ["Amazon Athena", "Amazon Kinesis Data Firehose", "AWS Glue", "Amazon QuickSight"],
+        answer: 1,
+        explain: "ストリーミングをS3/Redshift等へ<strong>そのまま配送・ロード</strong>するのは<strong>Kinesis Data Firehose</strong>。AthenaはSQLクエリ、GlueはETL、QuickSightは可視化。",
+      },
+      {
+        q: "Apache Spark や Hadoop を用いて大規模データの分散処理・分析を行う基盤をマネージドで利用したい。適したサービスはどれか。",
+        choices: ["Amazon EMR", "Amazon Redshift", "AWS Glue", "Amazon Kinesis"],
+        answer: 0,
+        explain: "<strong>Hadoop/Apache Spark</strong> のビッグデータ処理基盤は<strong>Amazon EMR</strong>。Redshiftは分析用DWH、GlueはETL、Kinesisはストリーミング。",
+      },
+
       {
         q: "2つのシステムの間にメッセージをためる待ち行列を置き、送信側と受信側の依存を弱めて（疎結合にして）、一方の障害の影響を減らしたい。用いるAWSサービスはどれか。",
         choices: ["Amazon SQS", "Amazon CloudFront", "AWS CloudFormation", "Amazon Athena"],

@@ -8,6 +8,12 @@ window.CURRICULUM.push(
     intro: "監視のCloudWatch、構成の自動化CloudFormation、運用のSystems Manager、助言のTrusted Advisor。",
     understand: [
       {
+        h: "ガバナンス・最適化の補強——Service Catalog・License Manager・Control Tower・Compute Optimizer",
+        body: "<ul><li><strong>AWS Service Catalog</strong>：管理者が<strong>承認済みの構成（テンプレート）だけを一覧化</strong>し、利用者はそこから選んで展開。使えるリソースを統制（ガバナンス）できる。</li><li><strong>AWS License Manager</strong>：ソフトウェアの<strong>ライセンスを一元管理</strong>。持ち込みライセンス（BYOL/BYOS）の利用状況を追跡し超過を防ぐ。</li><li><strong>AWS Control Tower</strong>：<strong>複数アカウントのセキュアな環境を、ベストプラクティスに沿って自動でセットアップ・統制</strong>（ランディングゾーン）。</li><li><strong>AWS Compute Optimizer</strong>：機械学習で<strong>EC2などの適正なサイズ（過剰/過小）を提案</strong>し、コストと性能を最適化。</li></ul>",
+        cap: "承認済み構成の統制＝Service Catalog、ライセンス管理＝License Manager、複数アカウント自動統制＝Control Tower、適正サイズ提案＝Compute Optimizer。",
+      },
+
+      {
         h: "監視の3兄弟——CloudWatch・CloudTrail・Config",
         body:
           "<p>名前が似ていて混同しやすい3つを、はっきり区別します。ここはCCPの頻出ポイントです。</p>" +
@@ -52,6 +58,11 @@ window.CURRICULUM.push(
       },
     ],
     memorize: [
+      { k: "AWS Service Catalog", v: "<strong>承認済み構成だけを一覧化</strong>し利用者に提供＝ガバナンス。" },
+      { k: "AWS License Manager", v: "ソフトウェア<strong>ライセンスの一元管理</strong>（BYOL/BYOS追跡）。" },
+      { k: "AWS Control Tower", v: "<strong>複数アカウントのセキュア環境を自動セットアップ・統制</strong>。" },
+      { k: "AWS Compute Optimizer", v: "MLで<strong>適正なリソースサイズを提案</strong>（過剰/過小の是正）。" },
+
       { k: "CloudWatch", v: "CPU・アクセス数など数値(メトリクス)を監視しアラーム通知。ログ収集も。" },
       { k: "3兄弟の区別", v: "数値=CloudWatch、操作履歴=CloudTrail、設定監視=Config。" },
       { k: "CloudFormation", v: "インフラをコード(テンプレート)で自動構築・複製(Infrastructure as Code)。" },
@@ -65,6 +76,19 @@ window.CURRICULUM.push(
       { q: "EC2の使用率が一定値を超えたら通知を受け取りたい。使うサービスは？", a: "Amazon CloudWatch（メトリクス監視＋アラーム）。" },
     ],
     quiz: [
+      {
+        q: "管理者が、あらかじめ承認した構成のリソースだけを一覧として用意し、利用者にはその中から選んで展開させることで利用リソースを統制したい。適したサービスはどれか。",
+        choices: ["AWS CloudFormation", "AWS Config", "AWS Service Catalog", "AWS Organizations"],
+        answer: 2,
+        explain: "承認済み構成だけを一覧化し利用者に提供して統制するのは<strong>AWS Service Catalog</strong>。CloudFormationは構築の仕組み、Configは構成の記録・評価。",
+      },
+      {
+        q: "自社で購入済みのソフトウェアライセンス（BYOL）をAWS上で活用しつつ、利用状況を追跡して上限超過を防ぎたい。適したサービスはどれか。",
+        choices: ["AWS License Manager", "AWS Marketplace", "AWS Service Catalog", "AWS Config"],
+        answer: 0,
+        explain: "持ち込みライセンス（BYOL/BYOS）を含む<strong>ライセンスの一元管理・追跡</strong>は<strong>AWS License Manager</strong>。Marketplaceは購入・調達の場。",
+      },
+
       {
         q: "EC2インスタンスのCPU使用率などのメトリクスを監視し、しきい値を超えたときにアラームで通知するAWSサービスはどれか。",
         choices: ["AWS CloudTrail", "Amazon CloudWatch", "AWS Config", "AWS Trusted Advisor"],
