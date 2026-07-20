@@ -119,6 +119,12 @@ window.CURRICULUM.push(
         answer: 0,
         explain: "移行コスト・TCOの試算は<strong>AWS Pricing Calculator</strong>。",
       },
+      {
+        q: "組織がクラウド移行を進めるにあたり、ビジネス・人材・ガバナンス・プラットフォーム・セキュリティ・運用といった観点から、組織全体の準備状況を体系的に評価したい。用いるべきAWSのフレームワークはどれか。",
+        choices: ["AWS Well-Architected フレームワーク", "AWS 責任共有モデル", "AWS クラウド導入フレームワーク（AWS CAF）", "AWS Trusted Advisor"],
+        answer: 2,
+        explain: "<strong>組織としてのクラウド導入の準備を体系的に評価・計画</strong>するのが <strong>AWS CAF（クラウド導入フレームワーク）</strong>。ビジネスリスクの軽減・ESG・収益増大・運用効率の向上といった成果を狙う。<strong>Well-Architected は「システム設計」の指針</strong>で対象が異なる（組織＝CAF／設計＝Well-Architected）。",
+      },
     ],
   }
 );

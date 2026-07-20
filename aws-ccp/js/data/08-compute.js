@@ -20,6 +20,22 @@ window.CURRICULUM.push(
           "<p>アクセスの増減に自動で対応する仕組みが 2 つあります。台数を自動で増減する <strong>Auto Scaling</strong> と、アクセスを複数のサーバーへ振り分ける <strong>ロードバランサー（ELB）</strong>です。この 2 つを組み合わせると『混んだら自動で増え、空いたら自動で減る』構成になり、<strong>可用性（止まりにくさ）とコスト効率</strong>が両立します。さらに、使い方に合わせて料金プラン（オンデマンド／リザーブド／スポット等・次項）を選べば、同じ性能でもコストを大きく下げられます。</p>",
       },
       {
+        h: "インスタンスタイプの選び方——用途に合わせて「形」を選ぶ",
+        body:
+          "<p>EC2 は「サーバーの大きさ」だけでなく、<strong>用途に合わせた“形（ファミリー）”</strong>を選べます。同じ料金を払うなら、仕事に合った形を選んだほうが速く・安くなります。公式試験ガイドでも『さまざまな EC2 インスタンスタイプの適切な使用方法』が対象スキルに挙がっています。</p>" +
+          "<ul>" +
+          "<li><strong>汎用</strong>：CPU・メモリ・ネットワークがバランス型。Web サーバーや小〜中規模アプリなど<strong>迷ったらまずここ</strong>。</li>" +
+          "<li><strong>コンピューティング最適化</strong>：<strong>CPU の性能が高い</strong>タイプ。動画のエンコード、科学技術計算、機械学習の推論など<strong>計算がとにかく重い</strong>処理向け。</li>" +
+          "<li><strong>メモリ最適化</strong>：<strong>メモリが大きい</strong>タイプ。大規模データベースや、大量データをメモリ上に載せて処理する用途向け。</li>" +
+          "<li><strong>ストレージ最適化</strong>：<strong>ディスクの読み書きが速い</strong>タイプ。データウェアハウスや大量のログ処理など<strong>ディスクI/Oが多い</strong>処理向け。</li>" +
+          "<li><strong>高速コンピューティング</strong>：<strong>GPU</strong> を積んだタイプ。機械学習の学習処理や 3D レンダリング向け。</li>" +
+          "</ul>" +
+          "<p><strong>選び方の考え方</strong>：まず汎用で動かし、<strong>どこが足りないか（CPU なのかメモリなのか）を見てから</strong>専用タイプへ変える、が基本です。過剰なスペックは無駄なコストになるため、実際の使用状況に合わせてサイズを見直す<strong>「適切なサイジング（ライトサイジング）」</strong>がコスト最適化の要になります（AWS Compute Optimizer が最適なサイズを提案してくれます）。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 190" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">インスタンスタイプ＝用途に合わせた「形」を選ぶ</text><rect x="20" y="36" width="106" height="120" rx="9" fill="#dce8f3" stroke="#4a7fa8"/><text x="73" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#34567a">汎用</text><text x="73" y="80" text-anchor="middle" font-size="9.5" fill="#6b6e76">バランス型</text><text x="73" y="104" text-anchor="middle" font-size="10" fill="#23252b">Webサーバー</text><text x="73" y="120" text-anchor="middle" font-size="10" fill="#23252b">一般的なアプリ</text><text x="73" y="142" text-anchor="middle" font-size="9.5" fill="#4a7fa8">迷ったらここ</text><rect x="134" y="36" width="106" height="120" rx="9" fill="#f2e7cd" stroke="#b28a2e"/><text x="187" y="58" text-anchor="middle" font-size="11" font-weight="800" fill="#7a5e17">コンピューティング</text><text x="187" y="72" text-anchor="middle" font-size="11" font-weight="800" fill="#7a5e17">最適化</text><text x="187" y="92" text-anchor="middle" font-size="9.5" fill="#6b6e76">CPUが強い</text><text x="187" y="116" text-anchor="middle" font-size="10" fill="#23252b">動画エンコード</text><text x="187" y="132" text-anchor="middle" font-size="10" fill="#23252b">科学技術計算</text><rect x="248" y="36" width="106" height="120" rx="9" fill="#dcecdd" stroke="#5c9160"/><text x="301" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#366b3c">メモリ最適化</text><text x="301" y="80" text-anchor="middle" font-size="9.5" fill="#6b6e76">メモリが大きい</text><text x="301" y="104" text-anchor="middle" font-size="10" fill="#23252b">大規模DB</text><text x="301" y="120" text-anchor="middle" font-size="10" fill="#23252b">インメモリ処理</text><rect x="362" y="36" width="106" height="120" rx="9" fill="#e6ddf3" stroke="#7a55c9"/><text x="415" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#5a3a9a">ストレージ最適化</text><text x="415" y="80" text-anchor="middle" font-size="9.5" fill="#6b6e76">ディスクが速い</text><text x="415" y="104" text-anchor="middle" font-size="10" fill="#23252b">データウェアハウス</text><text x="415" y="120" text-anchor="middle" font-size="10" fill="#23252b">大量ログ処理</text><rect x="476" y="36" width="84" height="120" rx="9" fill="#f6e4e0" stroke="#c0392b"/><text x="518" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#8a2b20">高速</text><text x="518" y="74" text-anchor="middle" font-size="11.5" font-weight="800" fill="#8a2b20">コンピューティング</text><text x="518" y="94" text-anchor="middle" font-size="9.5" fill="#6b6e76">GPU搭載</text><text x="518" y="118" text-anchor="middle" font-size="10" fill="#23252b">機械学習の学習</text><text x="290" y="178" text-anchor="middle" font-size="10" fill="#6b6e76">まず汎用→足りない資源（CPU/メモリ/ディスク）に合わせて専用タイプへ。過剰スペックは無駄＝適切なサイジング</text></svg>',
+        cap: "汎用／CPU重視＝コンピューティング最適化／メモリ重視／ディスク重視＝ストレージ最適化／GPU＝高速コンピューティング。過剰スペックを見直すのが適切なサイジング。",
+      },
+      {
         h: "EC2の購入オプション——安くする4つの選択肢",
         body:
           "<p>EC2は使い方に応じて<strong>料金プラン</strong>を選べます。CCP頻出です。</p>" +
@@ -29,7 +45,13 @@ window.CURRICULUM.push(
           "<li><strong>Savings Plans</strong>：一定の使用量（1年or3年）をコミットして割引。RIより柔軟。</li>" +
           "<li><strong>スポットインスタンス</strong>：AWSの<strong>余剰リソースを最大9割引</strong>で使えるが、<strong>AWS都合で中断されることがある</strong>。中断されても平気なバッチ処理向け。</li>" +
           "</ul>" +
-          "<p>他に、物理サーバーを専有する<strong>Dedicated Hosts</strong>（ライセンス要件等）もあります。</p>",
+          "<p>さらに、公式試験ガイドに挙がっている<strong>「専有」と「予約」</strong>の選択肢もあります。</p>" +
+          "<ul>" +
+          "<li><strong>Dedicated Hosts（専有ホスト）</strong>：<strong>物理サーバーを丸ごと専有</strong>します。物理コア数まで把握できるため、<strong>「サーバー単位」で数える既存ソフトのライセンス（BYOL）を持ち込みたい</strong>場合や、法令で物理的な分離が必要な場合に使います。</li>" +
+          "<li><strong>Dedicated Instances（ハードウェア専有インスタンス）</strong>：<strong>他の顧客と物理ハードウェアを共有しない</strong>インスタンス。専有ホストと違い物理サーバーそのものは指定・可視化されません。『他社と同居したくない』という分離要件だけならこちら。</li>" +
+          "<li><strong>キャパシティーの予約（On-Demand Capacity Reservations）</strong>：特定の AZ で<strong>必要な台数分の“空き”を確保</strong>しておく仕組み。『セール当日に確実に起動できないと困る』ときに使います。<strong>割引が目的ではなく“確保”が目的</strong>である点が、割引目的の RI／Savings Plans との違いです。</li>" +
+          "</ul>" +
+          "<p><strong>取り違え注意</strong>：<strong>安くしたい＝RI／Savings Plans／スポット</strong>、<strong>物理的に分離したい＝専有ホスト／専有インスタンス</strong>、<strong>確実に起動したい＝キャパシティー予約</strong>。目的が違うので混同しないようにします。</p>",
         diagram:
           '<svg viewBox="0 0 580 205" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">EC2 購入オプションの使い分け</text>' +
@@ -79,6 +101,10 @@ window.CURRICULUM.push(
       { k: "Outposts / Local Zones / Wavelength", v: "Outposts＝自社DCにAWS、Local Zones＝大都市で低遅延、Wavelength＝<strong>5G</strong>で超低遅延。" },
 
       { k: "EC2", v: "AWS上の仮想サーバー(IaaS)。インスタンスタイプでCPU/メモリを選ぶ。OS以上は利用者管理。" },
+      { k: "インスタンスタイプの種類", v: "<strong>汎用</strong>=バランス／<strong>コンピューティング最適化</strong>=CPU重視／<strong>メモリ最適化</strong>=大規模DB／<strong>ストレージ最適化</strong>=ディスクI/O重視／<strong>高速コンピューティング</strong>=GPU。" },
+      { k: "適切なサイジング(ライトサイジング)", v: "使用状況に合わせ<strong>過剰スペックを見直す</strong>コスト最適化。<strong>Compute Optimizer</strong>が最適サイズを提案。" },
+      { k: "Dedicated Hosts / Dedicated Instances", v: "専有ホスト=<strong>物理サーバーを丸ごと専有</strong>(BYOLライセンス持込・物理分離)。専有インスタンス=<strong>他顧客とハード非共有</strong>(物理サーバーは指定不可)。" },
+      { k: "キャパシティーの予約", v: "特定AZで<strong>必要台数の空きを確保</strong>。<strong>割引ではなく“確実に起動”が目的</strong>（RI/Savings Plansは割引目的）。" },
       { k: "Auto Scaling", v: "負荷に応じてEC2の台数を自動で増減。可用性とコスト効率を両立。" },
       { k: "ELB(ロードバランサー)", v: "アクセスを複数サーバーへ自動で振り分ける。" },
       { k: "オンデマンド", v: "縛りなしで使った分だけ。短期・変動負荷向け。単価は高め。" },
@@ -125,6 +151,30 @@ window.CURRICULUM.push(
         choices: ["Amazon EC2", "AWS Lambda", "Amazon RDS", "Amazon EBS"],
         answer: 1,
         explain: "サーバー管理不要・実行した分だけ課金のサーバーレスは<strong>AWS Lambda</strong>。",
+      },
+      {
+        q: "動画のエンコード処理のように、CPU の演算能力を非常に多く必要とするワークロードを EC2 で実行したい。最も適したインスタンスタイプのカテゴリはどれか。",
+        choices: ["メモリ最適化", "ストレージ最適化", "汎用", "コンピューティング最適化"],
+        answer: 3,
+        explain: "<strong>CPU の性能が求められる</strong>処理には<strong>コンピューティング最適化</strong>。メモリ最適化は大規模DB、ストレージ最適化はディスクI/Oが多い処理、汎用はバランス型。",
+      },
+      {
+        q: "大規模セールの当日に、特定のアベイラビリティーゾーンで必要な台数の EC2 を「確実に起動できる」ようにしておきたい。割引を得ることが目的ではない。適した仕組みはどれか。",
+        choices: ["オンデマンドキャパシティーの予約", "リザーブドインスタンス", "スポットインスタンス", "Savings Plans"],
+        answer: 0,
+        explain: "指定 AZ で<strong>必要な台数の空きを確保</strong>するのが<strong>キャパシティーの予約</strong>。RI や Savings Plans は<strong>割引</strong>が目的、スポットは中断ありで確実性がない。目的（確保か割引か）で選び分ける。",
+      },
+      {
+        q: "コンテナ化したアプリケーションを、サーバー（EC2インスタンス）の管理を一切せずに実行したい。最も適した組み合わせはどれか。",
+        choices: ["EC2 に Docker を自分でインストールする", "Amazon EC2 Auto Scaling", "Amazon ECS または Amazon EKS を AWS Fargate で実行する", "AWS Batch のみを使用する"],
+        answer: 2,
+        explain: "コンテナの管理サービスが <strong>ECS（AWS独自）</strong>と <strong>EKS（Kubernetes）</strong>で、その実行基盤としてサーバー管理不要の <strong>Fargate</strong> を選ぶとサーバーレスにコンテナを動かせる。",
+      },
+      {
+        q: "既存の商用ソフトウェアのライセンスを AWS へ持ち込む（BYOL）にあたり、物理サーバーのコア数を把握できる形で EC2 を専有したい。適したオプションはどれか。",
+        choices: ["スポットインスタンス", "Dedicated Hosts（専有ホスト）", "オンデマンドインスタンス", "Savings Plans"],
+        answer: 1,
+        explain: "<strong>物理サーバーを丸ごと専有</strong>し、ソケット/コア数を把握できるのが <strong>Dedicated Hosts</strong>。サーバー単位で数えるライセンスの持ち込み（BYOL）に向く。<strong>ハードウェア専有インスタンス（Dedicated Instances）</strong>は「他顧客とハードを共有しない」だけで物理サーバーの指定・可視化はできない点が違う。",
       },
     ],
   }

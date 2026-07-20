@@ -47,6 +47,22 @@ window.CURRICULUM.push(
         cap: "数値の監視＝CloudWatch、操作の監査＝CloudTrail、設定の監視＝Config。3つを取り違えない。",
       },
       {
+        h: "AWSの操作方法——コンソール・CLI／SDK・そしてIaC",
+        body:
+          "<p>AWS を操作する方法は 1 つではありません。公式試験ガイドでも『プログラムによるアクセス（API・SDK・CLI）、マネジメントコンソール、Infrastructure as Code などのオプションの決定』が対象スキルに挙がっています。<strong>やりたいことによって使い分ける</strong>のがポイントです。</p>" +
+          "<ul>" +
+          "<li><strong>マネジメントコンソール</strong>：ブラウザで操作する<strong>画面（GUI）</strong>。クリックで分かりやすく、<strong>学習や一度きりの作業</strong>に向きます。</li>" +
+          "<li><strong>AWS CLI</strong>：<strong>コマンドで操作</strong>する方法。手順をスクリプトにまとめて<strong>繰り返し自動実行</strong>できます。ブラウザからすぐ CLI を使える <strong>AWS CloudShell</strong> も用意されています。</li>" +
+          "<li><strong>SDK</strong>：Python や Java などの<strong>プログラムのコードから AWS を操作</strong>するための開発キット。アプリに AWS の機能を組み込むときに使います。</li>" +
+          "<li><strong>API</strong>：上記すべての<strong>土台</strong>。コンソールも CLI も SDK も、最終的には API を呼んで AWS を動かしています。</li>" +
+          "</ul>" +
+          "<p>そしてもう一段上の考え方が <strong>IaC（Infrastructure as Code＝コードとしてのインフラ）</strong>です。サーバーやネットワークの構成を<strong>コード（テンプレート）に書いておき、そこから自動で環境を構築</strong>します（AWS では <strong>CloudFormation</strong>）。手作業と違って<strong>何度でも同じ環境を寸分違わず再現でき</strong>、変更履歴もコードとして残ります。</p>" +
+          "<p><strong>判断の軸</strong>：<strong>1 回限りの操作</strong>なら手軽なコンソールでよい。しかし<strong>同じ構成を何度も作る・複数環境（開発／本番）を揃える・監査で再現性を示す</strong>必要があるなら <strong>IaC（CloudFormation）</strong>を選ぶ——これが試験で問われる考え方です。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">AWSの操作方法と使い分け</text><rect x="18" y="34" width="126" height="86" rx="9" fill="#dce8f3" stroke="#4a7fa8"/><text x="81" y="56" text-anchor="middle" font-size="11" font-weight="800" fill="#34567a">コンソール</text><text x="81" y="74" text-anchor="middle" font-size="9.5" fill="#6b6e76">ブラウザのGUI</text><text x="81" y="96" text-anchor="middle" font-size="10" fill="#23252b">学習・1回限り</text><rect x="152" y="34" width="126" height="86" rx="9" fill="#f2e7cd" stroke="#b28a2e"/><text x="215" y="56" text-anchor="middle" font-size="11" font-weight="800" fill="#7a5e17">CLI</text><text x="215" y="74" text-anchor="middle" font-size="9.5" fill="#6b6e76">コマンド操作</text><text x="215" y="96" text-anchor="middle" font-size="10" fill="#23252b">スクリプトで自動化</text><rect x="286" y="34" width="126" height="86" rx="9" fill="#dcecdd" stroke="#5c9160"/><text x="349" y="56" text-anchor="middle" font-size="11" font-weight="800" fill="#366b3c">SDK</text><text x="349" y="74" text-anchor="middle" font-size="9.5" fill="#6b6e76">プログラムから</text><text x="349" y="96" text-anchor="middle" font-size="10" fill="#23252b">アプリに組み込む</text><rect x="420" y="34" width="142" height="86" rx="9" fill="#e6ddf3" stroke="#7a55c9"/><text x="491" y="56" text-anchor="middle" font-size="11" font-weight="800" fill="#5a3a9a">IaC (CloudFormation)</text><text x="491" y="74" text-anchor="middle" font-size="9.5" fill="#6b6e76">構成をコード化</text><text x="491" y="96" text-anchor="middle" font-size="10" fill="#23252b">同じ環境を何度でも</text><rect x="18" y="134" width="544" height="30" rx="7" fill="#f7f2ea" stroke="#cbb79a"/><text x="290" y="153" text-anchor="middle" font-size="10.5" fill="#5a5346">すべての土台は <tspan font-weight="700">API</tspan>（コンソールもCLIもSDKも、最後はAPIを呼んでいる）</text><text x="290" y="186" text-anchor="middle" font-size="10" fill="#6b6e76">1回限り→コンソール／繰り返し・再現性が要る→IaC（CloudFormation）</text></svg>',
+        cap: "GUI＝コンソール、コマンド＝CLI、プログラム＝SDK、土台＝API。繰り返し・再現性が要るならIaC（CloudFormation）。",
+      },
+      {
         h: "自動化と運用支援——CloudFormation・Systems Manager・Trusted Advisor",
         body:
           "<p>手作業を減らしてミスを防ぎ、運用を楽にするサービス群です。『同じ環境構築の繰り返し』や『たくさんのサーバーの一括管理』を自動化します。</p>" +
@@ -69,6 +85,8 @@ window.CURRICULUM.push(
       { k: "CloudFormation", v: "インフラをコード(テンプレート)で自動構築・複製(Infrastructure as Code)。" },
       { k: "Systems Manager", v: "多数のEC2のパッチ適用や設定を一括管理する運用ツール。" },
       { k: "Trusted Advisor", v: "コスト・セキュリティ・パフォーマンス・耐障害性・サービス上限の5観点で助言。" },
+      { k: "操作方法の使い分け", v: "GUI=<strong>マネジメントコンソール</strong>／コマンド=<strong>CLI</strong>／プログラム=<strong>SDK</strong>／土台=<strong>API</strong>。ブラウザでCLIが使える<strong>CloudShell</strong>も。" },
+      { k: "IaC(Infrastructure as Code)", v: "構成を<strong>コードで定義し自動構築</strong>。<strong>1回限り→コンソール／繰り返し・再現性→IaC(CloudFormation)</strong>。" },
     ],
     flashcards: [
       { q: "CloudWatch・CloudTrail・Configの違いは？", a: "CloudWatchは数値（CPU等）の監視とアラーム、CloudTrailは操作履歴の記録（監査）、Configは設定（構成）の監視。" },
@@ -107,6 +125,30 @@ window.CURRICULUM.push(
         choices: ["AWS Trusted Advisor", "Amazon Inspector", "AWS Config", "Amazon Macie"],
         answer: 0,
         explain: "5観点で改善を助言するのは<strong>AWS Trusted Advisor</strong>。",
+      },
+      {
+        q: "開発・検証・本番で「まったく同じ構成」の環境を何度も構築し直す必要がある。手作業による設定ミスをなくし、構成を再現可能にしたい。最も適した方法はどれか。",
+        choices: ["マネジメントコンソールで毎回手動作成する", "作業手順書を作り担当者が実行する", "スクリーンショットを残して同じ手順を繰り返す", "AWS CloudFormation でテンプレート化する（IaC）"],
+        answer: 3,
+        explain: "構成を<strong>コード（テンプレート）で定義して自動構築</strong>するのが <strong>IaC＝CloudFormation</strong>。何度でも同じ環境を再現でき、手作業の設定ミスがなくなる。1回限りの作業ならコンソールでよいが、繰り返し・再現性が必要ならIaCを選ぶ。",
+      },
+      {
+        q: "複数の AWS アカウントを新規に展開するにあたり、セキュリティのベースラインやガードレールを備えた環境を自動でセットアップし、統制したい。適したサービスはどれか。",
+        choices: ["Amazon Inspector", "AWS Control Tower", "AWS Config", "Amazon CloudWatch"],
+        answer: 1,
+        explain: "<strong>複数アカウントのセキュアな環境を自動セットアップし統制</strong>するのが <strong>AWS Control Tower</strong>。Config は設定の監視、Inspector は脆弱性診断、CloudWatch は数値監視で役割が異なる。",
+      },
+      {
+        q: "稼働中の EC2 インスタンスが過剰なスペックになっていないかを分析し、機械学習に基づいて適切なサイズを提案してほしい。適したサービスはどれか。",
+        choices: ["AWS Budgets", "AWS CloudTrail", "AWS Compute Optimizer", "AWS Artifact"],
+        answer: 2,
+        explain: "使用状況を分析して<strong>適切なリソースサイズを提案</strong>するのが <strong>Compute Optimizer</strong>。過剰スペックの是正＝<strong>適切なサイジング（ライトサイジング）</strong>はコスト最適化の基本。",
+      },
+      {
+        q: "毎週決まった手順で行っている AWS の定型作業を、スクリプトにまとめて自動実行できるようにしたい。最も適した操作方法はどれか。",
+        choices: ["AWS CLI（コマンドラインインターフェイス）", "AWS マネジメントコンソールで毎回クリック操作する", "AWS Artifact", "AWS Health Dashboard"],
+        answer: 0,
+        explain: "コマンドで操作でき<strong>スクリプト化して繰り返し自動実行</strong>できるのが <strong>AWS CLI</strong>（ブラウザから使える CloudShell もある）。コンソールはGUIで学習や1回限りの作業向き、プログラムへの組み込みは SDK、これらの土台が API。",
       },
     ],
   }

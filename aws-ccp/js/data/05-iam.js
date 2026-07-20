@@ -44,6 +44,20 @@ window.CURRICULUM.push(
           "</ul>" +
           "<p>まとめると『<strong>ルートは封印、日常は最小権限の IAM ユーザー、認証は MFA、プログラムにはロール</strong>』。試験では『ルートユーザーで日常作業する』『全員に管理者権限を与える』のような選択肢は<strong>誤り</strong>、と判断できるようにします。</p>",
       },
+      {
+        h: "大人数・複数アカウントの認証——IAMアイデンティティセンターとフェデレーション",
+        body:
+          "<p>社員が数百人いて AWS アカウントも複数ある——そんなとき、<strong>アカウントごとに IAM ユーザーを作って配る</strong>のは現実的ではありません（退職時の消し忘れも起きます）。公式試験ガイドでも『IAM アイデンティティセンター』『フェデレーテッドなどのアイデンティティ管理のタイプ』が対象知識に挙がっています。</p>" +
+          "<ul>" +
+          "<li><strong>IAM アイデンティティセンター（旧 AWS Single Sign-On）</strong>：<strong>一度のログインで、複数の AWS アカウントや業務アプリに入れる（シングルサインオン）</strong>仕組み。従業員のアクセスを<strong>一元管理</strong>でき、入退社時の権限付与・剥奪も1か所で済みます。</li>" +
+          "<li><strong>フェデレーション（IDフェデレーション）</strong>：<strong>すでに社内にある ID 基盤</strong>（Active Directory や外部の ID プロバイダ）の認証結果を信頼して、AWS へアクセスさせる方式。<strong>AWS 側に個別の IAM ユーザーを作らずに済む</strong>のが最大の利点で、社員は普段の社内アカウントのままログインできます。</li>" +
+          "<li><strong>アカウント間の IAM ロール</strong>：別の AWS アカウントのリソースを使わせたいとき、<strong>ロールを引き受けさせる（AssumeRole）</strong>ことで一時的に権限を貸します。相手にキーを渡す必要がありません。</li>" +
+          "</ul>" +
+          "<p><strong>取り違え注意</strong>：ここまでは<strong>「社内の人（従業員）」</strong>が AWS を操作するための仕組みです。一方、自社が作った<strong>アプリの利用者（顧客）</strong>のサインアップ／サインインを管理するのは <strong>Amazon Cognito</strong> です。『従業員が AWS にログイン＝IAM アイデンティティセンター／フェデレーション』『アプリの一般ユーザーがログイン＝Cognito』と分けて覚えます。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">誰がログインするのか で仕組みが変わる</text><rect x="24" y="36" width="250" height="140" rx="10" fill="#dce8f3" stroke="#4a7fa8"/><text x="149" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#34567a">従業員が AWS を操作する</text><rect x="44" y="70" width="210" height="30" rx="6" fill="#eef4f9" stroke="#9db8cd"/><text x="149" y="89" text-anchor="middle" font-size="10" fill="#23252b">IAMアイデンティティセンター（SSO）</text><rect x="44" y="106" width="210" height="30" rx="6" fill="#eef4f9" stroke="#9db8cd"/><text x="149" y="125" text-anchor="middle" font-size="10" fill="#23252b">フェデレーション（社内ADを利用）</text><text x="149" y="158" text-anchor="middle" font-size="9.5" fill="#4a7fa8">個別のIAMユーザーを作らずに一元管理</text><rect x="306" y="36" width="250" height="140" rx="10" fill="#dcecdd" stroke="#5c9160"/><text x="431" y="58" text-anchor="middle" font-size="11.5" font-weight="800" fill="#366b3c">アプリの利用者（顧客）</text><rect x="326" y="70" width="210" height="30" rx="6" fill="#eef7ef" stroke="#a9ccab"/><text x="431" y="89" text-anchor="middle" font-size="10" fill="#23252b">Amazon Cognito</text><text x="431" y="120" text-anchor="middle" font-size="10" fill="#23252b">アプリのサインアップ／サインイン</text><text x="431" y="158" text-anchor="middle" font-size="9.5" fill="#5c9160">一般ユーザー向けの認証基盤</text></svg>',
+        cap: "従業員がAWSへ＝IAMアイデンティティセンター／フェデレーション。アプリの顧客が使う＝Cognito。取り違え注意。",
+      },
     ],
     memorize: [
       { k: "IAM", v: "誰が何にどこまでアクセスできるかを管理。無料・グローバル（リージョン非依存）。" },
@@ -53,6 +67,10 @@ window.CURRICULUM.push(
       { k: "ルートユーザー", v: "全権限を持つ最強アカウント。日常利用は避け、MFAで厳重保護。" },
       { k: "MFA(多要素認証)", v: "パスワード＋ワンタイムコード等。ルートユーザーには必須。" },
       { k: "最小権限の原則", v: "必要最小限の権限だけを与える。余分な権限は付けない。" },
+      { k: "IAMアイデンティティセンター", v: "旧AWS SSO。<strong>一度のログインで複数AWSアカウント/アプリ</strong>へ。従業員アクセスを一元管理。" },
+      { k: "フェデレーション", v: "<strong>社内AD等の既存ID基盤の認証を信頼</strong>してAWSへ。<strong>個別のIAMユーザーを作らずに済む</strong>。" },
+      { k: "アカウント間のIAMロール", v: "別アカウントにロールを引き受けさせ<strong>一時的に権限を貸す</strong>。キーを渡さない。" },
+      { k: "Cognito との違い", v: "従業員がAWSへ＝アイデンティティセンター/フェデレーション。<strong>アプリの顧客の認証＝Cognito</strong>。" },
     ],
     flashcards: [
       { q: "IAMのグループを使う利点は？", a: "複数のユーザーに同じ権限をまとめて付与でき、管理が簡単になること。" },
@@ -89,6 +107,18 @@ window.CURRICULUM.push(
         ],
         answer: 1,
         explain: "<strong>ルートユーザーはMFAで保護し日常利用しない</strong>、日常は最小権限のIAMユーザーを使うのが基本。",
+      },
+      {
+        q: "社内の Active Directory で管理している数百名の従業員に AWS へのアクセスを許可したい。AWS 側に従業員ごとの IAM ユーザーを作らずに、既存の社内アカウントでログインさせたい。適切な方式はどれか。",
+        choices: ["従業員ごとにアクセスキーを配布する", "ルートユーザーを共有する", "IDフェデレーションを利用する", "全員を1つのIAMユーザーで共有する"],
+        answer: 2,
+        explain: "既存の ID 基盤（社内 AD 等）の認証を信頼して AWS へアクセスさせるのが<strong>フェデレーション</strong>。<strong>個別の IAM ユーザーを作らずに済み</strong>、退職時も社内側で無効化すれば済む。キーの配布やアカウント共有は重大なアンチパターン。",
+      },
+      {
+        q: "複数の AWS アカウントを運用している企業で、従業員が一度のログインで、権限のある複数アカウントへ切り替えてアクセスできるようにしたい。適したサービスはどれか。",
+        choices: ["Amazon Cognito", "AWS Shield", "Amazon Inspector", "AWS IAM アイデンティティセンター"],
+        answer: 3,
+        explain: "複数 AWS アカウント／アプリへの<strong>シングルサインオン</strong>を提供し従業員アクセスを一元管理するのが <strong>IAM アイデンティティセンター（旧 AWS SSO）</strong>。<strong>Cognito は自社アプリの“顧客”向け</strong>認証で対象が異なる。",
       },
     ],
   }

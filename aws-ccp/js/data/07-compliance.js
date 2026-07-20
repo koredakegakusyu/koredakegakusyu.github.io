@@ -14,6 +14,7 @@ window.CURRICULUM.push(
           "<ul>" +
           "<li><strong>CloudTrail</strong>：<strong>『誰が・いつ・何の操作（API 呼び出し）をしたか』という操作の履歴（証跡）</strong>を記録します。『退職者のアカウントで操作されていないか』『いつ設定が変えられたか』を後から追え、<strong>監査・不正調査</strong>の根拠になります（＝操作ログ）。</li>" +
           "<li><strong>Config</strong>：<strong>リソースの設定（構成）が、決めたルールに従っているかを継続的に監視・記録</strong>します。『すべての S3 が暗号化されているか』『開けてはいけないポートが開いていないか』などを自動でチェックし、設定変更の履歴も追えます（＝構成の監視）。</li>" +
+          "<li><strong>AWS Audit Manager</strong>：監査に必要な<strong>証拠（エビデンス）の収集を自動化</strong>し、監査レポート作成の手間を減らすサービスです。CloudTrail などが記録したログを、規格・基準（フレームワーク）に沿って自動でとりまとめてくれます。『<strong>監査対応の証拠集めを自動化＝Audit Manager</strong>』と覚えます。</li>" +
           "</ul>" +
           "<p>混同注意：<strong>『操作の履歴』＝CloudTrail</strong>、<strong>『設定の状態と変化』＝Config</strong>。あわせて、リソースの状態を数値で監視するのが <strong>CloudWatch</strong>（数値＝CloudWatch／操作＝CloudTrail／設定＝Config）。監査資料として AWS の第三者認証レポートを入手できる <strong>AWS Artifact</strong> も、コンプライアンス対応の定番です。</p>",
         diagram:
@@ -71,6 +72,12 @@ window.CURRICULUM.push(
         choices: ["AWS Artifact", "AWS Config", "Amazon Macie", "AWS Shield"],
         answer: 0,
         explain: "コンプライアンス報告書・監査資料の入手は<strong>AWS Artifact</strong>。",
+      },
+      {
+        q: "監査に備えて、AWS 上の操作ログや設定情報から必要な証拠（エビデンス）を、監査基準に沿って自動的に収集・とりまとめたい。適したサービスはどれか。",
+        choices: ["Amazon Macie", "AWS Trusted Advisor", "AWS Audit Manager", "Amazon GuardDuty"],
+        answer: 2,
+        explain: "<strong>監査用の証拠収集を自動化</strong>し、基準（フレームワーク）に沿ってレポート作成を助けるのが <strong>AWS Audit Manager</strong>。Artifact は「AWS側の認証レポートを入手する」場所で、役割が異なる点に注意。",
       },
     ],
   }

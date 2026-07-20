@@ -9,7 +9,7 @@ window.CURRICULUM.push(
     understand: [
       {
         h: "データ転送・大容量移行の補強——Transfer Acceleration・Transfer Family・DataSync・Snowball Edge・Storage Gateway",
-        body: "<ul><li><strong>S3 Transfer Acceleration</strong>：遠隔地からのS3アップロードを<strong>エッジロケーション経由で高速化</strong>。長距離転送の速度改善。</li><li><strong>AWS Transfer Family</strong>：<strong>SFTP/FTPS/FTP</strong>でS3やEFSへファイル転送。既存のFTP運用をそのままクラウドへ。</li><li><strong>AWS DataSync</strong>：オンプレとAWS間の<strong>大量ファイルの同期・移行を高速・自動化</strong>。</li><li><strong>AWS Snowball Edge</strong>：<strong>大容量データを物理デバイスで搬送してオフライン移行</strong>。回線が細い/量が膨大なときに有効。簡単な計算も可能。</li><li><strong>AWS Storage Gateway</strong>：オンプレの機器からクラウドストレージ（S3等）を<strong>手元のストレージのように使える</strong>ようにするハイブリッド接続。</li></ul>",
+        body: "<ul><li><strong>S3 Transfer Acceleration</strong>：遠隔地からのS3アップロードを<strong>エッジロケーション経由で高速化</strong>。長距離転送の速度改善。</li><li><strong>AWS Transfer Family</strong>：<strong>SFTP/FTPS/FTP</strong>でS3やEFSへファイル転送。既存のFTP運用をそのままクラウドへ。</li><li><strong>AWS DataSync</strong>：オンプレとAWS間の<strong>大量ファイルの同期・移行を高速・自動化</strong>。</li><li><strong>AWS Snowball Edge</strong>：<strong>大容量データを物理デバイスで搬送してオフライン移行</strong>。回線が細い/量が膨大なときに有効。簡単な計算も可能。</li><li><strong>AWS Storage Gateway</strong>：オンプレの機器からクラウドストレージ（S3等）を<strong>手元のストレージのように使える</strong>ようにするハイブリッド接続。<strong>よく使うデータは手元にキャッシュ</strong>されるので普段は高速に扱えます。</li><li><strong>AWS Backup</strong>：EBS・RDS・DynamoDB・EFS・FSx など<strong>複数サービスのバックアップを1か所でまとめて管理・自動化</strong>するサービス。『いつ・何を・何日保管するか』をポリシーで決めれば自動で取得・保持され、サービスごとにバラバラに設定する手間がなくなります。『<strong>バックアップの一元管理＝AWS Backup</strong>』。</li></ul>",
         cap: "遠距離アップロード高速化＝Transfer Acceleration、FTP系転送＝Transfer Family、大量同期＝DataSync、物理搬送＝Snowball Edge。",
       },
 
@@ -77,7 +77,8 @@ window.CURRICULUM.push(
       { k: "AWS Transfer Family", v: "<strong>SFTP/FTPS/FTP</strong>でS3/EFSへ転送。" },
       { k: "AWS DataSync", v: "オンプレ〜AWS間の<strong>大量ファイル同期・移行を自動化</strong>。" },
       { k: "AWS Snowball Edge", v: "<strong>大容量データを物理デバイスで搬送</strong>してオフライン移行。" },
-      { k: "AWS Storage Gateway", v: "オンプレから<strong>クラウドストレージを手元のように使う</strong>ハイブリッド接続。" },
+      { k: "AWS Storage Gateway", v: "オンプレから<strong>クラウドストレージを手元のように使う</strong>ハイブリッド接続（よく使うデータはキャッシュ）。" },
+      { k: "AWS Backup", v: "EBS/RDS/DynamoDB/EFS/FSx等<strong>複数サービスのバックアップを一元管理・自動化</strong>。ポリシーで取得と保持を自動化。" },
 
       { k: "S3", v: "オブジェクトストレージ。大量のファイルを安価・高耐久(イレブンナイン)で保存。静的サイト公開も可。" },
       { k: "EBS", v: "EC2に接続して使うブロックストレージ（ディスク）。基本1台に接続。" },
@@ -141,6 +142,12 @@ window.CURRICULUM.push(
         choices: ["Amazon FSx for Lustre", "Amazon EFS", "Amazon S3 Glacier", "Amazon EBS"],
         answer: 0,
         explain: "HPC・機械学習・大規模分析向けの<strong>超高速な並列ファイルシステム</strong>で、S3 と連携できるのは <strong>Amazon FSx for Lustre</strong>。EFS は汎用の共有、Glacier は長期保管用。",
+      },
+      {
+        q: "EBS・RDS・DynamoDB・EFS など複数のサービスのバックアップについて、取得スケジュールと保持期間をポリシーで定めて一元的に管理・自動化したい。適したサービスはどれか。",
+        choices: ["Amazon S3 Glacier", "AWS Storage Gateway", "AWS Backup", "S3 バージョニング"],
+        answer: 2,
+        explain: "複数サービスの<strong>バックアップを1か所でまとめて管理・自動化</strong>するのが <strong>AWS Backup</strong>。Glacier は長期保管用のストレージクラス、Storage Gateway はオンプレとのハイブリッド接続で目的が異なる。",
       },
     ],
   }
