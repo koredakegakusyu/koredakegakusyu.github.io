@@ -18,10 +18,10 @@ window.CURRICULUM.push(
         body:
           "<p>アプリ同士を直接つなぐと、片方が忙しかったり落ちたりすると、もう片方も巻き込まれて止まります。間に<strong>クッション</strong>を挟んで<strong>互いの依存を弱める（疎結合にする）</strong>のが、次の2つです。</p>" +
           "<ul>" +
-          "<li><strong>SQS（Simple Queue Service）</strong>：<strong>メッセージを一時的にためる待ち行列（キュー）</strong>。送る側はキューに入れるだけ、受ける側は自分のペースで取り出す。受ける側が混んでいてもメッセージは失われず、順に処理できる。</li>" +
-          "<li><strong>SNS（Simple Notification Service）</strong>：<strong>1つのメッセージを、登録した複数の宛先へ一斉に通知（発行/購読）</strong>する。メール送信やシステム間の通知に使う。</li>" +
+          "<li><strong>Amazon SQS（Simple Queue Service）</strong>：<strong>メッセージを一時的にためておく“待ち行列（キュー）”</strong>です。送る側はキューに入れたら仕事は終わり、受ける側は<strong>自分の処理できるペースで1件ずつ取り出します</strong>。注文が殺到しても、いったんキューにたまるだけなので<strong>取りこぼしが起きず</strong>、受け側のサーバーが一時的に落ちてもメッセージは消えません。<br><strong>試験のキーワード：</strong>「<strong>キュー／待ち行列</strong>」「アクセス急増でも取りこぼさない」「処理を後回しにして順番にさばく」「送る側と受ける側を切り離す」→ SQS。</li>" +
+          "<li><strong>Amazon SNS（Simple Notification Service）</strong>：<strong>1つのメッセージを、登録済みの複数の宛先へ一斉に配る通知サービス</strong>です（発行／購読＝Pub/Sub）。「システムに異常が出たら、担当者へメール＋別システムへも同時に連絡」といった<strong>1対多の同報</strong>が得意です。<br><strong>試験のキーワード：</strong>「<strong>通知</strong>」「複数の宛先へ一斉に」「アラートをメールで送る」「Pub/Sub」→ SNS。</li>" +
           "</ul>" +
-          "<p>ざっくり<strong>『ためて1対1で処理＝SQS』『一斉に配る1対多＝SNS』</strong>と対応づけます。</p>",
+          "<p><strong>取り違え注意（頻出）</strong>：<strong>『ためて、1件ずつ処理させる＝SQS』／『一斉に配って知らせる＝SNS』</strong>。“順番に処理”“取りこぼさない”と来たら SQS、“通知”“複数へ同時に”と来たら SNS、と反射で選べるようにします。なお <strong>CloudWatch のアラームが SNS 経由で通知を送る</strong>、という組み合わせも定番です。</p>",
         diagram:
           '<svg viewBox="0 0 580 165" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">SQS（キューでためる）で疎結合にする</text>' +
@@ -38,13 +38,13 @@ window.CURRICULUM.push(
       {
         h: "データを分析する代表サービス（広く浅く）",
         body:
-          "<p>CCPでは分析系サービスも『名前と用途』レベルで問われます。代表を押さえます。</p>" +
+          "<p>分析系は『データが<strong>どの段階</strong>にあるか』で使うサービスが変わります。<strong>集める→整える→ためる→調べる→見せる</strong>という流れで捉えると、問題文のどのキーワードがどのサービスを指すのかが一本につながります。</p>" +
           "<ul>" +
-          "<li><strong>Athena</strong>：<strong>S3のデータにSQLで直接クエリ</strong>できる（サーバー不要）。</li>" +
-          "<li><strong>Kinesis</strong>：<strong>リアルタイムに流れ込むデータ（ストリーミング）</strong>を収集・処理。</li>" +
-          "<li><strong>Glue</strong>：データの抽出・変換（ETL）を行うマネージドサービス。</li>" +
-          "<li><strong>QuickSight</strong>：データを<strong>グラフやダッシュボードで可視化</strong>するBIツール。</li>" +
-          "<li><strong>Redshift</strong>：大量データを集計・分析するデータウェアハウス（再掲）。</li>" +
+          "<li><strong>Amazon Kinesis</strong>：<strong>次々と絶え間なく流れ込んでくるデータ（ストリーミングデータ）を、発生したそばからリアルタイムに収集・処理</strong>します。IoTセンサーの計測値、Webサイトのクリックログ、アプリの動作ログなどが対象です。<br><strong>試験のキーワード：</strong>「<strong>リアルタイム</strong>」「ストリーミングデータ」「センサーから絶え間なく送られてくる」→ Kinesis。</li>" +
+          "<li><strong>AWS Glue</strong>：バラバラな形式のデータを<strong>抽出し、使える形に変換・整形して、保存先へ流し込む（ETL）</strong>サーバーレスのサービスです。「日付の書式がファイルごとに違う」「列名が揃っていない」といったデータを分析できる形に揃えます。<br><strong>試験のキーワード：</strong>「<strong>ETL</strong>」「データの変換・整形」「形式の異なるデータを統合したい」→ Glue。</li>" +
+          "<li><strong>Amazon Athena</strong>：<strong>S3 に置いてあるファイルに対して、そのまま SQL で問い合わせできる</strong>サービス。データベースにデータを移したり、サーバーを立てたりする必要が<strong>一切ありません</strong>（サーバーレス）。実行したクエリの量だけ課金されます。<br><strong>試験のキーワード：</strong>「<strong>S3 のデータに直接 SQL</strong>」「サーバーを用意せずに分析」「データを移さずそのまま問い合わせ」→ Athena。</li>" +
+          "<li><strong>Amazon Redshift</strong>：<strong>大量のデータをためて、集計・分析することに特化したデータベース（データウェアハウス／DWH）</strong>です。複数のシステムから集めた何年分ものデータを、まとめて高速に集計するのに向きます。<br><strong>試験のキーワード：</strong>「<strong>データウェアハウス</strong>」「大量データの集計・分析基盤」「BIのためにデータを集約」→ Redshift。※<strong>Athenaは“S3にそのまま問い合わせ”、Redshiftは“DWHにためてから分析”</strong>という違いが問われます。</li>" +
+          "<li><strong>Amazon QuickSight</strong>：分析した結果を<strong>グラフやダッシュボードにして「見える化」する BI ツール</strong>です。経営層や現場が数字を一目で把握できる画面を作れます。<br><strong>試験のキーワード：</strong>「<strong>可視化</strong>」「ダッシュボード」「グラフで見せたい」「BI」→ QuickSight。</li>" +
           "</ul>" +
           "<p>用途で結びつけて覚えます：『<strong>S3 のファイルにそのまま SQL＝Athena</strong>』『<strong>リアルタイムに流れ込むデータ＝Kinesis</strong>』『<strong>データの変換・整形(ETL)＝Glue</strong>』『<strong>グラフで見える化(BI)＝QuickSight</strong>』『<strong>大量データをまとめて集計・分析(DWH)＝Redshift</strong>』。CCP では作り込みの詳細より『どのサービスが何をするか』の対応が問われます。</p>",
       },

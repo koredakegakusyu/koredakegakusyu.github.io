@@ -12,10 +12,10 @@ window.CURRICULUM.push(
         body:
           "<p>コードの変更を<strong>自動でテスト・ビルドし本番へ届ける</strong>仕組みが<strong>CI/CD</strong>です。AWSではこれを『Code』で始まる4サービスで実現します。役割を流れで覚えます。</p>" +
           "<ul>" +
-          "<li><strong>CodeCommit</strong>：ソースコードを保管する<strong>Gitリポジトリ</strong>。</li>" +
-          "<li><strong>CodeBuild</strong>：コードを<strong>ビルド・テスト</strong>する。</li>" +
-          "<li><strong>CodeDeploy</strong>：ビルド成果物を<strong>本番環境へ自動デプロイ</strong>する。</li>" +
-          "<li><strong>CodePipeline</strong>：上記の一連の流れを<strong>1本のパイプラインにつないで自動化</strong>する（司令塔）。</li>" +
+          "<li><strong>AWS CodeCommit</strong>：<strong>ソースコードを保管しておく置き場（Gitリポジトリ）</strong>。誰がいつ何行変えたかの履歴が残り、複数人で同じコードを安全に編集できます。<br><strong>試験のキーワード：</strong>「<strong>ソースコードの保管・バージョン管理</strong>」「Gitリポジトリ」→ CodeCommit。</li>" +
+          "<li><strong>AWS CodeBuild</strong>：預けたコードを<strong>実行できる形に組み立て（ビルド）、自動テストを走らせる</strong>サービス。ビルド用のサーバーを自前で用意する必要がありません。<br><strong>試験のキーワード：</strong>「<strong>ビルド</strong>」「コンパイル」「<strong>自動テストを実行</strong>」→ CodeBuild。</li>" +
+          "<li><strong>AWS CodeDeploy</strong>：出来上がったものを <strong>EC2 や Lambda などの本番環境へ自動で配置（デプロイ）</strong>します。少しずつ切り替えるなど、<strong>停止時間を抑えた配布</strong>ができます。<br><strong>試験のキーワード：</strong>「<strong>デプロイ</strong>」「本番環境へ自動で反映」「リリース作業の自動化」→ CodeDeploy。</li>" +
+          "<li><strong>AWS CodePipeline</strong>：上の3つを<strong>1本の流れ（パイプライン）としてつなぎ、コードを変更したら最後まで自動で流す“司令塔”</strong>です。個々の作業ではなく<strong>全体の流れを自動化</strong>する役割だ、という点が問われます。<br><strong>試験のキーワード：</strong>「<strong>CI/CDパイプライン</strong>」「一連の流れを自動化」「コード変更から本番反映まで自動で」→ CodePipeline。</li>" +
           "</ul>" +
           "<p>流れは『<strong>CodeCommit（保管）→ CodeBuild（ビルド・テスト）→ CodeDeploy（デプロイ）</strong>』を <strong>CodePipeline</strong> が一本につないで自動化、というイメージです。CI/CD にすると、コードを変更するたびに<strong>手作業なしで自動的にテスト・リリース</strong>できるため、リリースが速くなり人為ミスも減ります。『毎回、手作業で本番へアップロードする』ような選択肢は CI/CD の考え方に反する、と判断できるようにします。</p>",
         diagram:

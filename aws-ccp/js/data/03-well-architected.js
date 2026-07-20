@@ -12,14 +12,14 @@ window.CURRICULUM.push(
         body:
           "<p>AWSが示す<strong>「良いクラウドの設計原則」</strong>をまとめたのが<strong>AWS Well-Architected フレームワーク</strong>です。次の<strong>6つの柱</strong>で構成されます（名前と一言をセットで覚えます）。</p>" +
           "<ul>" +
-          "<li><strong>運用上の優秀性</strong>：運用を自動化し、継続的に改善する。</li>" +
-          "<li><strong>セキュリティ</strong>：データやシステムを保護する。</li>" +
-          "<li><strong>信頼性</strong>：障害から自動で復旧し、動き続ける。</li>" +
-          "<li><strong>パフォーマンス効率</strong>：リソースを効率よく使い、需要に合わせる。</li>" +
-          "<li><strong>コスト最適化</strong>：無駄をなくし、必要なコストだけ払う。</li>" +
-          "<li><strong>持続可能性</strong>：環境負荷（エネルギー消費）を減らす。</li>" +
+          "<li><strong>運用上の優秀性（Operational Excellence）</strong>：システムを<strong>動かし続ける“運用”そのものを良くしていく</strong>柱。手作業を自動化し、変更は小さく頻繁に行い、失敗から学んで手順を改善します。<br><strong>試験のキーワード：</strong>「<strong>運用の自動化</strong>」「継続的な改善」「小さな変更を頻繁に」→ 運用上の優秀性。</li>" +
+          "<li><strong>セキュリティ（Security）</strong>：<strong>データとシステムを守る</strong>柱。誰が何にアクセスできるかを厳密に管理し（最小権限）、<strong>保管時・転送時の暗号化</strong>、操作の記録（追跡可能性）を徹底します。<br><strong>試験のキーワード：</strong>「<strong>暗号化</strong>」「最小権限」「アクセス管理」「追跡可能にする」→ セキュリティ。</li>" +
+          "<li><strong>信頼性（Reliability）</strong>：<strong>障害が起きても止まらない・自動で回復する</strong>柱。複数AZへの分散、自動復旧、需要変化への対応（スケーリング）を設計します。<br><strong>試験のキーワード：</strong>「<strong>障害から自動的に復旧</strong>」「可用性を高める」「マルチAZで冗長化」→ 信頼性。</li>" +
+          "<li><strong>パフォーマンス効率（Performance Efficiency）</strong>：<strong>必要な性能を、無駄なく効率的に出す</strong>柱。用途に合ったサービス・インスタンスタイプを選び、需要に応じて増減させます。<br><strong>試験のキーワード：</strong>「<strong>適切なリソースタイプを選ぶ</strong>」「需要に応じて性能を調整」→ パフォーマンス効率。</li>" +
+          "<li><strong>コスト最適化（Cost Optimization）</strong>：<strong>払う必要のないお金を払わない</strong>柱。使っていないリソースを止め、過剰なスペックを見直し（適切なサイジング）、割引プランを活用します。<br><strong>試験のキーワード：</strong>「<strong>不要なコストを削減</strong>」「使った分だけ」「未使用リソースの停止」→ コスト最適化。</li>" +
+          "<li><strong>持続可能性（Sustainability）</strong>：<strong>環境への負荷を減らす</strong>柱。必要最小限のリソースで動かし、エネルギー消費とその環境影響を小さくします。<br><strong>試験のキーワード：</strong>「<strong>環境への影響</strong>」「エネルギー消費の削減」「サステナビリティ」→ 持続可能性。</li>" +
           "</ul>" +
-          "<p>設計を無料でチェックできる<strong>Well-Architected Tool</strong>もあります。</p>",
+          "<p>自分の設計がこの6本柱に沿っているかを<strong>無料で診断できる</strong>のが <strong>AWS Well-Architected Tool</strong>です。<strong>取り違え注意</strong>：<strong>Well-Architected は「システムの設計」の指針</strong>、<strong>AWS CAF は「組織としてのクラウド導入」の指針</strong>で対象が違います。問題文が“設計・アーキテクチャ”なら Well-Architected、“組織・人材・ガバナンス”なら CAF です。</p>",
         diagram:
           '<svg viewBox="0 0 580 200" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">Well-Architected フレームワークの6本柱</text>' +

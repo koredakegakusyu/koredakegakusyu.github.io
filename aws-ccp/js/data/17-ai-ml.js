@@ -20,17 +20,19 @@ window.CURRICULUM.push(
       {
         h: "用途特化AIサービス——入力と出力で覚える",
         body:
-          "<p>『何を入れて何が出るか』で覚えると迷いません。</p>" +
+          "<p>この分野は<strong>『何を入れたら、何が出てくるか』</strong>さえ押さえれば確実に得点できます。問題文には毎回ほぼ同じ言い回し（キーワード）が出るので、<strong>そのキーワードとサービス名を直結</strong>させて覚えましょう。各項目の最後に、実際に問われる言い方を挙げてあります。</p>" +
           "<ul>" +
-          "<li><strong>Rekognition</strong>：<strong>画像・動画</strong>を分析（顔認識・物体検出）。</li>" +
-          "<li><strong>Polly</strong>：<strong>テキスト→音声</strong>（読み上げ）。</li>" +
-          "<li><strong>Transcribe</strong>：<strong>音声→テキスト</strong>（文字起こし）。</li>" +
-          "<li><strong>Translate</strong>：<strong>言語→別の言語</strong>（翻訳）。</li>" +
-          "<li><strong>Comprehend</strong>：<strong>文章を解析</strong>（感情分析・キーワード抽出などの自然言語処理）。</li>" +
-          "<li><strong>Lex</strong>：<strong>会話（チャットボット・音声ボット）</strong>を作る。</li>" +
-          "<li><strong>Textract</strong>：<strong>書類・画像から文字やデータを抽出</strong>（OCR＋）。</li>" +
-          "<li><strong>Amazon Q / Bedrock</strong>：<strong>生成AI</strong>（対話アシスタントや、基盤モデルでのアプリ構築）。</li>" +
-          "</ul>",
+          "<li><strong>Amazon Rekognition</strong>：<strong>画像や動画をAIが分析</strong>し、写っている<strong>物体・シーン・人物の顔・文字・不適切なコンテンツ</strong>を自動で検出します。SNS投稿画像の自動チェック、オフィスの入退室での顔認証、防犯カメラ映像から特定の人物を探す、といった使い方をします。<br><strong>試験のキーワード：</strong>「画像から物体を検出」「<strong>顔認識・顔の比較</strong>」「動画の分析」「不適切な画像を自動で検閲」→ Rekognition。</li>" +
+          "<li><strong>Amazon Polly</strong>：<strong>文章（テキスト）を、人間のような自然な音声に変換して読み上げ</strong>ます。ニュース記事の音声版、eラーニング教材のナレーション自動生成、視覚に障がいのある方向けの読み上げ機能などに使います。<br><strong>試験のキーワード：</strong>「<strong>テキストを音声に</strong>」「読み上げる」「ナレーションを自動生成」→ Polly。※次の Transcribe と<strong>向きが逆</strong>なので必ずセットで覚えます。</li>" +
+          "<li><strong>Amazon Transcribe</strong>：<strong>音声を文字に起こします（文字起こし）</strong>。コールセンターの通話内容の記録、会議の議事録作成、動画への字幕付けなどに使われます。<br><strong>試験のキーワード：</strong>「<strong>音声を文字に</strong>」「文字起こし」「通話内容を記録・分析したい」「動画に字幕」→ Transcribe。</li>" +
+          "<li><strong>Amazon Translate</strong>：<strong>ある言語の文章を別の言語へ自動翻訳</strong>します。ECサイトの商品説明の多言語化や、問い合わせメールの翻訳などに使います。<br><strong>試験のキーワード：</strong>「多言語に対応させたい」「<strong>翻訳</strong>」「海外の利用者向けにコンテンツを変換」→ Translate。</li>" +
+          "<li><strong>Amazon Comprehend</strong>：<strong>文章の“意味”をAIが解析</strong>する自然言語処理サービス。文章が<strong>肯定的か否定的か（感情分析）</strong>、重要な<strong>キーワードや人名・地名</strong>は何か、何語で書かれているかなどを判定します。商品レビューの評判分析や、問い合わせ内容の自動分類に使います。<br><strong>試験のキーワード：</strong>「<strong>感情分析</strong>」「口コミ・レビューの評判を分析」「文章からキーワードを抽出」→ Comprehend。</li>" +
+          "<li><strong>Amazon Lex</strong>：<strong>会話するボット（チャットボット・音声ボット）を作る</strong>サービス。Alexa と同じ技術が使われています。よくある問い合わせにボットが自動応答する窓口を作れ、コールセンターの Amazon Connect と組み合わせることも多いです。<br><strong>試験のキーワード：</strong>「<strong>チャットボット</strong>」「会話型の自動応答」「問い合わせにボットで対応」→ Lex。</li>" +
+          "<li><strong>Amazon Kendra</strong>：<strong>社内に散らばった大量の文書を、普段の言葉（自然言語）で検索できる</strong>AI検索サービス。「経費精算の締め日は？」のように<strong>質問文のまま聞ける</strong>のが特徴で、単語一致のキーワード検索より賢く探せます。<br><strong>試験のキーワード：</strong>「<strong>社内ドキュメントの検索</strong>」「自然な言葉で質問して答えを探す」→ Kendra。</li>" +
+          "<li><strong>Amazon Textract</strong>：<strong>請求書・申込書・帳票などの書類画像から、文字だけでなく“表”や“入力欄”の項目まで構造を保ったまま抽出</strong>します。ただ文字を読むだけの OCR より一歩進んでおり、紙書類のデータ入力を自動化できます。<br><strong>試験のキーワード：</strong>「<strong>書類・帳票からデータを抽出</strong>」「スキャンした申込書の入力を自動化」「OCR」→ Textract。</li>" +
+          "<li><strong>Amazon Bedrock / Amazon Q</strong>：<strong>生成AI</strong>のサービス。<strong>Bedrock</strong> は各社の<strong>基盤モデル（大規模言語モデル）をAPI経由で呼び出し、自社アプリに生成AIを組み込む</strong>ためのもの。<strong>Amazon Q</strong> は業務で使える<strong>対話型アシスタント</strong>です。<br><strong>試験のキーワード：</strong>「<strong>生成AI</strong>」「基盤モデルを使ってアプリを作る」→ Bedrock、「業務を手伝う対話アシスタント」→ Amazon Q。</li>" +
+          "</ul>" +
+          "<p><strong>取り違えやすい組み合わせ</strong>：<strong>Polly（テキスト→音声）とTranscribe（音声→テキスト）は向きが逆</strong>。<strong>Comprehend は“意味の解析”、Translate は“翻訳”、Textract は“書類からの抽出”</strong>で、どれも文章を扱うため混同しがちです。『入力は何か・出力は何か』で切り分けてください。</p>",
         diagram:
           '<svg viewBox="0 0 580 210" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="20" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">用途特化AIサービス（入力→出力で覚える）</text>' +
