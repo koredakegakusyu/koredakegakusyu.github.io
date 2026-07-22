@@ -89,9 +89,51 @@ window.CURRICULUM.push(
           "<p>EC2 は便利ですが、OS の更新やサーバー台数の調整など<strong>“サーバーのお守り”は利用者の仕事</strong>です。この管理そのものを AWS に任せ、<strong>アプリのコードだけに集中する</strong>考え方が <strong>サーバーレス</strong>です（サーバーが無いのではなく、『サーバーの存在を意識しなくてよい』という意味）。</p>" +
           "<ul>" +
           "<li><strong>AWS Lambda</strong>：<strong>コードを書いて置くだけ</strong>で動くサービス。サーバーの起動・管理・台数調整（スケール）は<strong>一切不要</strong>で、<strong>実行された回数と時間の分だけ課金</strong>されます（使わなければ料金ゼロ）。ファイルのアップロードや API リクエストなどの<strong>イベントに反応して短時間だけ動く</strong>処理が得意です。</li>" +
-          "<li><strong>コンテナ（ECS／EKS）</strong>：アプリを必要なものごと“箱（コンテナ）”に詰めて、どこでも同じように動かす技術です。AWS 独自の管理サービスが <strong>ECS</strong>、Kubernetes（業界標準）で動かすのが <strong>EKS</strong>。そして、その<strong>コンテナをサーバー管理なしで動かす</strong>実行基盤が <strong>Fargate</strong> です。</li>" +
           "</ul>" +
-          "<p>判断の目安：『<strong>サーバーの管理をしたくない・使った分だけ払いたい</strong>』なら Lambda や Fargate。『OS レベルまで自分で細かく制御したい・既存のソフトをそのまま動かしたい』なら EC2、と選び分けます。</p>",
+          "<p><strong>試験のキーワード：</strong>「サーバーの管理をしたくない」「<strong>実行した分だけ課金（使わなければ無料）</strong>」「ファイルがアップされたら自動で処理」「<strong>イベント駆動</strong>」→ Lambda。逆に『OS レベルまで自分で細かく設定したい』『常時動かし続ける』なら EC2 が向きます。</p>",
+      },
+      {
+        h: "コンテナの4兄弟——ECR・ECS・EKS・Fargate の関係をつかむ",
+        body:
+          "<p><strong>コンテナ</strong>とは、アプリを「動かすのに必要なもの一式（プログラム・ライブラリ・設定）」をひとつの<strong>“箱”に詰めた</strong>もの。箱ごと運ぶので、<strong>開発PCでもクラウドでも“まったく同じように動く”</strong>のが利点です。AWS でコンテナを扱うとき、名前の似た 4 つが登場します。<strong>それぞれ役割が違い、組み合わせて使う</strong>ので、関係を押さえるのが最重要です。</p>" +
+          "<ul>" +
+          "<li><strong>Amazon ECR（Elastic Container Registry）＝箱の“保管庫”</strong>：作ったコンテナイメージ（箱の設計図）を保管しておく置き場です。ここから取り出して動かします。<strong>試験のキーワード：</strong>「コンテナイメージの保管・レジストリ」→ ECR。</li>" +
+          "<li><strong>Amazon ECS（Elastic Container Service）＝箱を動かす“AWS独自の司令塔”</strong>：どの箱を何個、どこで動かすかを管理（オーケストレーション）します。<strong>AWS独自でシンプル</strong>なのが特徴。<strong>試験のキーワード：</strong>「コンテナのオーケストレーション」「AWS独自のコンテナ管理」→ ECS。</li>" +
+          "<li><strong>Amazon EKS（Elastic Kubernetes Service）＝“Kubernetes版”の司令塔</strong>：役割は ECS と同じ（コンテナの管理）ですが、業界標準の <strong>Kubernetes</strong> をそのまま使えます。<strong>すでに Kubernetes を使っている／他社クラウドと揃えたい</strong>場合に選びます。<strong>試験のキーワード：</strong>「<strong>Kubernetes</strong>」→ EKS。</li>" +
+          "<li><strong>AWS Fargate＝箱を動かす“サーバーレスな土台”</strong>：ECS/EKS が箱を動かすとき、その<strong>下で実際に動かすサーバーを AWS が肩代わり</strong>してくれます。利用者は EC2 の台数管理・パッチから解放されます（＝サーバーレス）。<strong>試験のキーワード：</strong>「コンテナを<strong>サーバー管理なしで</strong>動かす」→ Fargate。</li>" +
+          "</ul>" +
+          "<p><strong>関係を一言で</strong>：<strong>ECR</strong>（保管庫）に置いた箱を、<strong>ECS または EKS</strong>（司令塔）が指示して動かす。その動かす土台は、<strong>Fargate</strong>（サーバー管理なし）か <strong>EC2 起動タイプ</strong>（自分でサーバーを持つ）から選べます。つまり『<strong>ECS か EKS か</strong>＝管理方式（AWS独自か Kubernetes か）』『<strong>Fargate か EC2 か</strong>＝サーバーを自分で持つか持たないか』という、<strong>2つの独立した選択</strong>だと理解すると混乱しません。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 250" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">コンテナ4兄弟の関係（保管庫→司令塔→土台）</text>' +
+          '<rect x="20" y="40" width="120" height="76" rx="9" fill="#dce8f3" stroke="#4a7fa8"/><text x="80" y="62" text-anchor="middle" font-size="12" font-weight="800" fill="#34567a">ECR</text><text x="80" y="82" text-anchor="middle" font-size="9.5" fill="#6b6e76">イメージの保管庫</text><text x="80" y="102" text-anchor="middle" font-size="9.5" fill="#23252b">箱を保管</text>' +
+          '<line x1="140" y1="78" x2="180" y2="78" stroke="#8a8f98" stroke-width="2"/><polygon points="180,78 170,73 170,83" fill="#8a8f98"/>' +
+          '<rect x="184" y="34" width="212" height="90" rx="9" fill="#f2e7cd" stroke="#b28a2e"/><text x="290" y="52" text-anchor="middle" font-size="10.5" font-weight="800" fill="#7a5e17">司令塔（オーケストレーション）</text><rect x="196" y="60" width="94" height="52" rx="6" fill="#fbf3e0" stroke="#b28a2e"/><text x="243" y="80" text-anchor="middle" font-size="11" font-weight="800" fill="#7a5e17">ECS</text><text x="243" y="98" text-anchor="middle" font-size="8.5" fill="#8a6a1e">AWS独自</text><rect x="296" y="60" width="94" height="52" rx="6" fill="#fbf3e0" stroke="#b28a2e"/><text x="343" y="80" text-anchor="middle" font-size="11" font-weight="800" fill="#7a5e17">EKS</text><text x="343" y="98" text-anchor="middle" font-size="8.5" fill="#8a6a1e">Kubernetes</text>' +
+          '<line x1="290" y1="124" x2="290" y2="150" stroke="#8a8f98" stroke-width="2"/><polygon points="290,150 285,140 295,140" fill="#8a8f98"/>' +
+          '<text x="290" y="168" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23252b">動かす土台をどちらか選ぶ</text>' +
+          '<rect x="120" y="178" width="150" height="56" rx="9" fill="#dcecdd" stroke="#5c9160"/><text x="195" y="200" text-anchor="middle" font-size="11.5" font-weight="800" fill="#366b3c">Fargate</text><text x="195" y="220" text-anchor="middle" font-size="9" fill="#366b3c">サーバー管理なし（サーバーレス）</text>' +
+          '<rect x="310" y="178" width="150" height="56" rx="9" fill="#f6e4e0" stroke="#c0392b"/><text x="385" y="200" text-anchor="middle" font-size="11.5" font-weight="800" fill="#8a2b20">EC2 起動タイプ</text><text x="385" y="220" text-anchor="middle" font-size="9" fill="#8a2b20">自分でサーバーを持つ</text>' +
+          '</svg>',
+        cap: "保管庫=ECR／司令塔=ECS(AWS独自)・EKS(Kubernetes)／土台=Fargate(サーバー管理なし)・EC2(自分で持つ)。ECS↔EKSは管理方式、Fargate↔EC2はサーバーを持つか、の別々の選択。",
+      },
+      {
+        h: "サーバーの管理はどこまで自分で？——EC2・Beanstalk・コンテナ・Lambda の管理範囲",
+        body:
+          "<p>これまで出てきた実行方法を『<strong>自分でどこまで面倒を見るか（管理範囲）</strong>』の一直線に並べると、選び方がすっきりします。<strong>右へ行くほど AWS に任せる範囲が増え、利用者はアプリに集中</strong>できます（そのぶん細かい制御は減ります）。</p>" +
+          "<ul>" +
+          "<li><strong>EC2（IaaS）＝いちばん自分で管理</strong>：OS もミドルウェアも台数も自分で面倒を見ます。自由度は最大ですが手間も最大。『<strong>OS レベルで細かく設定したい／既存ソフトをそのまま動かしたい</strong>』ならこれ。</li>" +
+          "<li><strong>AWS Elastic Beanstalk（PaaS）＝コードを渡せば環境は自動</strong>：<strong>アプリのコードをアップロードするだけ</strong>で、その裏で必要な <strong>EC2・ロードバランサー(ELB)・Auto Scaling などを AWS が自動で構築・デプロイ</strong>してくれます。サーバーは存在しますが構築の手間が省け、<strong>あとから細かい設定変更もできる</strong>のが特徴。『<strong>インフラ構築に詳しくないが、普通の Web アプリを手早く動かしたい</strong>』人向け。<strong>試験のキーワード：</strong>「コードをアップロードするだけで環境を自動構築・デプロイ」→ Elastic Beanstalk。</li>" +
+          "<li><strong>コンテナ（ECS/EKS ＋ Fargate）＝箱で動かす</strong>：アプリを箱に詰めて動かす方式。<strong>Fargate</strong> を使えばサーバー管理からも解放されます（前項）。</li>" +
+          "<li><strong>AWS Lambda（サーバーレス／FaaS）＝コードだけ、実行した分だけ</strong>：サーバーの存在を一切意識せず、<strong>イベントに反応して動いた分だけ課金</strong>。管理範囲は最小。</li>" +
+          "</ul>" +
+          "<p><strong>“サーバーレスか、サーバーが要るか”</strong>で言うと、<strong>Lambda と Fargate はサーバーレス</strong>（サーバーを意識しない）、<strong>EC2・Beanstalk・ECS/EKSのEC2起動タイプはサーバーが要る</strong>（存在を意識する）側です。混同しやすい <strong>Beanstalk と Lambda</strong> は、『<strong>いつものWebアプリまるごとを楽にデプロイ＝Beanstalk</strong>』『<strong>小さな処理をイベントで実行＝Lambda</strong>』と区別します。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 170" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">管理範囲のグラデーション（左＝自分で管理／右＝AWSに任せる）</text>' +
+          '<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f6e4e0"/><stop offset="1" stop-color="#dcecdd"/></linearGradient></defs>' +
+          '<rect x="20" y="52" width="540" height="30" rx="6" fill="url(#g1)" stroke="#cbb79a"/><text x="40" y="98" font-size="9.5" fill="#8a2b20">自分で管理が多い</text><text x="560" y="98" text-anchor="end" font-size="9.5" fill="#366b3c">AWSに任せる（アプリに集中）</text>' +
+          (function(){var items=[["EC2","IaaS"],["Beanstalk","PaaS"],["コンテナ+Fargate","箱"],["Lambda","サーバーレス"]];var s="";var xs=[70,210,355,500];items.forEach(function(it,i){var x=xs[i];s+='<line x1="'+x+'" y1="52" x2="'+x+'" y2="82" stroke="#8a8f98" stroke-width="1.5"/>';s+='<rect x="'+(x-58)+'" y="112" width="116" height="42" rx="7" fill="#faf7f1" stroke="#d9d2c6"/>';s+='<text x="'+x+'" y="130" text-anchor="middle" font-size="11" font-weight="800" fill="#23252b">'+it[0]+'</text>';s+='<text x="'+x+'" y="146" text-anchor="middle" font-size="9" fill="#6b6e76">'+it[1]+'</text>';});return s;})() +
+          '<text x="290" y="46" text-anchor="middle" font-size="9.5" fill="#6b6e76">Lambda / Fargate ＝ サーバーレス（サーバーを意識しない）</text>' +
+          '</svg>',
+        cap: "EC2(全部自分)→Beanstalk(コードを渡せば環境自動)→コンテナ+Fargate→Lambda(コードだけ)。右ほどAWSに任せる。Lambda/Fargateはサーバーレス。",
       },
     ],
     memorize: [
@@ -111,7 +153,13 @@ window.CURRICULUM.push(
       { k: "リザーブド(RI)/Savings Plans", v: "1〜3年の利用をコミットして大幅割引。長期安定利用向け。" },
       { k: "スポットインスタンス", v: "余剰を最大9割引。中断ありでバッチ向け。" },
       { k: "Lambda", v: "サーバーレス。コードを置くだけ、実行した分だけ課金。管理不要。" },
-      { k: "Fargate", v: "コンテナをサーバー管理なしで実行するサーバーレスなコンテナ基盤。" },
+      { k: "コンテナとは", v: "アプリ+必要な一式を“箱”に詰める技術。<strong>開発PCでもクラウドでも同じように動く</strong>。" },
+      { k: "Amazon ECR", v: "コンテナイメージの<strong>保管庫（レジストリ）</strong>。ここから取り出して動かす。" },
+      { k: "Amazon ECS", v: "コンテナを動かす<strong>AWS独自の司令塔（オーケストレーション）</strong>。シンプル。" },
+      { k: "Amazon EKS", v: "同じくコンテナの司令塔だが<strong>Kubernetes（業界標準）</strong>を使う。他社クラウドと揃えたい時。" },
+      { k: "Fargate", v: "コンテナを<strong>サーバー管理なしで実行</strong>するサーバーレスな土台（ECS/EKSの下で動く）。EC2起動タイプは自分でサーバーを持つ。" },
+      { k: "Elastic Beanstalk", v: "<strong>コードをアップするだけでEC2/ELB/Auto Scalingを自動構築・デプロイ(PaaS)</strong>。あとから設定変更も可。BeanstalkはWebアプリ丸ごと、Lambdaは小さな処理をイベントで。" },
+      { k: "管理範囲(サーバーレスか)", v: "EC2(全部自分)→Beanstalk→コンテナ+Fargate→Lambda(コードだけ)。<strong>Lambda/Fargateはサーバーレス</strong>。" },
     ],
     flashcards: [
       { q: "EC2とは何か？", a: "AWS上に仮想サーバーを立てて使うサービス（IaaS）。数分で起動でき、CPU・メモリの大きさを選べる。" },

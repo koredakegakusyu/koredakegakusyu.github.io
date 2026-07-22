@@ -62,14 +62,22 @@ window.CURRICULUM.push(
       {
         h: "S3のストレージクラス——アクセス頻度でコストを下げる",
         body:
-          "<p>S3は、<strong>データにどれくらいアクセスするか</strong>で保存クラスを選ぶと安くなります。よくアクセスするものは高く、めったに使わないものは安くなります。</p>" +
+          "<p>S3 は 1 種類ではなく、<strong>データにどれくらいアクセスするか（アクセス頻度）</strong>に応じて<strong>ストレージクラス</strong>を選べます。<strong>よく使うものは保存料が高め・取り出しは無料</strong>、<strong>めったに使わないものは保存料が激安・取り出しに料金や時間</strong>、という関係です。用途に合わせて選ぶ（または自動で移す）ことでコストを大きく下げられます。</p>" +
           "<ul>" +
-          "<li><strong>S3 標準（Standard）</strong>：頻繁にアクセスするデータ。標準。</li>" +
-          "<li><strong>S3 標準-IA / 1ゾーンIA</strong>：<strong>アクセス頻度が低い</strong>データ。保存は安いが取り出しに料金。</li>" +
-          "<li><strong>S3 Glacier 各種</strong>：<strong>アーカイブ（長期保管）</strong>用で最安。取り出しに時間（数分〜数時間）がかかる。</li>" +
-          "<li><strong>S3 Intelligent-Tiering</strong>：<strong>アクセス状況を見てAWSが自動で最適なクラスに移動</strong>。迷ったらこれ。</li>" +
+          "<li><strong>S3 標準（Standard）</strong>：<strong>頻繁にアクセスする</strong>データ用の基本クラス。データは<strong>複数の AZ（3つ以上）に自動複製</strong>され、非常に高い耐久性。取り出し料金なし。Web サイトの画像や稼働中のデータ向け。</li>" +
+          "<li><strong>S3 標準-IA（Standard-Infrequent Access）</strong>：<strong>アクセス頻度は低いが、いざという時すぐ取り出したい</strong>データ用。<strong>複数の AZ に複製</strong>される点は標準と同じで<strong>可用性・耐久性は高いまま</strong>、<strong>保存料が安い</strong>代わりに<strong>取り出し（読み出し）に料金</strong>がかかります。最低保存期間 30 日。バックアップや月次でしか見ないデータ向け。</li>" +
+          "<li><strong>S3 One Zone-IA（1 ゾーン-IA）</strong>：標準-IA とほぼ同じですが、<strong>データを 1 つの AZ にしか置きません</strong>。そのぶん<strong>さらに安い</strong>反面、<strong>その AZ が災害等で失われるとデータも失われます</strong>。だから<strong>“消えても再作成できるデータ”</strong>（別の場所にもある複製、サムネイル画像など）に限って使います。<strong>ここが最頻出の区別：標準-IA＝複数 AZ／One Zone-IA＝1 AZ のみ</strong>。</li>" +
+          "<li><strong>S3 Intelligent-Tiering（自動階層化）</strong>：<strong>アクセス状況を AWS が見張って、自動で最適なクラスへ移動</strong>してくれます。アクセス頻度が読めない・管理の手間をかけたくないなら<strong>迷わずこれ</strong>。取り出し料金なし。</li>" +
+          "<li><strong>S3 Glacier 各種（アーカイブ用・最安）</strong>：<strong>めったにアクセスしない長期保管</strong>用で最安。取り出しに時間がかかり、その速さで 3 段階——<strong>Glacier Instant Retrieval</strong>（すぐ取り出せる）／<strong>Glacier Flexible Retrieval</strong>（数分〜数時間）／<strong>Glacier Deep Archive</strong>（最安・十数時間、法令で数年保管する書類など）。</li>" +
           "</ul>" +
-          "<p>ルール（ライフサイクルポリシー）で『90日たったらGlacierへ移す』のような自動移動も設定できます。</p>",
+          "<p><strong>ライフサイクルポリシー</strong>を設定すれば、『作成 30 日後に標準-IA へ、90 日後に Glacier へ、1 年後に削除』のように<strong>時間の経過に合わせて自動でクラスを移動・削除</strong>できます。手作業で移し替える必要はありません。</p>" +
+          "<p><strong>試験のキーワードで選ぶ：</strong>「頻繁にアクセス」→ 標準／「たまにアクセス・でもすぐ出したい・重要」→ 標準-IA／「<strong>消えても作り直せる・とにかく安く</strong>」→ One Zone-IA／「<strong>アクセス頻度が読めない・自動でおまかせ</strong>」→ Intelligent-Tiering／「<strong>数年しまうだけ・最安</strong>」→ Glacier Deep Archive。</p>",
+        diagram:
+          '<svg viewBox="0 0 580 230" xmlns="http://www.w3.org/2000/svg"><text x="290" y="20" text-anchor="middle" font-size="13.5" font-weight="700" fill="#23252b">S3ストレージクラス（アクセス頻度でコストが下がる）</text>' +
+          (function(){var head=["クラス","アクセス頻度","AZ","保存料","取り出し"];var rows=[["標準","高い","複数AZ","高め","無料・即時"],["標準-IA","低い","複数AZ","安い","料金あり・即時"],["One Zone-IA","低い","1 AZ のみ","もっと安い","料金あり・即時"],["Intelligent-Tiering","読めない","複数AZ","自動最適化","無料"],["Glacier 各種","めったに","複数AZ","最安","時間がかかる"]];var w=[132,84,92,96,104],x0=16,y0=34,rh=34;var xs=[x0];for(var i=0;i<w.length;i++)xs.push(xs[i]+w[i]);var s="";head.forEach(function(h,ci){s+='<rect x="'+xs[ci]+'" y="'+y0+'" width="'+w[ci]+'" height="'+rh+'" fill="#eceff3" stroke="#c7ccd2"/><text x="'+(xs[ci]+w[ci]/2)+'" y="'+(y0+21)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="#23252b">'+h+'</text>';});rows.forEach(function(row,ri){var y=y0+(ri+1)*rh;row.forEach(function(cell,ci){var hl=(ci===2&&cell==="1 AZ のみ");s+='<rect x="'+xs[ci]+'" y="'+y+'" width="'+w[ci]+'" height="'+rh+'" fill="'+(hl?"#f6e4e0":"#ffffff")+'" stroke="#d8dbe0"/>';s+='<text x="'+(xs[ci]+w[ci]/2)+'" y="'+(y+21)+'" text-anchor="middle" font-size="'+(ci===0?10.5:9.8)+'" '+(ci===0?'font-weight="700" ':(hl?'font-weight="800" ':''))+'fill="'+(hl?"#8a2b20":"#23252b")+'">'+cell+'</text>';});});return s;})() +
+          '<text x="290" y="222" text-anchor="middle" font-size="9.5" fill="#c0392b">最重要：標準-IA＝複数AZ（安全）／One Zone-IA＝1 AZのみ（さらに安いが消失リスク）</text>' +
+          '</svg>',
+        cap: "頻繁=標準、たまに・重要=標準-IA(複数AZ)、消えても平気で最安=One Zone-IA(1 AZ)、読めない=Intelligent-Tiering、長期保管=Glacier。",
       },
     ],
     memorize: [
@@ -86,9 +94,11 @@ window.CURRICULUM.push(
       { k: "Amazon FSx", v: "用途特化のフルマネージド共有ファイル。Windows向け・Lustre(高性能)などから種類を選ぶ。" },
       { k: "FSx for Windows File Server", v: "Windowsネイティブの共有ファイル。<strong>SMB＋Active Directory統合</strong>。既存Windowsファイルサーバーの移行に。" },
       { k: "FSx for Lustre", v: "<strong>HPC・機械学習・大規模分析</strong>向けの超高速並列ファイルシステム。<strong>S3と連携</strong>。" },
-      { k: "S3標準-IA", v: "アクセス頻度が低いデータ向け。保存は安いが取り出しに料金。" },
-      { k: "S3 Glacier", v: "アーカイブ（長期保管）用で最安。取り出しに時間がかかる。" },
-      { k: "Intelligent-Tiering", v: "アクセス状況に応じAWSが自動で最適クラスへ移動。" },
+      { k: "S3標準-IA", v: "低頻度アクセス向け。<strong>複数AZに複製（可用性は高いまま）</strong>、保存安い/取り出し料金あり。最低30日。" },
+      { k: "S3 One Zone-IA", v: "<strong>1つのAZのみ</strong>に保存＝さらに安いが<strong>AZ障害でデータ喪失</strong>。消えても再作成できるデータ向け。" },
+      { k: "標準-IA と One Zone-IA の違い", v: "<strong>標準-IA=複数AZ（安全）／One Zone-IA=1 AZのみ（安いが消失リスク）</strong>。最頻出の区別。" },
+      { k: "S3 Glacier 各種", v: "長期保管で最安。取り出し速度で <strong>Instant Retrieval / Flexible Retrieval / Deep Archive(最安・十数時間)</strong>。" },
+      { k: "Intelligent-Tiering", v: "アクセス状況に応じAWSが<strong>自動で最適クラスへ移動</strong>。頻度が読めない時に。取り出し料金なし。" },
       { k: "ライフサイクルポリシー", v: "『90日後にGlacierへ』など保存クラスの自動移動ルール。" },
     ],
     flashcards: [
@@ -148,6 +158,24 @@ window.CURRICULUM.push(
         choices: ["Amazon S3 Glacier", "AWS Storage Gateway", "AWS Backup", "S3 バージョニング"],
         answer: 2,
         explain: "複数サービスの<strong>バックアップを1か所でまとめて管理・自動化</strong>するのが <strong>AWS Backup</strong>。Glacier は長期保管用のストレージクラス、Storage Gateway はオンプレとのハイブリッド接続で目的が異なる。",
+      },
+      {
+        q: "別の場所にも複製が存在し、万一失われても再作成できるサムネイル画像を、できるだけ低コストで S3 に保存したい。最も適したストレージクラスはどれか。",
+        choices: ["S3 標準", "S3 標準-IA", "S3 One Zone-IA", "S3 Glacier Deep Archive"],
+        answer: 2,
+        explain: "<strong>データを1つのAZにしか置かない</strong>ぶん安いのが <strong>S3 One Zone-IA</strong>。AZ障害で失われるため<strong>“消えても再作成できるデータ”</strong>に向く。標準-IAは複数AZで安全だがその分割高、Deep Archiveは取り出しに十数時間かかり用途が違う。",
+      },
+      {
+        q: "アクセス頻度は低いものの、いざ必要になったら即座に取り出したい重要なバックアップデータを、複数のアベイラビリティーゾーンで保護しつつ保存料を抑えたい。適したクラスはどれか。",
+        choices: ["S3 One Zone-IA", "S3 標準-IA", "S3 Glacier Flexible Retrieval", "S3 標準"],
+        answer: 1,
+        explain: "<strong>複数AZに複製され可用性は高いまま、保存料が安い</strong>のが <strong>S3 標準-IA</strong>（取り出しに料金）。One Zone-IA は1 AZのみで重要データには不向き、Glacier は取り出しに時間がかかる。",
+      },
+      {
+        q: "オブジェクトへのアクセス頻度が予測できず、手間をかけずに自動でコスト最適なクラスへ移動させたい。適した S3 のストレージクラスはどれか。",
+        choices: ["S3 Intelligent-Tiering", "S3 標準", "S3 Glacier Deep Archive", "S3 One Zone-IA"],
+        answer: 0,
+        explain: "アクセス状況を監視して<strong>自動で最適なクラスへ移動</strong>するのが <strong>S3 Intelligent-Tiering</strong>。頻度が読めない・管理の手間を避けたい場合の定番。",
       },
     ],
   }
