@@ -16,7 +16,8 @@ window.CURRICULUM.push(
       {
         h: "EC2——AWS上の仮想サーバー",
         body:
-          "<p><strong>Amazon EC2（Elastic Compute Cloud）</strong>は、AWS 上に<strong>仮想サーバーを立てて使う</strong>最も基本的なサービスです（IaaS）。物理サーバーを買う代わりに、必要なスペックのサーバーを<strong>数分で起動</strong>でき、不要になれば止めて課金を止められます。用途に応じて <strong>CPU・メモリの大きさ（インスタンスタイプ）</strong>を選び、汎用・計算重視・メモリ重視といった“ファミリー”から最適なものを選べます。OS とその上のアプリは利用者が管理します（責任共有モデルの IaaS）。起動時の OS・ソフト構成は <strong>AMI（マシンイメージ＝テンプレート）</strong>から選んで揃えます。</p>" +
+          "<p><strong>Amazon EC2（Elastic Compute Cloud）</strong>は、AWS 上に<strong>仮想サーバーを立てて使う</strong>最も基本的なサービスです（IaaS）。物理サーバーを買う代わりに、必要なスペックのサーバーを<strong>数分で起動</strong>でき、不要になれば止めて課金を止められます。用途に応じて <strong>CPU・メモリの大きさ（インスタンスタイプ）</strong>を選び、汎用・計算重視・メモリ重視といった“ファミリー”から最適なものを選べます。OS とその上のアプリは利用者が管理します（責任共有モデルの IaaS）。</p>" +
+          "<p><strong>AMI（Amazon マシンイメージ）＝サーバーの“ひな形（テンプレート）”</strong>：EC2 を起動するときは、<strong>OS の種類・初期設定・入れておくソフトを丸ごと1枚にまとめた「AMI」を選んで</strong>立ち上げます。同じ AMI から起動すれば<strong>まったく同じ構成のサーバーを何台でも一瞬で複製</strong>でき、Auto Scaling で自動的に増える台も同じ AMI から作られます。自分で構築し終えたサーバーを<strong>AMI として保存して使い回し</strong>たり、AWS Marketplace で提供される<strong>既製の AMI</strong>（ソフト導入済みのサーバー）を使ったりもできます。<br><strong>試験のキーワード：</strong>「<strong>OS やソフトを含んだサーバーのテンプレート／イメージ</strong>」「同じ構成の EC2 を複製・量産する元」→ AMI。（“サーバーの大きさ・形”＝インスタンスタイプ、“ディスクのバックアップ”＝EBS スナップショット、とは別物です。）</p>" +
           "<p>アクセスの増減に自動で対応する仕組みが 2 つあります。台数を自動で増減する <strong>Auto Scaling</strong> と、アクセスを複数のサーバーへ振り分ける <strong>ロードバランサー（ELB）</strong>です。この 2 つを組み合わせると『混んだら自動で増え、空いたら自動で減る』構成になり、<strong>可用性（止まりにくさ）とコスト効率</strong>が両立します。さらに、使い方に合わせて料金プラン（オンデマンド／リザーブド／スポット等・次項）を選べば、同じ性能でもコストを大きく下げられます。</p>",
       },
       {
@@ -143,6 +144,7 @@ window.CURRICULUM.push(
       { k: "Outposts / Local Zones / Wavelength", v: "Outposts＝自社DCにAWS、Local Zones＝大都市で低遅延、Wavelength＝<strong>5G</strong>で超低遅延。" },
 
       { k: "EC2", v: "AWS上の仮想サーバー(IaaS)。インスタンスタイプでCPU/メモリを選ぶ。OS以上は利用者管理。" },
+      { k: "AMI（Amazonマシンイメージ）", v: "EC2起動時に選ぶ<strong>OS・設定・ソフトを丸ごと含んだサーバーのテンプレート（ひな形）</strong>。同じ構成のEC2を複製・量産できる（Auto Scalingの増設もこれ基準）。自作保存やMarketplace既製も。" },
       { k: "インスタンスタイプの種類", v: "<strong>汎用</strong>=バランス／<strong>コンピューティング最適化</strong>=CPU重視／<strong>メモリ最適化</strong>=大規模DB／<strong>ストレージ最適化</strong>=ディスクI/O重視／<strong>高速コンピューティング</strong>=GPU。" },
       { k: "適切なサイジング(ライトサイジング)", v: "使用状況に合わせ<strong>過剰スペックを見直す</strong>コスト最適化。<strong>Compute Optimizer</strong>が最適サイズを提案。" },
       { k: "Dedicated Hosts / Dedicated Instances", v: "専有ホスト=<strong>物理サーバーを丸ごと専有</strong>(BYOLライセンス持込・物理分離)。専有インスタンス=<strong>他顧客とハード非共有</strong>(物理サーバーは指定不可)。" },
@@ -223,6 +225,12 @@ window.CURRICULUM.push(
         choices: ["スポットインスタンス", "Dedicated Hosts（専有ホスト）", "オンデマンドインスタンス", "Savings Plans"],
         answer: 1,
         explain: "<strong>物理サーバーを丸ごと専有</strong>し、ソケット/コア数を把握できるのが <strong>Dedicated Hosts</strong>。サーバー単位で数えるライセンスの持ち込み（BYOL）に向く。<strong>ハードウェア専有インスタンス（Dedicated Instances）</strong>は「他顧客とハードを共有しない」だけで物理サーバーの指定・可視化はできない点が違う。",
+      },
+      {
+        q: "EC2 インスタンスを起動する際に、OS の種類・初期設定・インストール済みソフトウェアを1つにまとめた“テンプレート”を選ぶ。同じ構成のサーバーを繰り返し作成できるこのテンプレートを何というか。",
+        choices: ["インスタンスタイプ", "セキュリティグループ", "EBS スナップショット", "AMI（Amazon マシンイメージ）"],
+        answer: 3,
+        explain: "OS・設定・ソフトを丸ごと含んだ<strong>サーバーのテンプレート（ひな形）</strong>が <strong>AMI</strong>。同じ AMI から同一構成の EC2 を何台でも複製でき、Auto Scaling で増える台も同じ AMI から作られる。インスタンスタイプは“サーバーの大きさ・形”、EBS スナップショットは“ディスクのバックアップ”で別物。",
       },
     ],
   }

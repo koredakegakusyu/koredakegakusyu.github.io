@@ -22,14 +22,15 @@ window.CURRICULUM.push(
       {
         h: "攻撃から守る——Shield・WAF・GuardDuty・Inspector・Macie",
         body:
-          "<p>用途別に守るサービスがあります。名前だけで役割を判断できるようにします。</p>" +
+          "<p>ここは CCP で<strong>最も混同しやすく、最もよく問われる</strong>ところです。名前が似ていますが、<strong>『何から守るか／何を見つけるか』が全部違います</strong>。まず大きく『<strong>攻撃を“防ぐ”壁（Shield・WAF）</strong>』と『<strong>問題を“見つける”検知役（GuardDuty・Inspector・Macie）</strong>』の 2 グループに分けると整理できます。</p>" +
           "<ul>" +
-          "<li><strong>Shield</strong>：<strong>DDoS攻撃</strong>（大量アクセスでサービスを止める攻撃）から守る。標準のStandardは無料で自動適用、Advancedは有料でより手厚い。</li>" +
-          "<li><strong>WAF（Web Application Firewall）</strong>：<strong>Webアプリへの攻撃</strong>（SQLインジェクション等）を、ルールに基づいて防ぐ。</li>" +
-          "<li><strong>GuardDuty</strong>：ログを分析して<strong>不審な挙動・脅威を自動で検知</strong>する見張り役。</li>" +
-          "<li><strong>Inspector</strong>：EC2やコンテナの<strong>脆弱性（弱点）を自動診断</strong>する。</li>" +
-          "<li><strong>Macie</strong>：S3内の<strong>個人情報などの機密データを見つけて</strong>保護を助ける。</li>" +
-          "</ul>",
+          "<li><strong>AWS Shield ＝ DDoS を“防ぐ”</strong>：<strong>DDoS 攻撃</strong>（世界中から大量のアクセスを浴びせてサービスを止める攻撃）を防ぎます。<strong>Standard は無料で自動適用</strong>、Advanced は有料でより手厚い保護。<br><strong>試験のキーワード：</strong>「<strong>DDoS</strong>」「大量アクセスでサービスを停止させる攻撃」→ Shield。</li>" +
+          "<li><strong>AWS WAF ＝ Web アプリへの攻撃を“防ぐ”</strong>：<strong>SQL インジェクションやクロスサイトスクリプティング</strong>など、Web アプリの入力を悪用する攻撃を、ルールで検査して防ぎます。<br><strong>試験のキーワード：</strong>「<strong>SQLインジェクション</strong>」「Webアプリの脆弱性を突く攻撃を防ぐ」「不正なリクエストをルールで遮断」→ WAF。</li>" +
+          "<li><strong>Amazon GuardDuty ＝ 不審な“動き”を見つける</strong>：各種ログを AI が分析し、<strong>不正アクセスやマルウェアの通信などの脅威を自動で検知</strong>する“見張り役”。防ぐのではなく<strong>気づく</strong>のが仕事。<br><strong>試験のキーワード：</strong>「<strong>脅威の検知</strong>」「不審な挙動・不正アクセスを自動で見つける」→ GuardDuty。</li>" +
+          "<li><strong>Amazon Inspector ＝ “弱点（脆弱性）”を見つける</strong>：EC2 やコンテナに<strong>既知の脆弱性やパッチ漏れがないかを自動診断</strong>します。攻撃される前の“健康診断”。<br><strong>試験のキーワード：</strong>「<strong>脆弱性（弱点）の診断・スキャン</strong>」「パッチ漏れの確認」→ Inspector。</li>" +
+          "<li><strong>Amazon Macie ＝ “機密データ”を見つける</strong>：<strong>S3 の中に個人情報やクレジットカード番号などの機密データが置かれていないか</strong>を機械学習で発見し、保護を助けます。<br><strong>試験のキーワード：</strong>「<strong>S3 の個人情報・機密データを検出</strong>」→ Macie。</li>" +
+          "</ul>" +
+          "<p><strong>反射で選べるように</strong>：DDoS→Shield／Webアプリ攻撃（SQLi等）→WAF／不審な動きを検知→GuardDuty／弱点を診断→Inspector／S3の個人情報を発見→Macie。<strong>『検知3兄弟』は“何を見つけるか”で区別</strong>——<strong>動き＝GuardDuty、弱点＝Inspector、機密データ＝Macie</strong>。</p>",
         diagram:
           '<svg viewBox="0 0 580 210" xmlns="http://www.w3.org/2000/svg" font-family="\'Noto Sans JP\',sans-serif">' +
           '<text x="290" y="22" fill="#23252b" font-size="14" font-weight="700" text-anchor="middle">セキュリティサービスの役割で分ける</text>' +
@@ -110,6 +111,24 @@ window.CURRICULUM.push(
         choices: ["Amazon GuardDuty", "AWS KMS", "AWS WAF", "Amazon Inspector"],
         answer: 1,
         explain: "暗号鍵の管理は<strong>KMS（Key Management Service）</strong>。",
+      },
+      {
+        q: "Amazon S3 バケットの中に、個人情報やクレジットカード番号などの機密データが誤って保存されていないかを自動的に検出したい。適したサービスはどれか。",
+        choices: ["Amazon Macie", "Amazon Inspector", "Amazon GuardDuty", "AWS Shield"],
+        answer: 0,
+        explain: "<strong>S3 内の機密データ（個人情報等）を発見</strong>するのが <strong>Amazon Macie</strong>。Inspector は EC2 等の脆弱性診断、GuardDuty は不審な挙動の検知、Shield は DDoS 防御で、それぞれ“見つける／守る対象”が違う。",
+      },
+      {
+        q: "EC2 インスタンスに既知の脆弱性やパッチ未適用がないかを自動的にスキャンして診断したい。適したサービスはどれか。",
+        choices: ["Amazon GuardDuty", "Amazon Inspector", "Amazon Macie", "AWS WAF"],
+        answer: 1,
+        explain: "EC2 やコンテナの<strong>脆弱性（弱点）を診断</strong>するのが <strong>Amazon Inspector</strong>。GuardDuty は“不審な動き”の検知、Macie は S3 の機密データ検出。『動き＝GuardDuty／弱点＝Inspector／機密データ＝Macie』で区別。",
+      },
+      {
+        q: "自社の Web アプリケーションを狙った SQL インジェクションやクロスサイトスクリプティングなどの攻撃を、ルールに基づいて遮断したい。適したサービスはどれか。",
+        choices: ["AWS Shield", "AWS WAF", "Amazon GuardDuty", "AWS KMS"],
+        answer: 1,
+        explain: "<strong>Web アプリを狙った攻撃（SQLi・XSS 等）をルールで防ぐ</strong>のが <strong>AWS WAF</strong>。Shield は DDoS 防御が対象で、守る攻撃の種類が異なる。",
       },
     ],
   }
