@@ -66,7 +66,13 @@ window.CURRICULUM.push(
           "<ul>" +
           "<li><strong>Amazon Route 53 ＝ DNS（住所案内）</strong>：<strong>ドメイン名（例 example.com）を、実際のサーバーの IP アドレスに変換</strong>する DNS サービス。ドメインの取得もでき、『一番近い拠点へ』『健康なサーバーへ』といった<strong>賢いルーティング制御</strong>もできます。名前の由来は DNS の標準ポート番号 53。<br><strong>試験のキーワード：</strong>「<strong>DNS</strong>」「ドメイン名を IP に変換」「ドメインの登録」→ Route 53。</li>" +
           "<li><strong>Amazon CloudFront ＝ CDN（コンテンツの高速配信）</strong>：画像・動画・Web ページなどを<strong>世界中のエッジロケーションにキャッシュ</strong>し、利用者の<strong>最寄りから配信して表示を高速化</strong>します。<br><strong>試験のキーワード：</strong>「<strong>CDN</strong>」「エッジにキャッシュ」「世界中の利用者に画像・動画を速く配信」→ CloudFront。※後述の Global Accelerator と混同注意（CloudFront＝<strong>キャッシュ配信</strong>、Global Accelerator＝<strong>経路の最適化</strong>）。</li>" +
-          "<li><strong>ELB（Elastic Load Balancing）＝ 交通整理（負荷分散）</strong>：届いたアクセスを<strong>複数のサーバーへ自動で振り分け</strong>ます。1 台に集中させず分散するので、<strong>負荷分散と可用性の向上</strong>につながります（Auto Scaling とセットで使うのが定番）。<br><strong>試験のキーワード：</strong>「<strong>負荷分散</strong>」「複数のサーバーにトラフィックを振り分ける」→ ELB。</li>" +
+          "<li><strong>ELB（Elastic Load Balancing）＝ 交通整理（負荷分散）</strong>：届いたアクセスを<strong>複数のサーバーへ自動で振り分け</strong>ます。1 台に集中させず分散するので、<strong>負荷分散と可用性の向上</strong>につながります（複数 AZ にまたがって振り分けるので、Auto Scaling とセットで使うのが定番）。<br><strong>試験のキーワード：</strong>「<strong>負荷分散</strong>」「複数のサーバーにトラフィックを振り分ける」→ ELB。</li>" +
+          "</ul>" +
+          "<p><strong>ELB には種類があり、使い分けが問われます</strong>（＝ロードバランサーの『どのレベルで振り分けるか』の違い）。</p>" +
+          "<ul>" +
+          "<li><strong>ALB（Application Load Balancer）＝ Web アプリ向け（レイヤー 7）</strong>：<strong>HTTP / HTTPS</strong> を扱い、URL のパス（/api、/img など）やホスト名を見て<strong>中身に応じて振り分け</strong>できます。Web サイト・API・コンテナ（ECS/EKS）に最適。<br><strong>試験のキーワード：</strong>「<strong>HTTP/HTTPS</strong>」「URL パスで振り分け」「Web アプリケーション」→ ALB。</li>" +
+          "<li><strong>NLB（Network Load Balancer）＝ 超高速・低遅延（レイヤー 4）</strong>：<strong>TCP / UDP</strong> をそのまま高速にさばきます。<strong>超低遅延・毎秒数百万リクエストの大量トラフィック</strong>や、固定 IP が必要な場面向け。<br><strong>試験のキーワード：</strong>「<strong>TCP/UDP</strong>」「超低遅延」「極めて高いスループット」「固定 IP」→ NLB。</li>" +
+          "<li><strong>覚え方：</strong>『Web の中身（HTTP・URL）で振り分ける＝ <strong>A</strong>LB（<strong>A</strong>pplication）』『とにかく速く TCP/UDP をさばく＝ <strong>N</strong>LB（<strong>N</strong>etwork）』。このほか、旧世代の CLB（Classic）や、サードパーティ製アプライアンスを挟む GWLB（Gateway）もありますが、まずは <strong>ALB と NLB の使い分け</strong>を押さえれば十分です。</li>" +
           "</ul>" +
           "<p><strong>オンプレミスと AWS をつなぐ 2 つの方法</strong>も、対比で問われます。</p>" +
           "<ul>" +
@@ -87,6 +93,7 @@ window.CURRICULUM.push(
       { k: "Route 53", v: "DNSサービス。ドメイン名⇔IPの変換、ドメイン取得、ルーティング制御。" },
       { k: "CloudFront", v: "CDN。エッジにキャッシュし利用者の近くから配信して高速化。" },
       { k: "ELB", v: "アクセスを複数サーバーへ自動で振り分け（負荷分散・可用性向上）。" },
+      { k: "ALB / NLB", v: "ELBの種類。<strong>ALB</strong>=HTTP/HTTPS(L7)・URLパスで振り分け、Webアプリ向け。<strong>NLB</strong>=TCP/UDP(L4)・超低遅延・大量トラフィック・固定IP向け。" },
       { k: "VPN / Direct Connect", v: "VPN=ネット経由で暗号化接続(安い)。Direct Connect=専用線(高速・安定・高価)。" },
     ],
     flashcards: [
@@ -127,6 +134,18 @@ window.CURRICULUM.push(
         choices: ["AWS VPN", "AWS Direct Connect", "Amazon CloudFront", "AWS Transit Gateway"],
         answer: 1,
         explain: "専用線で接続するのは<strong>AWS Direct Connect</strong>。VPNはインターネット経由で暗号化する手軽な方式。",
+      },
+      {
+        q: "HTTP/HTTPSのWebアプリケーションで、リクエストのURLパス（例: /api と /images）に応じて振り分け先を変えたい。最適なロードバランサーはどれか。",
+        choices: ["Network Load Balancer（NLB）", "AWS Global Accelerator", "Application Load Balancer（ALB）", "Amazon Route 53"],
+        answer: 2,
+        explain: "<strong>HTTP/HTTPS（レイヤー7）</strong>でURLパスやホスト名を見て振り分けるのは<strong>ALB</strong>。NLBはTCP/UDP（L4）の超低遅延用途で、中身（URL）は見ない。",
+      },
+      {
+        q: "TCPベースのゲームサーバー向けに、毎秒数百万リクエスト規模のトラフィックを超低遅延でさばき、固定IPも必要とする。最適なロードバランサーはどれか。",
+        choices: ["Application Load Balancer（ALB）", "Amazon CloudFront", "AWS VPN", "Network Load Balancer（NLB）"],
+        answer: 3,
+        explain: "<strong>TCP/UDP（レイヤー4）</strong>を超低遅延・高スループットでさばき固定IPも提供するのは<strong>NLB</strong>。ALBはHTTP/HTTPSのWebアプリ向け。",
       },
     ],
   }
