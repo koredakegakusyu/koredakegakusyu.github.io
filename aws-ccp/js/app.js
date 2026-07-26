@@ -253,6 +253,41 @@
     document.title = "サービス早見表 | コレダケ学習AWS CCP";
   }
 
+  // HTMLタグを除去して検索用テキストにする
+  function textOf(html) { return String(html == null ? "" : html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " "); }
+
+  // カリキュラム全体（暗記キー＋暗記の説明＋理解の見出し・本文＋サービス名）から
+  // 「用語 → 解説モジュール」の索引を実行時に自動生成する。
+  // これにより早見表の検索がサービス名だけでなく全AWS関連用語をカバーする。
+  var _TERM_INDEX = null;
+  function buildTermIndex() {
+    if (_TERM_INDEX) return _TERM_INDEX;
+    var idx = [], seen = {};
+    var mods = window.CURRICULUM || [];
+    var titleById = {};
+    mods.forEach(function (m) { titleById[m.id] = m.title; });
+    function add(term, search, id) {
+      term = (term || "").trim();
+      if (!term || !id) return;
+      var key = term.toLowerCase() + "|" + id;
+      if (seen[key]) return;
+      seen[key] = 1;
+      idx.push({ term: term, search: (search || term).toLowerCase(), id: id, title: titleById[id] || id });
+    }
+    mods.forEach(function (m) {
+      (m.memorize || []).forEach(function (x) { add(x.k, x.k + " " + textOf(x.v), m.id); });
+      (m.understand || []).forEach(function (u) {
+        var concept = (u.h || "").split("——")[0].split("／")[0].trim();
+        add(concept, textOf(u.h) + " " + textOf(u.body), m.id);
+      });
+    });
+    // 早見表のサービス名（COMPARE_LINK＝サービス→モジュールの正）も索引に含める
+    var link = window.COMPARE_LINK || {};
+    Object.keys(link).forEach(function (n) { add(n, n, link[n]); });
+    _TERM_INDEX = idx;
+    return idx;
+  }
+
   function renderCompare() {
     var rows = window.COMPARE || [];
     var versus = window.VERSUS || [];
@@ -262,9 +297,10 @@
     var html = "";
     html += '<div class="cmp-head"><div class="crumb"><a href="#home" data-nav>ホーム</a> ／ 早見表</div>';
     html += "<h1>🗂 サービス早見表</h1>";
-    html += "<p>全" + rows.length + "サービスを一覧。検索とカテゴリで絞り込み、<strong>サービス名をクリックすると解説ページへ移動</strong>します。下部に「紛らわしいペアの決め手」も。</p></div>";
+    html += "<p>全" + rows.length + "サービスを一覧。<strong>サービス名だけでなく、AWSの用語・キーワードでも検索して解説へジャンプ</strong>できます（例：マルチAZ／フェイルオーバー／暗号化／CIDR）。下部に「紛らわしいペアの決め手」も。</p></div>";
 
-    html += '<div class="cmp-toolbar"><input type="search" class="cmp-search" id="cmp-search" placeholder="🔍 検索（例: 暗号化 / 低遅延 / キャッシュ / 移行）" aria-label="サービスを検索"><span class="cmp-count" id="cmp-count"></span></div>';
+    html += '<div class="cmp-toolbar"><input type="search" class="cmp-search" id="cmp-search" placeholder="🔍 サービス名・用語・キーワードで検索（例: マルチAZ / 暗号化 / 低遅延 / 移行）" aria-label="サービス・用語を検索"><span class="cmp-count" id="cmp-count"></span></div>';
+    html += '<div class="cmp-terms" id="cmp-terms" hidden></div>';
     html += '<div class="cmp-chips" id="cmp-chips"><button class="cmp-chip active" data-cat="all">すべて</button>';
     cats.forEach(function (c) { html += '<button class="cmp-chip" data-cat="' + esc(c) + '">' + esc(c) + "</button>"; });
     html += "</div>";
@@ -329,11 +365,38 @@
     var count = document.getElementById("cmp-count");
     var empty = document.getElementById("cmp-empty");
     var chips = document.getElementById("cmp-chips");
+    var termsBox = document.getElementById("cmp-terms");
     if (!body) return;
     var rows = Array.prototype.slice.call(body.querySelectorAll("tr"));
     var activeCat = "all";
+    var TERM_INDEX = buildTermIndex();
+    var TERM_LIMIT = 60;
+    // 用語索引の検索結果（クリックで解説へ）を描画する
+    function renderTerms(q, raw) {
+      if (!termsBox) return;
+      if (!q) { termsBox.hidden = true; termsBox.innerHTML = ""; return; }
+      var hits = TERM_INDEX.filter(function (t) { return t.search.indexOf(q) !== -1; });
+      // 「用語そのもの」に一致するものを先頭に（説明文だけ一致より優先）
+      hits.sort(function (a, b) {
+        var ai = a.term.toLowerCase().indexOf(q), bi = b.term.toLowerCase().indexOf(q);
+        var aIn = ai !== -1 ? 0 : 1, bIn = bi !== -1 ? 0 : 1;
+        if (aIn !== bIn) return aIn - bIn;
+        if (ai !== bi) return ai - bi;
+        return a.term.length - b.term.length;
+      });
+      if (!hits.length) { termsBox.hidden = true; termsBox.innerHTML = ""; return; }
+      var h = '<div class="cmp-terms-head">🔎 「' + esc(raw) + '」に一致する用語 ' + hits.length + ' 件（クリックで解説へ）</div><div class="cmp-terms-list">';
+      hits.slice(0, TERM_LIMIT).forEach(function (t) {
+        h += '<a class="term-hit" href="#' + esc(t.id) + '">' + esc(t.term) + '<span class="term-mod">' + esc(t.title) + "</span></a>";
+      });
+      if (hits.length > TERM_LIMIT) h += '<span class="term-more">ほか ' + (hits.length - TERM_LIMIT) + " 件…さらに絞り込んでください</span>";
+      h += "</div>";
+      termsBox.innerHTML = h;
+      termsBox.hidden = false;
+    }
     function apply() {
-      var q = (search.value || "").trim().toLowerCase();
+      var raw = (search.value || "").trim();
+      var q = raw.toLowerCase();
       var shown = 0;
       rows.forEach(function (tr) {
         var okCat = activeCat === "all" || tr.getAttribute("data-cat") === activeCat;
@@ -344,6 +407,7 @@
       });
       count.textContent = shown + " / " + rows.length + " 件";
       empty.style.display = shown ? "none" : "block";
+      renderTerms(q, raw);
     }
     search.addEventListener("input", apply);
     chips.addEventListener("click", function (e) {

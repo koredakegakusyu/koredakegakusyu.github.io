@@ -433,6 +433,26 @@ h1, h2, h3, h4 { line-height: 1.4; text-wrap: balance; font-weight: 700; letter-
 .cmp-chip:hover { border-color: var(--accent); color: var(--accent); }
 .cmp-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
+/* 用語検索の結果（サービス名以外のAWS用語からも解説へジャンプ） */
+.cmp-terms {
+  margin: 0 0 1rem; padding: 0.85rem 1rem;
+  background: var(--bg-elev-2); border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.cmp-terms[hidden] { display: none; }
+.cmp-terms-head { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.6rem; }
+.cmp-terms-list { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.term-hit {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px;
+  padding: 0.32rem 0.75rem; font-size: 0.82rem; font-weight: 700;
+  color: var(--accent); text-decoration: none; transition: var(--transition);
+}
+.term-hit:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+.term-hit .term-mod { font-size: 0.72rem; font-weight: 500; color: var(--text-muted); }
+.term-hit:hover .term-mod { color: rgba(255,255,255,0.85); }
+.term-more { align-self: center; font-size: 0.78rem; color: var(--text-muted); }
+
 .cmp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-soft); }
 table.cmp-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .cmp-table th, .cmp-table td { padding: 0.7rem 0.95rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border-soft); }
